@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  FLOWBOX — лендинг. Перед публикацией замени 3 значения ниже:   ║
+  ║  1) INSTAGRAM:  https://instagram.com/flowbox.nyc              ║
+  ║  2) WHATSAPP:   https://wa.me/1XXXXXXXXXX  (твой номер)        ║
+  ║  3) ТЕЛЕФОН:    tel:+1XXXXXXXXXX                               ║
+  ║  Найди их через Ctrl+F → "ЗАМЕНИ".                              ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLOWBOX — Автоматизация для салонов и барбершопов Бруклина</title>
+<meta name="description" content="Настраиваем автозапись и автоответы для салонов, барбершопов и ногтевых студий Бруклина. Под ключ, на русском. Бесплатный разбор бизнеса.">
+<style>
+  :root{
+    --bg:#0A0D14; --bg2:#10141E; --card:#141A26; --line:#232C3D;
+    --text:#EAEEF6; --muted:#9AA6BB; --accent:#4F7CFF; --accent2:#22D3EE;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,"Segoe UI",system-ui,Roboto,Arial,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  .grad{background:linear-gradient(105deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;
+    padding:14px 24px;border-radius:12px;cursor:pointer;transition:.18s;border:0;line-height:1}
+  .btn-primary{background:linear-gradient(105deg,var(--accent),var(--accent2));color:#06101f}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(79,124,255,.35)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--accent);color:#fff}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:rgba(10,13,20,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(35,44,61,.6)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-weight:800;font-size:22px;letter-spacing:.5px}
+  .logo span{font-weight:400;opacity:.55;font-size:13px;display:block;letter-spacing:2px;margin-top:-4px}
+  .nav .btn{padding:11px 18px;font-size:14px}
+
+  /* hero */
+  .hero{position:relative;padding:72px 0 60px;text-align:center;overflow:hidden}
+  .hero::before{content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);
+    width:760px;height:520px;background:radial-gradient(closest-side,rgba(79,124,255,.22),transparent 70%);filter:blur(20px);z-index:0}
+  .hero .wrap{position:relative;z-index:1}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--accent2);
+    background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.25);padding:7px 14px;border-radius:99px;margin-bottom:22px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);box-shadow:0 0 10px var(--accent2)}
+  h1{font-size:clamp(30px,5.4vw,52px);line-height:1.12;font-weight:800;letter-spacing:-.5px;margin-bottom:20px}
+  .lead{font-size:clamp(16px,2.3vw,20px);color:var(--muted);max-width:620px;margin:0 auto 32px}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+  /* pain strip */
+  .pain{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0}
+  .pain p{text-align:center;font-size:clamp(16px,2.4vw,20px);color:var(--text);max-width:760px;margin:0 auto}
+  .pain b{color:var(--accent2);font-weight:600}
+
+  /* sections */
+  section.block{padding:66px 0}
+  .kicker{text-align:center;color:var(--accent);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+  h2{font-size:clamp(24px,3.6vw,36px);text-align:center;font-weight:800;letter-spacing:-.4px;margin-bottom:14px}
+  .sub{text-align:center;color:var(--muted);max-width:600px;margin:0 auto 44px;font-size:17px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px;transition:.2s}
+  .card:hover{border-color:rgba(79,124,255,.5);transform:translateY(-3px)}
+  .ico{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;
+    background:linear-gradient(135deg,rgba(79,124,255,.18),rgba(34,211,238,.12));border:1px solid rgba(79,124,255,.25);margin-bottom:18px}
+  .card h3{font-size:19px;font-weight:700;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:15px}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;counter-reset:s}
+  .step{position:relative;background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:30px 24px 26px}
+  .step::before{counter-increment:s;content:"0" counter(s);position:absolute;top:18px;right:22px;font-size:34px;font-weight:800;
+    background:linear-gradient(105deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.65}
+  .step h3{font-size:19px;font-weight:700;margin:6px 0 8px}
+  .step p{color:var(--muted);font-size:15px}
+
+  /* audience */
+  .aud{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .tags{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+  .tag{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:11px 20px;font-size:15px;font-weight:500}
+  .tag i{color:var(--accent2);font-style:normal;margin-right:6px}
+
+  /* why */
+  .why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+  .why .card{text-align:center}
+  .why .ico{margin:0 auto 16px}
+
+  /* final cta */
+  .final{text-align:center;background:linear-gradient(135deg,rgba(79,124,255,.14),rgba(34,211,238,.07));
+    border:1px solid rgba(79,124,255,.3);border-radius:26px;padding:54px 28px;margin:30px 0}
+  .final h2{margin-bottom:12px}
+  .final .sub{margin-bottom:28px}
+
+  footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--muted);font-size:14px}
+  footer .logo{font-size:18px;margin-bottom:8px;color:var(--text)}
+
+  @media(max-width:600px){
+    .nav .hide{display:none}
+    section.block{padding:48px 0}
+    .hero{padding:54px 0 44px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">FLOWBOX<span>АВТОМАТИЗАЦИЯ</span></div>
+    <!-- ЗАМЕНИ ссылку на Instagram --><a class="btn btn-primary" href="https://instagram.com/flowbox.nyc">Бесплатный разбор</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span> Автоматизация для бизнеса · Бруклин</div>
+    <h1>Перестаньте терять клиентов<br>из директа и пропущенных звонков</h1>
+    <p class="lead">Настраиваем <b class="grad">автозапись и автоответы</b> для салонов, барбершопов и ногтевых студий. Под ключ, на русском — клиенты записываются сами, 24/7.</p>
+    <div class="cta-row">
+      <!-- ЗАМЕНИ ссылку на Instagram --><a class="btn btn-primary" href="https://instagram.com/flowbox.nyc">Получить бесплатный разбор →</a>
+      <a class="btn btn-ghost" href="#how">Как это работает</a>
+    </div>
+  </div>
+</section>
+
+<div class="pain">
+  <div class="wrap">
+    <p>Клиент пишет вам в Instagram в <b>23:40</b>. Вы отвечаете утром. А он уже <b>записался к конкуренту.</b></p>
+  </div>
+</div>
+
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">Что мы настраиваем</div>
+    <h2>Три вещи, которые вернут вам клиентов</h2>
+    <p class="sub">Никаких сложных приложений. Проверенные инструменты, настроенные под ваш салон.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="ico">📅</div>
+        <h3>Автозапись 24/7</h3>
+        <p>Клиент сам выбирает услугу, мастера и время — без звонков и переписки. Запись приходит вам в календарь.</p>
+      </div>
+      <div class="card">
+        <div class="ico">💬</div>
+        <h3>Автоответы в Instagram и WhatsApp</h3>
+        <p>Цены, адрес, часы работы и ссылка на запись — система отвечает мгновенно, даже ночью и в выходные.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔔</div>
+        <h3>Напоминания о записи</h3>
+        <p>Автонапоминание клиенту за день до визита. Меньше неявок — больше заполненных кресел и дохода.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="how">
+  <div class="wrap">
+    <div class="kicker">Как это работает</div>
+    <h2>Вам не нужно ничего настраивать</h2>
+    <p class="sub">Вся техническая часть — на нас. Вы просто принимаете клиентов.</p>
+    <div class="steps">
+      <div class="step">
+        <h3>Бесплатный разбор</h3>
+        <p>15 минут. Смотрим, где именно вы теряете клиентов и записи прямо сейчас.</p>
+      </div>
+      <div class="step">
+        <h3>Настройка под ключ</h3>
+        <p>Всё настраиваем за вас за 2–3 дня. От вас — только доступы и пара ответов.</p>
+      </div>
+      <div class="step">
+        <h3>Работает на вас</h3>
+        <p>Система записывает, отвечает и напоминает. Вы занимаетесь клиентами, а не телефоном.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block aud">
+  <div class="wrap">
+    <div class="kicker">Для кого</div>
+    <h2>Мы знаем ваш бизнес</h2>
+    <p class="sub">Брайтон-Бич, Шипсхед-Бэй и весь Бруклин. Говорим по-русски и по-английски.</p>
+    <div class="tags">
+      <div class="tag"><i>✦</i>Салоны красоты</div>
+      <div class="tag"><i>✦</i>Барбершопы</div>
+      <div class="tag"><i>✦</i>Ногтевые студии</div>
+      <div class="tag"><i>✦</i>Бьюти-мастера</div>
+      <div class="tag"><i>✦</i>Косметология</div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">Почему мы</div>
+    <h2>Свои люди, а не очередное агентство</h2>
+    <p class="sub"></p>
+    <div class="why">
+      <div class="card">
+        <div class="ico">🇷🇺</div>
+        <h3>На вашем языке</h3>
+        <p>Объясняем и настраиваем без технических сложностей. По-русски, по-человечески.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🛠️</div>
+        <h3>Под ключ</h3>
+        <p>Вы не трогаете технику — всё делаем мы. Сломается — чиним сами, на связи.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📍</div>
+        <h3>Локально</h3>
+        <p>Мы в Бруклине, рядом. Можем приехать и показать всё лично.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="kicker">Наши работы</div>
+    <h2>Пример: premium-сайт с онлайн-записью</h2>
+    <p class="sub">Что мы сделали для студии детейлинга White Swan Auto Spa — люксовый сайт с реальными фото, ценами и записью прямо на странице.</p>
+    <div class="card" style="max-width:620px;margin:0 auto">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+        <div class="ico" style="margin:0">🦢</div>
+        <div>
+          <h3 style="margin:0 0 2px">White Swan Auto Spa</h3>
+          <p style="margin:0;font-size:14px;color:var(--muted)">Детейлинг-студия · США · запись по предв.</p>
+        </div>
+      </div>
+      <p style="color:var(--muted);font-size:15px">Премиальный тёмный дизайн, hero-слайдшоу, услуги и цены, онлайн-запись во всплывающем окне. Сделано под ключ — клиент только принимает брони.</p>
+      <div style="margin-top:18px;text-align:center">
+        <a class="btn btn-primary" href="https://coruscating-dodol-a7803a.netlify.app" target="_blank" rel="noopener">Открыть живое демо →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="final">
+    <h2>Узнайте, сколько клиентов вы теряете</h2>
+    <p class="sub">Короткий бесплатный разбор вашего Instagram и записи. Без обязательств и навязывания.</p>
+    <div class="cta-row">
+      <!-- ЗАМЕНИ ссылку на Instagram --><a class="btn btn-primary" href="https://instagram.com/flowbox.nyc">Написать в Instagram</a>
+      <!-- ЗАМЕНИ номер WhatsApp --><a class="btn btn-ghost" href="https://wa.me/1XXXXXXXXXX">WhatsApp</a>
+      <!-- ЗАМЕНИ телефон --><a class="btn btn-ghost" href="tel:+1XXXXXXXXXX">Позвонить</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo">FLOWBOX</div>
+    <p>Автоматизация для малого бизнеса · Brooklyn, NY</p>
+    <p style="margin-top:6px;opacity:.6">© 2026 FLOWBOX. Все права защищены.</p>
+  </div>
+</footer>
+
+</body>
+</html>
