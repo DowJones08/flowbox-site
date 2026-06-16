@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <!--
   ╔══════════════════════════════════════════════════════════════╗
-  ║  FLOWBOX — лендинг. Перед публикацией замени 3 значения ниже:   ║
-  ║  1) INSTAGRAM:  https://instagram.com/flow_box08              ║
-  ║  2) WHATSAPP:   https://wa.me/13322778090  (твой номер)        ║
-  ║  3) ТЕЛЕФОН:    tel:+13322778090                               ║
-  ║  Найди их через Ctrl+F → "ЗАМЕНИ".                              ║
+  ║  FLOWBOX landing — trilingual EN / RU / ES (EN default).       ║
+  ║  Contacts already set: IG @flow_box08, WhatsApp/tel +1 332 277 8090
+  ║  Translations live in the I18N object in the <script> at the   ║
+  ║  bottom. Header buttons switch language instantly (no reload). ║
   ╚══════════════════════════════════════════════════════════════╝
 -->
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FLOWBOX — Автоматизация для малого бизнеса</title>
-<meta name="description" content="Настраиваем автозапись и автоответы для малого бизнеса. Под ключ, на русском. Проверка бизнеса за $3 — покажем, где вы теряете клиентов.">
+<title>FLOWBOX — Automation for small business</title>
+<meta name="description" content="We set up auto-booking and auto-replies for small businesses. Done-for-you. A $3 business check shows where you're losing clients.">
 <style>
   :root{
     --bg:#0A0D14; --bg2:#10141E; --card:#141A26; --line:#232C3D;
@@ -38,10 +37,15 @@
 
   /* header */
   header{position:sticky;top:0;z-index:50;background:rgba(10,13,20,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(35,44,61,.6)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:14px}
   .logo{font-weight:800;font-size:22px;letter-spacing:.5px}
   .logo span{font-weight:400;opacity:.55;font-size:13px;display:block;letter-spacing:2px;margin-top:-4px}
   .nav .btn{padding:11px 18px;font-size:14px}
+  .navr{display:flex;align-items:center;gap:12px}
+  .lang{display:inline-flex;border:1px solid var(--line);border-radius:99px;overflow:hidden;flex:none}
+  .lang button{background:transparent;color:var(--muted);border:0;padding:7px 11px;font-size:12.5px;font-weight:700;cursor:pointer;letter-spacing:.5px;transition:.15s;font-family:inherit}
+  .lang button:hover{color:var(--text)}
+  .lang button.active{background:linear-gradient(105deg,var(--accent),var(--accent2));color:#06101f}
 
   /* hero */
   .hero{position:relative;padding:72px 0 60px;text-align:center;overflow:hidden}
@@ -102,13 +106,6 @@
   footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--muted);font-size:14px}
   footer .logo{font-size:18px;margin-bottom:8px;color:var(--text)}
 
-  @media(max-width:600px){
-    .nav .hide{display:none}
-    section.block{padding:48px 0}
-    .hero{padding:54px 0 44px}
-    .prices{grid-template-columns:1fr !important}
-  }
-
   /* pricing */
   .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;align-items:stretch}
   .price{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column}
@@ -126,55 +123,70 @@
   .entry p{max-width:680px;margin:0 auto}
   .entry b{color:var(--accent2)}
   .note{color:var(--muted);font-size:13.5px;max-width:760px;margin:18px auto 0;text-align:center}
+
+  @media(max-width:600px){
+    .nav .hide{display:none}
+    section.block{padding:48px 0}
+    .hero{padding:54px 0 44px}
+    .prices{grid-template-columns:1fr}
+    .navr{gap:8px}
+  }
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <div class="logo">FLOWBOX<span>АВТОМАТИЗАЦИЯ</span></div>
-    <!-- ЗАМЕНИ ссылку на Instagram --><a class="btn btn-primary" href="https://instagram.com/flow_box08">Проверка за $3</a>
+    <div class="logo">FLOWBOX<span data-i18n="logo_sub">AUTOMATION</span></div>
+    <div class="navr">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" class="active">EN</button>
+        <button type="button" data-lang="ru">RU</button>
+        <button type="button" data-lang="es">ES</button>
+      </div>
+      <a class="btn btn-primary hide" data-i18n="nav_cta" href="https://instagram.com/flow_box08">$3 Business Check</a>
+    </div>
   </div>
 </header>
 
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span> Автоматизация для малого бизнеса</div>
-    <h1>Перестаньте терять клиентов<br>из директа и пропущенных звонков</h1>
-    <p class="lead">Настраиваем <b class="grad">автозапись и автоответы</b> для салонов, барбершопов и ногтевых студий. Под ключ, на русском — клиенты записываются сами, 24/7.</p>
+    <div class="eyebrow"><span class="dot"></span> <span data-i18n="hero_eyebrow">Automation for small business</span></div>
+    <h1 data-i18n="hero_h1">Stop losing clients<br>from DMs and missed calls</h1>
+    <p class="lead" data-i18n="hero_lead">We set up <b class="grad">auto-booking and auto-replies</b> for small businesses. Done-for-you — clients book themselves, 24/7.</p>
     <div class="cta-row">
-      <!-- ЗАМЕНИ ссылку на Instagram --><a class="btn btn-primary" href="https://instagram.com/flow_box08">Проверка бизнеса за $3 →</a>
-      <a class="btn btn-ghost" href="#how">Как это работает</a>
+      <a class="btn btn-primary" data-i18n="hero_cta1" href="https://instagram.com/flow_box08">Get a $3 business check →</a>
+      <a class="btn btn-ghost" data-i18n="hero_cta2" href="#how">How it works</a>
     </div>
   </div>
 </section>
 
 <div class="pain">
   <div class="wrap">
-    <p>Клиент пишет вам в Instagram в <b>23:40</b>. Вы отвечаете утром. А он уже <b>записался к конкуренту.</b></p>
+    <p data-i18n="pain">A client messages you on Instagram at <b>11:40 PM</b>. You reply in the morning. They've already <b>booked with a competitor.</b></p>
   </div>
 </div>
 
 <section class="block">
   <div class="wrap">
-    <div class="kicker">Что мы настраиваем</div>
-    <h2>Три вещи, которые вернут вам клиентов</h2>
-    <p class="sub">Никаких сложных приложений. Проверенные инструменты, настроенные под ваш салон.</p>
+    <div class="kicker" data-i18n="svc_kicker">What we set up</div>
+    <h2 data-i18n="svc_h2">Three things that bring clients back</h2>
+    <p class="sub" data-i18n="svc_sub">No complicated apps. Proven tools, set up for your business.</p>
     <div class="grid">
       <div class="card">
         <div class="ico">📅</div>
-        <h3>Автозапись 24/7</h3>
-        <p>Клиент сам выбирает услугу, мастера и время — без звонков и переписки. Запись приходит вам в календарь.</p>
+        <h3 data-i18n="svc1_h3">Online booking 24/7</h3>
+        <p data-i18n="svc1_p">Clients pick the service, staff and time themselves — no calls, no back-and-forth. The booking lands in your calendar.</p>
       </div>
       <div class="card">
         <div class="ico">💬</div>
-        <h3>Автоответы в Instagram и WhatsApp</h3>
-        <p>Цены, адрес, часы работы и ссылка на запись — система отвечает мгновенно, даже ночью и в выходные.</p>
+        <h3 data-i18n="svc2_h3">Auto-replies on Instagram & WhatsApp</h3>
+        <p data-i18n="svc2_p">Prices, address, hours and a booking link — the system replies instantly, even at night and on weekends.</p>
       </div>
       <div class="card">
         <div class="ico">🔔</div>
-        <h3>Напоминания о записи</h3>
-        <p>Автонапоминание клиенту за день до визита. Меньше неявок — больше заполненных кресел и дохода.</p>
+        <h3 data-i18n="svc3_h3">Appointment reminders</h3>
+        <p data-i18n="svc3_p">An automatic reminder the day before the visit. Fewer no-shows — more filled chairs and revenue.</p>
       </div>
     </div>
   </div>
@@ -182,21 +194,21 @@
 
 <section class="block" id="how">
   <div class="wrap">
-    <div class="kicker">Как это работает</div>
-    <h2>Вам не нужно ничего настраивать</h2>
-    <p class="sub">Вся техническая часть — на нас. Вы просто принимаете клиентов.</p>
+    <div class="kicker" data-i18n="how_kicker">How it works</div>
+    <h2 data-i18n="how_h2">You don't set up anything</h2>
+    <p class="sub" data-i18n="how_sub">All the technical work is on us. You just take clients.</p>
     <div class="steps">
       <div class="step">
-        <h3>Проверка за $3</h3>
-        <p>15 минут. За символические $3 показываем, где именно вы теряете клиентов и записи прямо сейчас.</p>
+        <h3 data-i18n="step1_h3">$3 business check</h3>
+        <p data-i18n="step1_p">15 minutes. For a symbolic $3 we show exactly where you're losing clients and bookings right now.</p>
       </div>
       <div class="step">
-        <h3>Настройка под ключ</h3>
-        <p>Всё настраиваем за вас за 2–3 дня. От вас — только доступы и пара ответов.</p>
+        <h3 data-i18n="step2_h3">Done-for-you setup</h3>
+        <p data-i18n="step2_p">We set everything up for you in 2–3 days. From you — just access and a couple of answers.</p>
       </div>
       <div class="step">
-        <h3>Работает на вас</h3>
-        <p>Система записывает, отвечает и напоминает. Вы занимаетесь клиентами, а не телефоном.</p>
+        <h3 data-i18n="step3_h3">It works for you</h3>
+        <p data-i18n="step3_p">The system books, replies and reminds. You focus on clients, not on your phone.</p>
       </div>
     </div>
   </div>
@@ -204,39 +216,38 @@
 
 <section class="block aud">
   <div class="wrap">
-    <div class="kicker">Для кого</div>
-    <h2>Мы знаем ваш бизнес</h2>
-    <p class="sub">Говорим по-русски и по-английски. Работаем онлайн — с бизнесом из любого города.</p>
+    <div class="kicker" data-i18n="aud_kicker">Who it's for</div>
+    <h2 data-i18n="aud_h2">We know your business</h2>
+    <p class="sub" data-i18n="aud_sub">We speak English, Russian and Spanish. We work online — with businesses anywhere.</p>
     <div class="tags">
-      <div class="tag"><i>✦</i>Салоны красоты</div>
-      <div class="tag"><i>✦</i>Барбершопы</div>
-      <div class="tag"><i>✦</i>Ногтевые студии</div>
-      <div class="tag"><i>✦</i>Бьюти-мастера</div>
-      <div class="tag"><i>✦</i>Косметология</div>
+      <div class="tag"><i>✦</i><span data-i18n="tag1">Beauty salons</span></div>
+      <div class="tag"><i>✦</i><span data-i18n="tag2">Barbershops</span></div>
+      <div class="tag"><i>✦</i><span data-i18n="tag3">Nail studios</span></div>
+      <div class="tag"><i>✦</i><span data-i18n="tag4">Beauty pros</span></div>
+      <div class="tag"><i>✦</i><span data-i18n="tag5">Skincare & cosmetology</span></div>
     </div>
   </div>
 </section>
 
 <section class="block">
   <div class="wrap">
-    <div class="kicker">Почему мы</div>
-    <h2>Свои люди, а не очередное агентство</h2>
-    <p class="sub"></p>
+    <div class="kicker" data-i18n="why_kicker">Why us</div>
+    <h2 data-i18n="why_h2">A real person, not another agency</h2>
     <div class="why">
       <div class="card">
-        <div class="ico">🇷🇺</div>
-        <h3>На вашем языке</h3>
-        <p>Объясняем и настраиваем без технических сложностей. По-русски, по-человечески.</p>
+        <div class="ico">🗣️</div>
+        <h3 data-i18n="why1_h3">Your language</h3>
+        <p data-i18n="why1_p">We explain and set things up without technical jargon — plain and human.</p>
       </div>
       <div class="card">
         <div class="ico">🛠️</div>
-        <h3>Под ключ</h3>
-        <p>Вы не трогаете технику — всё делаем мы. Сломается — чиним сами, на связи.</p>
+        <h3 data-i18n="why2_h3">Done-for-you</h3>
+        <p data-i18n="why2_p">You don't touch the tech — we do it all. If something breaks, we fix it. Always in touch.</p>
       </div>
       <div class="card">
         <div class="ico">💻</div>
-        <h3>Полностью онлайн</h3>
-        <p>Настраиваем удалённо, без визитов — работаем с бизнесом из любого города.</p>
+        <h3 data-i18n="why3_h3">Fully online</h3>
+        <p data-i18n="why3_p">We set everything up remotely, no visits — working with businesses anywhere.</p>
       </div>
     </div>
   </div>
@@ -244,20 +255,20 @@
 
 <section class="block">
   <div class="wrap">
-    <div class="kicker">Наши работы</div>
-    <h2>Пример: premium-сайт с онлайн-записью</h2>
-    <p class="sub">Что мы сделали для студии детейлинга White Swan Auto Spa — люксовый сайт с реальными фото, ценами и записью прямо на странице.</p>
+    <div class="kicker" data-i18n="work_kicker">Our work</div>
+    <h2 data-i18n="work_h2">Example: a premium site with online booking</h2>
+    <p class="sub" data-i18n="work_sub">What we built for the detailing studio White Swan Auto Spa — a luxury site with real photos, prices and booking right on the page.</p>
     <div class="card" style="max-width:620px;margin:0 auto">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
         <div class="ico" style="margin:0">🦢</div>
         <div>
           <h3 style="margin:0 0 2px">White Swan Auto Spa</h3>
-          <p style="margin:0;font-size:14px;color:var(--muted)">Детейлинг-студия · США · запись по предв.</p>
+          <p style="margin:0;font-size:14px;color:var(--muted)" data-i18n="work_card_sub">Detailing studio · USA · by appointment</p>
         </div>
       </div>
-      <p style="color:var(--muted);font-size:15px">Премиальный тёмный дизайн, hero-слайдшоу, услуги и цены, онлайн-запись во всплывающем окне. Сделано под ключ — клиент только принимает брони.</p>
+      <p style="color:var(--muted);font-size:15px" data-i18n="work_card_p">Premium dark design, hero slideshow, services and prices, online booking in a popup. Done-for-you — the client just takes bookings.</p>
       <div style="margin-top:18px;text-align:center">
-        <a class="btn btn-primary" href="https://coruscating-dodol-a7803a.netlify.app" target="_blank" rel="noopener">Открыть живое демо →</a>
+        <a class="btn btn-primary" data-i18n="work_cta" href="https://coruscating-dodol-a7803a.netlify.app" target="_blank" rel="noopener">Open live demo →</a>
       </div>
     </div>
   </div>
@@ -265,79 +276,79 @@
 
 <section class="block" id="prices">
   <div class="wrap">
-    <div class="kicker">Цены</div>
-    <h2>Сколько стоит автоматизация</h2>
-    <p class="sub">Цены по рынку США 2025–2026 для работы «под ключ» от одного специалиста, а не агентства. Сайт с записью у фрилансеров стоит $800–$2 500 — базовый тариф честный и привычный. Полный пакет у студий доходит до $4 000–$12 000, так что наш максимум заметно ниже агентских ставок.</p>
+    <div class="kicker" data-i18n="price_kicker">Pricing</div>
+    <h2 data-i18n="price_h2">What automation costs</h2>
+    <p class="sub" data-i18n="price_sub">Prices based on the US market 2025–2026 for done-for-you work by a single specialist, not an agency. A site with booking from freelancers runs $800–$2,500 — the base tier is fair and familiar. A full package from studios reaches $4,000–$12,000, so our top tier is well below agency rates.</p>
     <div class="prices">
 
       <div class="price">
-        <h3>Сайт + запись</h3>
-        <div class="tg">Чистый сайт и онлайн-запись, которая работает 24/7.</div>
-        <div class="amt">$1 500</div>
-        <div class="mo">+ $49/мес поддержка</div>
+        <h3 data-i18n="tier1_h3">Site + booking</h3>
+        <div class="tg" data-i18n="tier1_tg">A clean site and online booking that works 24/7.</div>
+        <div class="amt">$1,500</div>
+        <div class="mo" data-i18n="tier1_mo">+ $49/mo support</div>
         <ul>
-          <li>Современный одностраничный сайт под телефон и компьютер</li>
-          <li>Настройка онлайн-записи (Square, Acuity или Calendly — на выбор)</li>
-          <li>Виджет записи прямо на сайте: клиент бронирует за минуту</li>
-          <li>Автоматические подтверждения записи клиенту</li>
-          <li>Подключение вашего домена, фото и контактов</li>
-          <li>Запуск и проверка всей системы перед сдачей</li>
+          <li data-i18n="tier1_li1">Modern one-page site for phone and desktop</li>
+          <li data-i18n="tier1_li2">Online booking setup (Square, Acuity or Calendly — your choice)</li>
+          <li data-i18n="tier1_li3">Booking widget right on the site: clients book in a minute</li>
+          <li data-i18n="tier1_li4">Automatic booking confirmations to clients</li>
+          <li data-i18n="tier1_li5">Your domain, photos and contacts connected</li>
+          <li data-i18n="tier1_li6">Launch and full system test before handover</li>
         </ul>
-        <a class="btn btn-ghost" href="https://instagram.com/flow_box08">Выбрать</a>
+        <a class="btn btn-ghost" data-i18n="tier_btn" href="https://instagram.com/flow_box08">Choose</a>
       </div>
 
       <div class="price">
-        <h3>Сайт + ½ автоматизации</h3>
-        <div class="tg">Сайт, запись и автоответы — заявки не теряются даже ночью.</div>
-        <div class="amt">$2 200</div>
-        <div class="mo">+ $99/мес поддержка</div>
+        <h3 data-i18n="tier2_h3">Site + half automation</h3>
+        <div class="tg" data-i18n="tier2_tg">Site, booking and auto-replies — leads aren't lost even at night.</div>
+        <div class="amt">$2,200</div>
+        <div class="mo" data-i18n="tier2_mo">+ $99/mo support</div>
         <ul>
-          <li>Всё из тарифа «Сайт + запись»</li>
-          <li>Автоответы в Instagram Direct на частые вопросы</li>
-          <li>Автоответы в WhatsApp со ссылкой на запись</li>
-          <li>Готовые ответы на топ-вопросы: цены, адрес, часы работы</li>
-          <li>Напоминания клиентам о записи (меньше неявок)</li>
-          <li>Настройка и тестирование сценариев под ваш бизнес</li>
+          <li data-i18n="tier2_li1">Everything in "Site + booking"</li>
+          <li data-i18n="tier2_li2">Instagram Direct auto-replies to common questions</li>
+          <li data-i18n="tier2_li3">WhatsApp auto-replies with a booking link</li>
+          <li data-i18n="tier2_li4">Ready answers to top questions: prices, address, hours</li>
+          <li data-i18n="tier2_li5">Client appointment reminders (fewer no-shows)</li>
+          <li data-i18n="tier2_li6">Scenarios set up and tested for your business</li>
         </ul>
-        <a class="btn btn-ghost" href="https://instagram.com/flow_box08">Выбрать</a>
+        <a class="btn btn-ghost" data-i18n="tier_btn" href="https://instagram.com/flow_box08">Choose</a>
       </div>
 
       <div class="price feat">
-        <div class="badge">Популярный выбор</div>
-        <h3>Сайт + полная автоматизация</h3>
-        <div class="tg">Полный автопилот: сайт, запись, бот и сбор клиентов в одном месте.</div>
-        <div class="amt">$3 500</div>
-        <div class="mo">+ $149/мес поддержка</div>
+        <div class="badge" data-i18n="badge">Most popular</div>
+        <h3 data-i18n="tier3_h3">Site + full automation</h3>
+        <div class="tg" data-i18n="tier3_tg">Full autopilot: site, booking, bot and client capture in one place.</div>
+        <div class="amt">$3,500</div>
+        <div class="mo" data-i18n="tier3_mo">+ $149/mo support</div>
         <ul>
-          <li>Всё из тарифа «Сайт + ½ автоматизации»</li>
-          <li>Полноценный чат-бот в Instagram и WhatsApp с диалогами</li>
-          <li>Сбор заявок и контактов клиентов в единую базу</li>
-          <li>Простая CRM: видно всех клиентов и историю обращений</li>
-          <li>Настройка всех воронок и сценариев под ключ</li>
-          <li>Ответ клиенту при пропущенном звонке со ссылкой на запись</li>
+          <li data-i18n="tier3_li1">Everything in "Site + half automation"</li>
+          <li data-i18n="tier3_li2">Full chatbot on Instagram and WhatsApp with dialogs</li>
+          <li data-i18n="tier3_li3">Lead and client contact capture into one base</li>
+          <li data-i18n="tier3_li4">Simple CRM: see every client and their history</li>
+          <li data-i18n="tier3_li5">All funnels and scenarios set up done-for-you</li>
+          <li data-i18n="tier3_li6">Missed-call text to the client with a booking link</li>
         </ul>
-        <a class="btn btn-primary" href="https://instagram.com/flow_box08">Выбрать</a>
+        <a class="btn btn-primary" data-i18n="tier_btn" href="https://instagram.com/flow_box08">Choose</a>
       </div>
 
     </div>
 
     <div class="entry">
-      <p>Не уверены, что нужно? <b>Начните с проверки за $3.</b> Я разберу, как ваш бизнес сейчас принимает заявки — сайт, запись, ответы в Instagram и WhatsApp — и пришлю короткий разбор, где вы теряете клиентов. Эти $3 вычту из стоимости настройки, если закажете любой тариф.</p>
-      <div style="margin-top:16px"><a class="btn btn-primary" href="https://instagram.com/flow_box08">Заказать проверку за $3</a></div>
+      <p data-i18n="entry_p">Not sure what you need? <b>Start with the $3 check.</b> I'll review how your business takes bookings right now — site, scheduling, replies on Instagram and WhatsApp — and send a short report on where you're losing clients. I'll credit the $3 toward setup if you order any tier.</p>
+      <div style="margin-top:16px"><a class="btn btn-primary" data-i18n="entry_btn" href="https://instagram.com/flow_box08">Order the $3 check</a></div>
     </div>
 
-    <p class="note">Никаких скрытых платежей: настройка и ежемесячная поддержка — это всё, что вы платите мне. Оплата сервисов записи и чата идёт напрямую вам и обычно стоит копейки — я подберу самый дешёвый вариант. Первым клиентам — скидка в обмен на честный отзыв после запуска.</p>
+    <p class="note" data-i18n="note">No hidden fees: setup and monthly support are all you pay me. Booking and chat tools are billed directly to you and usually cost pennies — I'll pick the cheapest option. First clients get a discount in exchange for an honest review after launch.</p>
   </div>
 </section>
 
 <section class="wrap">
   <div class="final">
-    <h2>Узнайте, сколько клиентов вы теряете</h2>
-    <p class="sub">Короткая проверка вашего Instagram и записи — всего $3. Покажем, где вы теряете клиентов, без воды и навязывания.</p>
+    <h2 data-i18n="final_h2">Find out how many clients you're losing</h2>
+    <p class="sub" data-i18n="final_sub">A short check of your Instagram and booking — just $3. We'll show where you're losing clients, no fluff, no pressure.</p>
     <div class="cta-row">
-      <!-- ЗАМЕНИ ссылку на Instagram --><a class="btn btn-primary" href="https://instagram.com/flow_box08">Написать в Instagram</a>
-      <!-- ЗАМЕНИ номер WhatsApp --><a class="btn btn-ghost" href="https://wa.me/13322778090">WhatsApp</a>
-      <!-- ЗАМЕНИ телефон --><a class="btn btn-ghost" href="tel:+13322778090">Позвонить</a>
+      <a class="btn btn-primary" data-i18n="final_cta1" href="https://instagram.com/flow_box08">Message on Instagram</a>
+      <a class="btn btn-ghost" href="https://wa.me/13322778090">WhatsApp</a>
+      <a class="btn btn-ghost" data-i18n="final_cta3" href="tel:+13322778090">Call</a>
     </div>
   </div>
 </section>
@@ -345,10 +356,230 @@
 <footer>
   <div class="wrap">
     <div class="logo">FLOWBOX</div>
-    <p>Автоматизация для малого бизнеса</p>
-    <p style="margin-top:6px;opacity:.6">© 2026 FLOWBOX. Все права защищены.</p>
+    <p data-i18n="footer_tagline">Automation for small business</p>
+    <p style="margin-top:6px;opacity:.6" data-i18n="footer_copy">© 2026 FLOWBOX. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+(function(){
+  var I18N = {
+    ru: {
+      logo_sub:"АВТОМАТИЗАЦИЯ",
+      nav_cta:"Проверка за $3",
+      hero_eyebrow:"Автоматизация для малого бизнеса",
+      hero_h1:"Перестаньте терять клиентов<br>из директа и пропущенных звонков",
+      hero_lead:"Настраиваем <b class='grad'>автозапись и автоответы</b> для малого бизнеса. Под ключ — клиенты записываются сами, 24/7.",
+      hero_cta1:"Проверка бизнеса за $3 →",
+      hero_cta2:"Как это работает",
+      pain:"Клиент пишет вам в Instagram в <b>23:40</b>. Вы отвечаете утром. А он уже <b>записался к конкуренту.</b>",
+      svc_kicker:"Что мы настраиваем",
+      svc_h2:"Три вещи, которые вернут вам клиентов",
+      svc_sub:"Никаких сложных приложений. Проверенные инструменты, настроенные под ваш бизнес.",
+      svc1_h3:"Автозапись 24/7",
+      svc1_p:"Клиент сам выбирает услугу, мастера и время — без звонков и переписки. Запись приходит вам в календарь.",
+      svc2_h3:"Автоответы в Instagram и WhatsApp",
+      svc2_p:"Цены, адрес, часы работы и ссылка на запись — система отвечает мгновенно, даже ночью и в выходные.",
+      svc3_h3:"Напоминания о записи",
+      svc3_p:"Автонапоминание клиенту за день до визита. Меньше неявок — больше заполненных кресел и дохода.",
+      how_kicker:"Как это работает",
+      how_h2:"Вам не нужно ничего настраивать",
+      how_sub:"Вся техническая часть — на нас. Вы просто принимаете клиентов.",
+      step1_h3:"Проверка за $3",
+      step1_p:"15 минут. За символические $3 показываем, где именно вы теряете клиентов и записи прямо сейчас.",
+      step2_h3:"Настройка под ключ",
+      step2_p:"Всё настраиваем за вас за 2–3 дня. От вас — только доступы и пара ответов.",
+      step3_h3:"Работает на вас",
+      step3_p:"Система записывает, отвечает и напоминает. Вы занимаетесь клиентами, а не телефоном.",
+      aud_kicker:"Для кого",
+      aud_h2:"Мы знаем ваш бизнес",
+      aud_sub:"Говорим по-английски, по-русски и по-испански. Работаем онлайн — с бизнесом из любого города.",
+      tag1:"Салоны красоты",
+      tag2:"Барбершопы",
+      tag3:"Ногтевые студии",
+      tag4:"Бьюти-мастера",
+      tag5:"Косметология",
+      why_kicker:"Почему мы",
+      why_h2:"Свои люди, а не очередное агентство",
+      why1_h3:"На вашем языке",
+      why1_p:"Объясняем и настраиваем без технических сложностей — по-человечески.",
+      why2_h3:"Под ключ",
+      why2_p:"Вы не трогаете технику — всё делаем мы. Сломается — чиним сами, на связи.",
+      why3_h3:"Полностью онлайн",
+      why3_p:"Настраиваем удалённо, без визитов — работаем с бизнесом из любого города.",
+      work_kicker:"Наши работы",
+      work_h2:"Пример: premium-сайт с онлайн-записью",
+      work_sub:"Что мы сделали для студии детейлинга White Swan Auto Spa — люксовый сайт с реальными фото, ценами и записью прямо на странице.",
+      work_card_sub:"Детейлинг-студия · США · запись по предв.",
+      work_card_p:"Премиальный тёмный дизайн, hero-слайдшоу, услуги и цены, онлайн-запись во всплывающем окне. Сделано под ключ — клиент только принимает брони.",
+      work_cta:"Открыть живое демо →",
+      price_kicker:"Цены",
+      price_h2:"Сколько стоит автоматизация",
+      price_sub:"Цены по рынку США 2025–2026 для работы «под ключ» от одного специалиста, а не агентства. Сайт с записью у фрилансеров стоит $800–$2 500 — базовый тариф честный и привычный. Полный пакет у студий доходит до $4 000–$12 000, так что наш максимум заметно ниже агентских ставок.",
+      tier1_h3:"Сайт + запись",
+      tier1_tg:"Чистый сайт и онлайн-запись, которая работает 24/7.",
+      tier1_mo:"+ $49/мес поддержка",
+      tier1_li1:"Современный одностраничный сайт под телефон и компьютер",
+      tier1_li2:"Настройка онлайн-записи (Square, Acuity или Calendly — на выбор)",
+      tier1_li3:"Виджет записи прямо на сайте: клиент бронирует за минуту",
+      tier1_li4:"Автоматические подтверждения записи клиенту",
+      tier1_li5:"Подключение вашего домена, фото и контактов",
+      tier1_li6:"Запуск и проверка всей системы перед сдачей",
+      tier2_h3:"Сайт + ½ автоматизации",
+      tier2_tg:"Сайт, запись и автоответы — заявки не теряются даже ночью.",
+      tier2_mo:"+ $99/мес поддержка",
+      tier2_li1:"Всё из тарифа «Сайт + запись»",
+      tier2_li2:"Автоответы в Instagram Direct на частые вопросы",
+      tier2_li3:"Автоответы в WhatsApp со ссылкой на запись",
+      tier2_li4:"Готовые ответы на топ-вопросы: цены, адрес, часы работы",
+      tier2_li5:"Напоминания клиентам о записи (меньше неявок)",
+      tier2_li6:"Настройка и тестирование сценариев под ваш бизнес",
+      tier3_h3:"Сайт + полная автоматизация",
+      tier3_tg:"Полный автопилот: сайт, запись, бот и сбор клиентов в одном месте.",
+      tier3_mo:"+ $149/мес поддержка",
+      tier3_li1:"Всё из тарифа «Сайт + ½ автоматизации»",
+      tier3_li2:"Полноценный чат-бот в Instagram и WhatsApp с диалогами",
+      tier3_li3:"Сбор заявок и контактов клиентов в единую базу",
+      tier3_li4:"Простая CRM: видно всех клиентов и историю обращений",
+      tier3_li5:"Настройка всех воронок и сценариев под ключ",
+      tier3_li6:"Ответ клиенту при пропущенном звонке со ссылкой на запись",
+      badge:"Популярный выбор",
+      tier_btn:"Выбрать",
+      entry_p:"Не уверены, что нужно? <b>Начните с проверки за $3.</b> Я разберу, как ваш бизнес сейчас принимает заявки — сайт, запись, ответы в Instagram и WhatsApp — и пришлю короткий разбор, где вы теряете клиентов. Эти $3 вычту из стоимости настройки, если закажете любой тариф.",
+      entry_btn:"Заказать проверку за $3",
+      note:"Никаких скрытых платежей: настройка и ежемесячная поддержка — это всё, что вы платите мне. Оплата сервисов записи и чата идёт напрямую вам и обычно стоит копейки — я подберу самый дешёвый вариант. Первым клиентам — скидка в обмен на честный отзыв после запуска.",
+      final_h2:"Узнайте, сколько клиентов вы теряете",
+      final_sub:"Короткая проверка вашего Instagram и записи — всего $3. Покажем, где вы теряете клиентов, без воды и навязывания.",
+      final_cta1:"Написать в Instagram",
+      final_cta3:"Позвонить",
+      footer_tagline:"Автоматизация для малого бизнеса",
+      footer_copy:"© 2026 FLOWBOX. Все права защищены."
+    },
+    es: {
+      logo_sub:"AUTOMATIZACIÓN",
+      nav_cta:"Chequeo por $3",
+      hero_eyebrow:"Automatización para pequeños negocios",
+      hero_h1:"Deje de perder clientes<br>por mensajes y llamadas perdidas",
+      hero_lead:"Configuramos <b class='grad'>reservas y respuestas automáticas</b> para pequeños negocios. Llave en mano — los clientes reservan solos, 24/7.",
+      hero_cta1:"Chequeo del negocio por $3 →",
+      hero_cta2:"Cómo funciona",
+      pain:"Un cliente le escribe por Instagram a las <b>23:40</b>. Usted responde por la mañana. Y él ya <b>reservó con la competencia.</b>",
+      svc_kicker:"Qué configuramos",
+      svc_h2:"Tres cosas que recuperan a sus clientes",
+      svc_sub:"Sin apps complicadas. Herramientas probadas, configuradas para su negocio.",
+      svc1_h3:"Reservas online 24/7",
+      svc1_p:"El cliente elige el servicio, el profesional y la hora — sin llamadas ni mensajes. La reserva llega a su calendario.",
+      svc2_h3:"Respuestas automáticas en Instagram y WhatsApp",
+      svc2_p:"Precios, dirección, horarios y enlace de reserva — el sistema responde al instante, incluso de noche y fines de semana.",
+      svc3_h3:"Recordatorios de cita",
+      svc3_p:"Un recordatorio automático el día antes de la visita. Menos ausencias — más sillones llenos e ingresos.",
+      how_kicker:"Cómo funciona",
+      how_h2:"Usted no configura nada",
+      how_sub:"Toda la parte técnica es nuestra. Usted solo atiende clientes.",
+      step1_h3:"Chequeo por $3",
+      step1_p:"15 minutos. Por unos simbólicos $3 le mostramos dónde está perdiendo clientes y reservas ahora mismo.",
+      step2_h3:"Configuración llave en mano",
+      step2_p:"Lo configuramos todo por usted en 2–3 días. De usted — solo accesos y un par de respuestas.",
+      step3_h3:"Trabaja para usted",
+      step3_p:"El sistema reserva, responde y recuerda. Usted se ocupa de los clientes, no del teléfono.",
+      aud_kicker:"Para quién",
+      aud_h2:"Conocemos su negocio",
+      aud_sub:"Hablamos inglés, ruso y español. Trabajamos online — con negocios de cualquier ciudad.",
+      tag1:"Salones de belleza",
+      tag2:"Barberías",
+      tag3:"Estudios de uñas",
+      tag4:"Profesionales de belleza",
+      tag5:"Cosmetología",
+      why_kicker:"Por qué nosotros",
+      why_h2:"Una persona real, no otra agencia",
+      why1_h3:"En su idioma",
+      why1_p:"Explicamos y configuramos sin tecnicismos — de forma humana.",
+      why2_h3:"Llave en mano",
+      why2_p:"Usted no toca la tecnología — lo hacemos todo. Si algo falla, lo arreglamos. Siempre disponibles.",
+      why3_h3:"Totalmente online",
+      why3_p:"Configuramos todo de forma remota, sin visitas — con negocios de cualquier lugar.",
+      work_kicker:"Nuestro trabajo",
+      work_h2:"Ejemplo: un sitio premium con reservas online",
+      work_sub:"Lo que creamos para el estudio de detailing White Swan Auto Spa — un sitio de lujo con fotos reales, precios y reservas en la misma página.",
+      work_card_sub:"Estudio de detailing · EE. UU. · con cita previa",
+      work_card_p:"Diseño oscuro premium, slideshow principal, servicios y precios, reservas online en ventana emergente. Llave en mano — el cliente solo recibe reservas.",
+      work_cta:"Abrir demo en vivo →",
+      price_kicker:"Precios",
+      price_h2:"Cuánto cuesta la automatización",
+      price_sub:"Precios según el mercado de EE. UU. 2025–2026 para trabajo llave en mano de un solo especialista, no una agencia. Un sitio con reservas de freelancers cuesta $800–$2,500 — el plan base es justo y habitual. Un paquete completo de estudios llega a $4,000–$12,000, así que nuestro plan máximo está muy por debajo de las tarifas de agencia.",
+      tier1_h3:"Sitio + reservas",
+      tier1_tg:"Un sitio limpio y reservas online que funcionan 24/7.",
+      tier1_mo:"+ $49/mes soporte",
+      tier1_li1:"Sitio moderno de una página para móvil y computadora",
+      tier1_li2:"Configuración de reservas online (Square, Acuity o Calendly — a elegir)",
+      tier1_li3:"Widget de reservas en el sitio: el cliente reserva en un minuto",
+      tier1_li4:"Confirmaciones automáticas de reserva al cliente",
+      tier1_li5:"Conexión de su dominio, fotos y contactos",
+      tier1_li6:"Lanzamiento y prueba completa del sistema antes de la entrega",
+      tier2_h3:"Sitio + ½ automatización",
+      tier2_tg:"Sitio, reservas y respuestas automáticas — no se pierden clientes ni de noche.",
+      tier2_mo:"+ $99/mes soporte",
+      tier2_li1:"Todo lo del plan «Sitio + reservas»",
+      tier2_li2:"Respuestas automáticas en Instagram Direct a preguntas frecuentes",
+      tier2_li3:"Respuestas automáticas en WhatsApp con enlace de reserva",
+      tier2_li4:"Respuestas listas a las preguntas top: precios, dirección, horarios",
+      tier2_li5:"Recordatorios de cita a los clientes (menos ausencias)",
+      tier2_li6:"Escenarios configurados y probados para su negocio",
+      tier3_h3:"Sitio + automatización completa",
+      tier3_tg:"Piloto automático total: sitio, reservas, bot y captura de clientes en un solo lugar.",
+      tier3_mo:"+ $149/mes soporte",
+      tier3_li1:"Todo lo del plan «Sitio + ½ automatización»",
+      tier3_li2:"Chatbot completo en Instagram y WhatsApp con diálogos",
+      tier3_li3:"Captura de leads y contactos de clientes en una sola base",
+      tier3_li4:"CRM simple: vea cada cliente y su historial",
+      tier3_li5:"Todos los embudos y escenarios configurados llave en mano",
+      tier3_li6:"Mensaje al cliente por llamada perdida con enlace de reserva",
+      badge:"Más elegido",
+      tier_btn:"Elegir",
+      entry_p:"¿No sabe qué necesita? <b>Empiece con el chequeo por $3.</b> Reviso cómo su negocio recibe reservas ahora — sitio, agenda, respuestas en Instagram y WhatsApp — y le envío un informe corto sobre dónde está perdiendo clientes. Descuento esos $3 del precio de configuración si contrata cualquier plan.",
+      entry_btn:"Pedir el chequeo por $3",
+      note:"Sin cargos ocultos: la configuración y el soporte mensual son todo lo que me paga. Las herramientas de reservas y chat se facturan directamente a usted y suelen costar centavos — elegiré la opción más barata. Los primeros clientes reciben un descuento a cambio de una reseña honesta tras el lanzamiento.",
+      final_h2:"Descubra cuántos clientes está perdiendo",
+      final_sub:"Un chequeo corto de su Instagram y sus reservas — solo $3. Le mostramos dónde pierde clientes, sin relleno ni presión.",
+      final_cta1:"Escribir por Instagram",
+      final_cta3:"Llamar",
+      footer_tagline:"Automatización para pequeños negocios",
+      footer_copy:"© 2026 FLOWBOX. Todos los derechos reservados."
+    }
+  };
+  var META = {
+    en:{title:"FLOWBOX — Automation for small business", desc:"We set up auto-booking and auto-replies for small businesses. Done-for-you. A $3 business check shows where you're losing clients."},
+    ru:{title:"FLOWBOX — Автоматизация для малого бизнеса", desc:"Настраиваем автозапись и автоответы для малого бизнеса. Под ключ. Проверка бизнеса за $3 покажет, где вы теряете клиентов."},
+    es:{title:"FLOWBOX — Automatización para pequeños negocios", desc:"Configuramos reservas y respuestas automáticas para pequeños negocios. Llave en mano. Un chequeo por $3 muestra dónde pierde clientes."}
+  };
+  var EN = {}; // English is the static HTML — captured on load for switching back
+  document.querySelectorAll('[data-i18n]').forEach(function(el){ EN[el.getAttribute('data-i18n')] = el.innerHTML; });
+
+  function setLang(l){
+    if(l!=='ru' && l!=='es') l='en';
+    var dict = (l==='en') ? EN : I18N[l];
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if(dict[k]!=null) el.innerHTML = dict[k];
+    });
+    var m = META[l] || META.en;
+    document.title = m.title;
+    var md = document.querySelector('meta[name="description"]');
+    if(md) md.setAttribute('content', m.desc);
+    document.querySelectorAll('.lang button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang')===l); });
+    try{ localStorage.setItem('flowbox_lang', l); }catch(e){}
+  }
+
+  var saved = null;
+  try{ saved = localStorage.getItem('flowbox_lang'); }catch(e){}
+  setLang(saved || 'en');
+
+  document.querySelectorAll('.lang button').forEach(function(b){
+    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
+  });
+})();
+</script>
 
 </body>
 </html>
