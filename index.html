@@ -12,8 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FLOWBOX — Автоматизация для салонов и барбершопов Бруклина</title>
-<meta name="description" content="Настраиваем автозапись и автоответы для салонов, барбершопов и ногтевых студий Бруклина. Под ключ, на русском. Проверка бизнеса за $3 — покажем, где вы теряете клиентов.">
+<title>FLOWBOX — Автоматизация для малого бизнеса</title>
+<meta name="description" content="Настраиваем автозапись и автоответы для малого бизнеса. Под ключ, на русском. Проверка бизнеса за $3 — покажем, где вы теряете клиентов.">
 <style>
   :root{
     --bg:#0A0D14; --bg2:#10141E; --card:#141A26; --line:#232C3D;
@@ -106,7 +106,26 @@
     .nav .hide{display:none}
     section.block{padding:48px 0}
     .hero{padding:54px 0 44px}
+    .prices{grid-template-columns:1fr !important}
   }
+
+  /* pricing */
+  .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;align-items:stretch}
+  .price{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column}
+  .price.feat{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 22px 55px rgba(79,124,255,.20);position:relative}
+  .price .badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(105deg,var(--accent),var(--accent2));color:#06101f;font-size:12px;font-weight:700;padding:6px 15px;border-radius:99px;white-space:nowrap}
+  .price h3{font-size:21px;margin-bottom:6px}
+  .price .tg{color:var(--muted);font-size:14px;min-height:42px;margin-bottom:16px}
+  .price .amt{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1}
+  .price .mo{color:var(--accent2);font-size:14px;font-weight:600;margin:6px 0 18px}
+  .price ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:0 0 24px;padding:0}
+  .price li{position:relative;padding-left:26px;font-size:14.5px;line-height:1.45}
+  .price li::before{content:"✓";position:absolute;left:0;top:0;color:var(--accent2);font-weight:800}
+  .price .btn{margin-top:auto;justify-content:center;width:100%}
+  .entry{background:linear-gradient(105deg,rgba(79,124,255,.12),rgba(34,211,238,.06));border:1px solid rgba(79,124,255,.32);border-radius:16px;padding:24px;margin-top:26px;text-align:center}
+  .entry p{max-width:680px;margin:0 auto}
+  .entry b{color:var(--accent2)}
+  .note{color:var(--muted);font-size:13.5px;max-width:760px;margin:18px auto 0;text-align:center}
 </style>
 </head>
 <body>
@@ -120,7 +139,7 @@
 
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span> Автоматизация для бизнеса · Бруклин</div>
+    <div class="eyebrow"><span class="dot"></span> Автоматизация для малого бизнеса</div>
     <h1>Перестаньте терять клиентов<br>из директа и пропущенных звонков</h1>
     <p class="lead">Настраиваем <b class="grad">автозапись и автоответы</b> для салонов, барбершопов и ногтевых студий. Под ключ, на русском — клиенты записываются сами, 24/7.</p>
     <div class="cta-row">
@@ -187,7 +206,7 @@
   <div class="wrap">
     <div class="kicker">Для кого</div>
     <h2>Мы знаем ваш бизнес</h2>
-    <p class="sub">Брайтон-Бич, Шипсхед-Бэй и весь Бруклин. Говорим по-русски и по-английски.</p>
+    <p class="sub">Говорим по-русски и по-английски. Работаем онлайн — с бизнесом из любого города.</p>
     <div class="tags">
       <div class="tag"><i>✦</i>Салоны красоты</div>
       <div class="tag"><i>✦</i>Барбершопы</div>
@@ -215,9 +234,9 @@
         <p>Вы не трогаете технику — всё делаем мы. Сломается — чиним сами, на связи.</p>
       </div>
       <div class="card">
-        <div class="ico">📍</div>
-        <h3>Локально</h3>
-        <p>Мы в Бруклине, рядом. Можем приехать и показать всё лично.</p>
+        <div class="ico">💻</div>
+        <h3>Полностью онлайн</h3>
+        <p>Настраиваем удалённо, без визитов — работаем с бизнесом из любого города.</p>
       </div>
     </div>
   </div>
@@ -244,6 +263,73 @@
   </div>
 </section>
 
+<section class="block" id="prices">
+  <div class="wrap">
+    <div class="kicker">Цены</div>
+    <h2>Сколько стоит автоматизация</h2>
+    <p class="sub">Цены по рынку США 2025–2026 для работы «под ключ» от одного специалиста, а не агентства. Сайт с записью у фрилансеров стоит $800–$2 500 — базовый тариф честный и привычный. Полный пакет у студий доходит до $4 000–$12 000, так что наш максимум заметно ниже агентских ставок.</p>
+    <div class="prices">
+
+      <div class="price">
+        <h3>Сайт + запись</h3>
+        <div class="tg">Чистый сайт и онлайн-запись, которая работает 24/7.</div>
+        <div class="amt">$1 500</div>
+        <div class="mo">+ $49/мес поддержка</div>
+        <ul>
+          <li>Современный одностраничный сайт под телефон и компьютер</li>
+          <li>Настройка онлайн-записи (Square, Acuity или Calendly — на выбор)</li>
+          <li>Виджет записи прямо на сайте: клиент бронирует за минуту</li>
+          <li>Автоматические подтверждения записи клиенту</li>
+          <li>Подключение вашего домена, фото и контактов</li>
+          <li>Запуск и проверка всей системы перед сдачей</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://instagram.com/flow_box08">Выбрать</a>
+      </div>
+
+      <div class="price">
+        <h3>Сайт + ½ автоматизации</h3>
+        <div class="tg">Сайт, запись и автоответы — заявки не теряются даже ночью.</div>
+        <div class="amt">$2 200</div>
+        <div class="mo">+ $99/мес поддержка</div>
+        <ul>
+          <li>Всё из тарифа «Сайт + запись»</li>
+          <li>Автоответы в Instagram Direct на частые вопросы</li>
+          <li>Автоответы в WhatsApp со ссылкой на запись</li>
+          <li>Готовые ответы на топ-вопросы: цены, адрес, часы работы</li>
+          <li>Напоминания клиентам о записи (меньше неявок)</li>
+          <li>Настройка и тестирование сценариев под ваш бизнес</li>
+        </ul>
+        <a class="btn btn-ghost" href="https://instagram.com/flow_box08">Выбрать</a>
+      </div>
+
+      <div class="price feat">
+        <div class="badge">Популярный выбор</div>
+        <h3>Сайт + полная автоматизация</h3>
+        <div class="tg">Полный автопилот: сайт, запись, бот и сбор клиентов в одном месте.</div>
+        <div class="amt">$3 500</div>
+        <div class="mo">+ $149/мес поддержка</div>
+        <ul>
+          <li>Всё из тарифа «Сайт + ½ автоматизации»</li>
+          <li>Полноценный чат-бот в Instagram и WhatsApp с диалогами</li>
+          <li>Сбор заявок и контактов клиентов в единую базу</li>
+          <li>Простая CRM: видно всех клиентов и историю обращений</li>
+          <li>Настройка всех воронок и сценариев под ключ</li>
+          <li>Ответ клиенту при пропущенном звонке со ссылкой на запись</li>
+        </ul>
+        <a class="btn btn-primary" href="https://instagram.com/flow_box08">Выбрать</a>
+      </div>
+
+    </div>
+
+    <div class="entry">
+      <p>Не уверены, что нужно? <b>Начните с проверки за $3.</b> Я разберу, как ваш бизнес сейчас принимает заявки — сайт, запись, ответы в Instagram и WhatsApp — и пришлю короткий разбор, где вы теряете клиентов. Эти $3 вычту из стоимости настройки, если закажете любой тариф.</p>
+      <div style="margin-top:16px"><a class="btn btn-primary" href="https://instagram.com/flow_box08">Заказать проверку за $3</a></div>
+    </div>
+
+    <p class="note">Никаких скрытых платежей: настройка и ежемесячная поддержка — это всё, что вы платите мне. Оплата сервисов записи и чата идёт напрямую вам и обычно стоит копейки — я подберу самый дешёвый вариант. Первым клиентам — скидка в обмен на честный отзыв после запуска.</p>
+  </div>
+</section>
+
 <section class="wrap">
   <div class="final">
     <h2>Узнайте, сколько клиентов вы теряете</h2>
@@ -259,7 +345,7 @@
 <footer>
   <div class="wrap">
     <div class="logo">FLOWBOX</div>
-    <p>Автоматизация для малого бизнеса · Brooklyn, NY</p>
+    <p>Автоматизация для малого бизнеса</p>
     <p style="margin-top:6px;opacity:.6">© 2026 FLOWBOX. Все права защищены.</p>
   </div>
 </footer>
