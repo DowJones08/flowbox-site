@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  DEMO site for Pushkin Studio — built by FLOWBOX as a pitch hook. ║
+  ║  RU is the static HTML (primary). EN lives in the I18N object in  ║
+  ║  the <script> at the bottom. Language toggle in header.          ║
+  ║                                                                    ║
+  ║  Real data (verified June 2026):                                  ║
+  ║   • Pushkin Studio — wedding photo & cinema (Alex Pushkin)        ║
+  ║   • Home-based — NO street address (privacy). Brooklyn + travel.  ║
+  ║   • (917) 776-8269 · @pushkinstudio.us                            ║
+  ║   • By appointment · 4.7★ / 16 reviews (WeddingWire)              ║
+  ║  NO MAP (home-based). PACKAGES are "от $" starting prices.        ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pushkin Studio — свадебная фото- и видеосъёмка в Нью-Йорке</title>
+<meta name="description" content="Pushkin Studio — кинематографичная свадебная фото- и видеосъёмка. Бруклин, выезд по NY, NJ и CT. 4.7★ на WeddingWire. Забронируйте дату онлайн.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Jost:wght@300;400;500;600;700&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14110F; --bg:#FBF8F3; --bg2:#F2ECE2; --card:#FFFFFF; --line:#E4DACB;
+    --text:#1F1B17; --muted:#7C7166; --gold:#C7A86A; --golddk:#A6864A; --charcoal:#1A1714;
+    --soft:#F5EFE6;
+    --serif:"Cormorant Garamond",Georgia,serif;
+    --sans:"Jost",-apple-system,"Segoe UI",system-ui,Roboto,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.7;font-weight:400;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  .serif{font-family:var(--serif)}
+  .gold{color:var(--gold)}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-weight:600;font-size:14px;
+    padding:15px 30px;border-radius:999px;cursor:pointer;transition:.22s;border:0;line-height:1;letter-spacing:1px;text-transform:uppercase}
+  .btn-primary{background:linear-gradient(105deg,var(--gold),var(--golddk));color:#1a140a;box-shadow:0 10px 26px rgba(166,134,74,.30)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(166,134,74,.42)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--golddk)}
+  .btn-light{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.30);backdrop-filter:blur(4px)}
+  .btn-light:hover{background:rgba(255,255,255,.16);border-color:var(--gold)}
+  .btn-dark{background:#fff;color:#14110f;border:1px solid transparent}
+  .btn-dark:hover{transform:translateY(-2px)}
+
+  /* header */
+  header{position:sticky;top:0;z-index:60;background:rgba(20,17,15,.74);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(199,168,106,.20)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px;gap:16px}
+  .brand{display:flex;align-items:center;gap:13px;line-height:1}
+  .brand img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:1px solid rgba(199,168,106,.5);flex:none}
+  .brand .bt{display:flex;flex-direction:column}
+  .brand b{font-family:var(--serif);font-weight:600;font-size:23px;color:#fff;letter-spacing:.5px}
+  .brand small{font-size:9.5px;letter-spacing:4px;color:var(--gold);margin-top:3px;text-transform:uppercase;font-weight:500}
+  .menu{display:flex;align-items:center;gap:28px}
+  .menu a{color:rgba(255,255,255,.80);font-size:13px;font-weight:400;transition:.15s;letter-spacing:.6px;text-transform:uppercase}
+  .menu a:hover{color:var(--gold)}
+  .navr{display:flex;align-items:center;gap:14px}
+  .lang{display:inline-flex;border:1px solid rgba(255,255,255,.22);border-radius:999px;overflow:hidden;flex:none}
+  .lang button{background:transparent;color:rgba(255,255,255,.6);border:0;padding:7px 12px;font-size:11.5px;font-weight:600;
+    cursor:pointer;letter-spacing:.8px;transition:.15s;font-family:inherit}
+  .lang button:hover{color:#fff}
+  .lang button.active{background:linear-gradient(105deg,var(--gold),var(--golddk));color:#1a140a}
+  header .btn{padding:11px 20px;font-size:11.5px}
+
+  /* hero */
+  .hero{position:relative;color:#fff;text-align:center;padding:118px 0 124px;overflow:hidden;
+    background:radial-gradient(120% 130% at 50% -10%,#241f1a 0%,#16120f 55%,#0d0a08 100%)}
+  .hero::before{content:"";position:absolute;inset:0;opacity:.55;z-index:0;
+    background:radial-gradient(closest-side,rgba(199,168,106,.26),transparent 70%) -100px -60px/640px 640px no-repeat,
+               radial-gradient(closest-side,rgba(199,168,106,.16),transparent 70%) calc(100% + 100px) 70%/600px 600px no-repeat}
+  .hero .wrap{position:relative;z-index:1}
+  .hbadge{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--gold);border:1px solid rgba(199,168,106,.42);background:rgba(199,168,106,.07);
+    padding:8px 18px;border-radius:999px;margin-bottom:28px;font-weight:500}
+  .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(46px,9vw,92px);line-height:.98;letter-spacing:1px;margin-bottom:6px}
+  .hero .kicker{font-family:var(--serif);font-style:italic;font-size:clamp(19px,3.2vw,28px);color:rgba(255,255,255,.82);margin-bottom:22px;font-weight:500}
+  .hero p.lead{font-size:clamp(15px,2.3vw,18px);color:rgba(255,255,255,.70);max-width:560px;margin:0 auto 36px;font-weight:300;letter-spacing:.3px}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .herometa{margin-top:34px;display:flex;gap:10px 28px;justify-content:center;flex-wrap:wrap;
+    color:rgba(255,255,255,.64);font-size:13px;letter-spacing:.4px}
+  .herometa span{display:inline-flex;align-items:center;gap:7px}
+  .herometa i{color:var(--gold);font-style:normal}
+
+  /* trust strip */
+  .trust{background:var(--charcoal);color:#fff;border-top:1px solid rgba(199,168,106,.18);padding:28px 0}
+  .trust .row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:center}
+  .trust .t b{display:block;font-family:var(--serif);font-size:30px;color:var(--gold);line-height:1.05;font-weight:600}
+  .trust .t span{font-size:11.5px;color:rgba(255,255,255,.60);letter-spacing:1px;text-transform:uppercase}
+
+  /* sections */
+  section.block{padding:96px 0}
+  .eyebrow{text-align:center;color:var(--golddk);font-size:11.5px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;margin-bottom:16px}
+  h2{font-family:var(--serif);font-weight:600;font-size:clamp(34px,5.2vw,56px);text-align:center;letter-spacing:.5px;margin-bottom:16px;color:var(--ink);line-height:1.05}
+  .sub{text-align:center;color:var(--muted);max-width:620px;margin:0 auto 54px;font-size:16.5px;font-weight:300}
+  .center{text-align:center}
+
+  /* packages */
+  .pkg-wrap{background:var(--bg2)}
+  .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1000px;margin:0 auto}
+  .pkg{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:34px 28px;transition:.25s;position:relative;
+    display:flex;flex-direction:column;box-shadow:0 8px 26px rgba(60,45,25,.05)}
+  .pkg:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 22px 50px rgba(60,45,25,.12)}
+  .pkg.feat{background:linear-gradient(180deg,#1c1813,#14110f);border-color:rgba(199,168,106,.45)}
+  .pkg.feat .pkg-nm,.pkg.feat .pkg-desc{color:#fff}
+  .pkg.feat .pkg-desc{color:rgba(255,255,255,.72)}
+  .pkg.feat .pkg-pr{color:var(--gold)}
+  .pkg .tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(105deg,var(--gold),var(--golddk));
+    color:#1a140a;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 16px;border-radius:999px;white-space:nowrap}
+  .pkg-nm{font-family:var(--serif);font-size:25px;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:.3px}
+  .pkg-desc{color:var(--muted);font-size:14px;font-weight:300;margin-bottom:20px;flex:1;line-height:1.6}
+  .pkg-pr{font-family:var(--serif);font-size:21px;font-weight:600;color:var(--golddk)}
+  .pkg-pr small{font-family:var(--sans);font-size:11px;color:var(--muted);font-weight:400;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:3px}
+  .pkg .btn{margin-top:22px;width:100%;justify-content:center}
+  .pricenote{text-align:center;color:var(--muted);font-size:13px;margin-top:34px;font-style:italic;font-weight:300}
+
+  /* works gallery — the star */
+  .work-wrap{background:var(--bg)}
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1100px;margin:0 auto}
+  .gal a{position:relative;display:block;border-radius:18px;overflow:hidden;background:var(--bg2);
+    box-shadow:0 12px 34px rgba(40,30,18,.12);aspect-ratio:4/5}
+  .gal a.wide{aspect-ratio:auto;grid-column:span 2;aspect-ratio:8/5}
+  .gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .gal a:hover img{transform:scale(1.07)}
+  .gal a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(20,17,15,.34));opacity:0;transition:.3s}
+  .gal a:hover::after{opacity:1}
+  @media(min-width:881px){
+    .gal a:nth-child(1){grid-column:span 2;aspect-ratio:8/5}
+    .gal a:nth-child(6){grid-column:span 2;aspect-ratio:8/5}
+  }
+
+  /* reviews */
+  .rev-wrap{background:var(--charcoal);color:#fff}
+  .rev-wrap h2{color:#fff}
+  .rev-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:22px;margin-top:8px;align-items:stretch}
+  .rev{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+    border:1px solid rgba(199,168,106,.22);border-radius:22px;padding:36px 34px;display:flex;flex-direction:column;justify-content:center}
+  .rev .qm{font-family:var(--serif);font-size:58px;color:var(--gold);line-height:.5;height:30px}
+  .rev p{color:rgba(255,255,255,.90);font-size:18px;font-style:italic;font-family:var(--serif);font-weight:500;margin:14px 0 20px;line-height:1.5}
+  .rev .who{font-size:12px;color:var(--gold);font-weight:600;letter-spacing:1px;text-transform:uppercase}
+  .rev .st{color:var(--gold);font-size:14px;letter-spacing:3px;margin-top:6px}
+  .rev.score{align-items:center;text-align:center}
+  .rev.score .big{font-family:var(--serif);font-size:64px;color:var(--gold);font-weight:600;line-height:1}
+  .rev.score .stars{color:var(--gold);font-size:18px;letter-spacing:4px;margin:8px 0 6px}
+  .rev.score .lbl{font-size:12px;color:rgba(255,255,255,.66);letter-spacing:1px;text-transform:uppercase}
+
+  /* travel panel (replaces map) */
+  .travel-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:stretch}
+  .travel-card{position:relative;border-radius:22px;overflow:hidden;border:1px solid rgba(199,168,106,.30);min-height:340px;
+    background:radial-gradient(120% 120% at 30% 10%,#241f1a,#14110f 75%);color:#fff;padding:42px 38px;display:flex;flex-direction:column;justify-content:center}
+  .travel-card .ti{font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:14px}
+  .travel-card h3{font-family:var(--serif);font-size:34px;font-weight:600;line-height:1.1;margin-bottom:16px}
+  .travel-card p{color:rgba(255,255,255,.74);font-size:15.5px;font-weight:300;margin-bottom:24px}
+  .zones{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+  .zone{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(199,168,106,.42);background:rgba(199,168,106,.08);
+    border-radius:999px;padding:9px 18px;font-size:13.5px;font-weight:500;letter-spacing:.5px}
+  .zone i{font-style:normal;color:var(--gold)}
+  .info{display:flex;flex-direction:column;justify-content:center;gap:22px}
+  .info .it{display:flex;gap:15px;align-items:flex-start}
+  .info .ic{flex:none;width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;
+    background:var(--soft);border:1px solid var(--line)}
+  .info .it b{display:block;font-size:15px;color:var(--ink);margin-bottom:2px;font-weight:600}
+  .info .it span{color:var(--muted);font-size:14.5px;font-weight:300}
+  .info .it a{color:var(--golddk);font-weight:600}
+
+  /* final */
+  .final{position:relative;color:#fff;text-align:center;overflow:hidden;
+    background:radial-gradient(120% 130% at 50% 0%,#241f1a,#14110f 72%)}
+  .final::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(closest-side,rgba(199,168,106,.24),transparent 70%) 50% -40px/720px 500px no-repeat}
+  .final .wrap{position:relative;z-index:1;padding:96px 24px}
+  .final h2{color:#fff;margin-bottom:16px}
+  .final p{color:rgba(255,255,255,.74);max-width:540px;margin:0 auto 32px;font-size:16.5px;font-weight:300}
+
+  footer{background:var(--charcoal);color:rgba(255,255,255,.6);padding:50px 0 36px;text-align:center;font-size:14px;
+    border-top:1px solid rgba(199,168,106,.18)}
+  footer .fbrand{font-family:var(--serif);font-size:26px;color:#fff;margin-bottom:6px;font-weight:600;letter-spacing:.5px}
+  footer .fcontacts{display:flex;gap:8px 24px;justify-content:center;flex-wrap:wrap;margin:16px 0 24px}
+  footer .fcontacts a{color:var(--gold);font-weight:600}
+  .madeby{border-top:1px solid rgba(255,255,255,.10);margin-top:8px;padding-top:22px;font-size:12.5px;color:rgba(255,255,255,.45);font-weight:300}
+  .madeby a{color:var(--gold);font-weight:600}
+
+  /* floating demo ribbon */
+  .demo-flag{position:fixed;right:16px;bottom:16px;z-index:90;display:inline-flex;align-items:center;gap:9px;
+    background:rgba(20,17,15,.92);color:#fff;border:1px solid rgba(199,168,106,.42);border-radius:999px;
+    padding:10px 16px;font-size:12px;font-weight:500;box-shadow:0 10px 30px rgba(0,0,0,.34);backdrop-filter:blur(6px);transition:.2s;letter-spacing:.5px}
+  .demo-flag:hover{transform:translateY(-2px);border-color:var(--gold)}
+  .demo-flag b{color:var(--gold);letter-spacing:1px}
+  .demo-flag .pulse{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(199,168,106,.6);animation:pl 2s infinite}
+  @keyframes pl{0%{box-shadow:0 0 0 0 rgba(199,168,106,.55)}70%{box-shadow:0 0 0 10px rgba(199,168,106,0)}100%{box-shadow:0 0 0 0 rgba(199,168,106,0)}}
+
+  /* booking modal */
+  .bm-overlay{position:fixed;inset:0;z-index:300;background:rgba(12,10,8,.62);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px}
+  .bm-overlay.open{display:flex}
+  .bm-card{background:var(--card,#fff);color:var(--text,#222);border:1px solid var(--line,#e6e6e6);border-radius:22px;max-width:440px;width:100%;max-height:92vh;overflow:auto;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .bm-x{position:absolute;top:12px;right:16px;background:transparent;border:0;font-size:30px;line-height:1;color:var(--muted,#999);cursor:pointer}
+  .bm-body{padding:34px 30px 30px}
+  .bm-h{font-size:30px;margin-bottom:6px;font-weight:600}
+  .bm-subt{color:var(--muted,#777);font-size:14.5px;margin-bottom:18px;font-weight:300}
+  .bm-form{display:flex;flex-direction:column;gap:4px}
+  .bm-form label{font-size:12px;font-weight:600;margin-top:10px;letter-spacing:.5px;text-transform:uppercase}
+  .bm-form input,.bm-form select{font-family:inherit;font-size:15px;padding:12px 14px;border:1px solid var(--line,#ddd);border-radius:12px;background:#fff;color:#1a1a1a;width:100%}
+  .bm-form input:focus,.bm-form select:focus{outline:none;border-color:var(--gold)}
+  .bm-row{display:flex;gap:12px}.bm-row>div{flex:1}
+  .bm-form .btn{margin-top:18px;width:100%;justify-content:center}
+  .bm-done{display:none;text-align:center}
+  .bm-done.show{display:block}
+  #bm-form-wrap.hide{display:none}
+  .bm-check{width:64px;height:64px;border-radius:50%;margin:4px auto 14px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;background:linear-gradient(135deg,#3cbf7d,#2a9d63)}
+  .bm-note{color:var(--muted,#999);font-size:12px;margin-top:12px;font-style:italic}
+
+  @media(max-width:880px){
+    .travel-grid{grid-template-columns:1fr}
+    .rev-grid{grid-template-columns:1fr}
+    .pkg-grid{grid-template-columns:1fr;max-width:460px}
+    .gal{grid-template-columns:1fr 1fr}
+    .gal a,.gal a.wide,.gal a:nth-child(1),.gal a:nth-child(6){grid-column:auto;aspect-ratio:4/5}
+  }
+  @media(max-width:680px){
+    .menu{display:none}
+    section.block{padding:64px 0}
+    .hero{padding:84px 0 86px}
+    .trust .row{grid-template-columns:1fr 1fr;gap:24px 14px}
+    .demo-flag{left:16px;right:16px;justify-content:center}
+    .gal{grid-template-columns:1fr}
+    .brand small{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <img src="img/logo.jpg" alt="Pushkin Studio">
+      <span class="bt"><b>Pushkin Studio</b><small>Wedding Photo &amp; Cinema</small></span>
+    </a>
+    <nav class="menu">
+      <a href="#packages" data-i18n="nav_packages">Пакеты</a>
+      <a href="#works" data-i18n="nav_works">Портфолио</a>
+      <a href="#reviews" data-i18n="nav_reviews">Отзывы</a>
+      <a href="#contact" data-i18n="nav_contacts">Контакты</a>
+    </nav>
+    <div class="navr">
+      <div class="lang" role="group" aria-label="Язык">
+        <button type="button" data-lang="ru" class="active">RU</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <button class="btn btn-primary" type="button" onclick="openBM()" data-i18n="nav_book">Забронировать дату</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hbadge" data-i18n="hero_badge">★ 4.7 / 5 · WeddingWire · 16 отзывов</div>
+    <h1>Pushkin Studio</h1>
+    <div class="kicker" data-i18n="hero_kicker">Кинематографичная свадебная фото- и видеосъёмка</div>
+    <p class="lead" data-i18n="hero_lead">Ваш день — как фильм. Эмоции, свет и детали, к которым возвращаешься годами. Бруклин и выезд по Нью-Йорку, Нью-Джерси и Коннектикуту.</p>
+    <div class="cta-row">
+      <button class="btn btn-primary" type="button" onclick="openBM()" data-i18n="hero_cta1">Забронировать дату →</button>
+      <a class="btn btn-light" href="#works" data-i18n="hero_cta2">Смотреть портфолио</a>
+    </div>
+    <div class="herometa">
+      <span><i>📍</i> <span data-i18n="meta_area">Бруклин · выезд по NY, NJ, CT</span></span>
+      <span><i>🎬</i> <span data-i18n="meta_appt">По записи</span></span>
+      <span><i>📞</i> <a href="tel:+19177768269">(917) 776-8269</a></span>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div class="row">
+      <div class="t"><b>★ 4.7</b><span data-i18n="tr1">рейтинг WeddingWire</span></div>
+      <div class="t"><b>16</b><span data-i18n="tr2">отзывов</span></div>
+      <div class="t"><b data-i18n="tr3b">Фото + видео</b><span data-i18n="tr3">в одной команде</span></div>
+      <div class="t"><b data-i18n="tr4b">NY · NJ · CT</b><span data-i18n="tr4">выезд на съёмку</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="block pkg-wrap" id="packages">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="pkg_eye">Пакеты съёмки</div>
+    <h2 data-i18n="pkg_h2">Выберите свой формат</h2>
+    <p class="sub" data-i18n="pkg_sub">От лёгкой love story до полного свадебного дня с фильмом. Подберём пакет под ваш сценарий и площадку.</p>
+    <div class="pkg-grid">
+      <div class="pkg">
+        <div class="pkg-nm" data-i18n="p1n">Свадебная фотосъёмка</div>
+        <div class="pkg-desc" data-i18n="p1d">Полный день, репортаж и постановочные кадры, ретушь и галерея в высоком разрешении.</div>
+        <div class="pkg-pr"><small data-i18n="pkg_from">от</small>$1,800</div>
+        <button class="btn btn-ghost" type="button" onclick="openBM()" data-i18n="pkg_btn">Забронировать</button>
+      </div>
+      <div class="pkg feat">
+        <div class="tag" data-i18n="pkg_pop">Хит выбора</div>
+        <div class="pkg-nm" data-i18n="p3n">Фото + видео (пакет)</div>
+        <div class="pkg-desc" data-i18n="p3d">Полное покрытие дня: фотограф и видеограф вместе. Галерея + кинематографичный фильм о свадьбе.</div>
+        <div class="pkg-pr"><small data-i18n="pkg_from">от</small>$2,900</div>
+        <button class="btn btn-primary" type="button" onclick="openBM()" data-i18n="pkg_btn2">Забронировать дату</button>
+      </div>
+      <div class="pkg">
+        <div class="pkg-nm" data-i18n="p2n">Свадебное видео</div>
+        <div class="pkg-desc" data-i18n="p2d">Кинематографичный фильм о вашем дне: монтаж, цветокоррекция, музыка и звук.</div>
+        <div class="pkg-pr"><small data-i18n="pkg_from">от</small>$1,500</div>
+        <button class="btn btn-ghost" type="button" onclick="openBM()" data-i18n="pkg_btn">Забронировать</button>
+      </div>
+      <div class="pkg">
+        <div class="pkg-nm" data-i18n="p4n">Engagement / Love Story</div>
+        <div class="pkg-desc" data-i18n="p4d">Помолвочная съёмка на красивой локации — лёгкая, тёплая, про вас двоих.</div>
+        <div class="pkg-pr"><small data-i18n="pkg_from">от</small>$500</div>
+        <button class="btn btn-ghost" type="button" onclick="openBM()" data-i18n="pkg_btn">Забронировать</button>
+      </div>
+      <div class="pkg">
+        <div class="pkg-nm" data-i18n="p5n">Семейная / событийная</div>
+        <div class="pkg-desc" data-i18n="p5d">Юбилеи, крестины, дни рождения и семейные портреты — съёмка любого вашего события.</div>
+        <div class="pkg-pr"><small data-i18n="pkg_from">от</small>$400</div>
+        <button class="btn btn-ghost" type="button" onclick="openBM()" data-i18n="pkg_btn">Забронировать</button>
+      </div>
+      <div class="pkg" style="justify-content:center;align-items:center;text-align:center;background:transparent;border-style:dashed">
+        <div class="pkg-nm serif" data-i18n="p6n">Не нашли формат?</div>
+        <div class="pkg-desc" style="flex:none" data-i18n="p6d">Соберём индивидуальный пакет под вашу свадьбу и бюджет.</div>
+        <button class="btn btn-ghost" type="button" onclick="openBM()" data-i18n="p6b">Обсудить →</button>
+      </div>
+    </div>
+    <p class="pricenote" data-i18n="pkg_note">* Цены указаны как стартовые («от $») для примера — на готовом сайте подставим ваш актуальный прайс. Итог зависит от часов покрытия и площадки.</p>
+  </div>
+</section>
+
+<section class="block work-wrap" id="works">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="work_eye">Портфолио</div>
+    <h2 data-i18n="work_h2">Наши работы</h2>
+    <p class="sub" data-i18n="work_sub">Реальные свадьбы, снятые Pushkin Studio. Эмоции дня — честно и красиво.</p>
+    <div class="gal">
+      <a href="img/work1.jpg" target="_blank" rel="noopener"><img src="img/work1.jpg" loading="lazy" alt="Свадебная съёмка Pushkin Studio"></a>
+      <a href="img/work2.jpg" target="_blank" rel="noopener"><img src="img/work2.jpg" loading="lazy" alt="Свадебная съёмка Pushkin Studio"></a>
+      <a href="img/work3.jpg" target="_blank" rel="noopener"><img src="img/work3.jpg" loading="lazy" alt="Свадебная съёмка Pushkin Studio"></a>
+      <a href="img/work4.jpg" target="_blank" rel="noopener"><img src="img/work4.jpg" loading="lazy" alt="Свадебная съёмка Pushkin Studio"></a>
+      <a href="img/work5.jpg" target="_blank" rel="noopener"><img src="img/work5.jpg" loading="lazy" alt="Свадебная съёмка Pushkin Studio"></a>
+      <a href="img/work6.jpg" target="_blank" rel="noopener"><img src="img/work6.jpg" loading="lazy" alt="Свадебная съёмка Pushkin Studio"></a>
+    </div>
+    <div class="center" style="margin-top:44px">
+      <a class="btn btn-ghost" href="https://instagram.com/pushkinstudio.us" target="_blank" rel="noopener" data-i18n="work_cta">Больше работ в Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<section class="block rev-wrap" id="reviews">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--gold)" data-i18n="rev_eye">Отзывы</div>
+    <h2 data-i18n="rev_h2">Что говорят молодожёны</h2>
+    <div class="rev-grid">
+      <div class="rev">
+        <div class="qm">“</div>
+        <p data-i18n="rev1">Алекс приехал из Нью-Йорка в Коннектикут задолго до начала свадьбы и работал без перерыва весь день — отличное качество и быстрая отдача материала.</p>
+        <div class="st">★★★★★</div>
+        <div class="who" data-i18n="rev1w">Отзыв · WeddingWire</div>
+      </div>
+      <div class="rev score">
+        <div class="big">4.7</div>
+        <div class="stars">★★★★★</div>
+        <div class="lbl" data-i18n="rev_score_lbl">средний рейтинг<br>WeddingWire · 16 отзывов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="loc_eye">Контакты</div>
+    <h2 data-i18n="loc_h2">Выезд на съёмку</h2>
+    <p class="sub" data-i18n="loc_sub">Базируемся в Бруклине и выезжаем к вам — на площадку, в загородный венью или домой. Работаем по записи.</p>
+    <div class="travel-grid">
+      <div class="travel-card">
+        <div class="ti" data-i18n="travel_ti">Зона выезда</div>
+        <h3 data-i18n="travel_h">Приедем туда, где вы празднуете</h3>
+        <p data-i18n="travel_p">Бруклин и весь Нью-Йорк, Нью-Джерси и Коннектикут. Дальние выезды обсуждаются индивидуально.</p>
+        <div class="zones">
+          <span class="zone"><i>📍</i> New York</span>
+          <span class="zone"><i>📍</i> New Jersey</span>
+          <span class="zone"><i>📍</i> Connecticut</span>
+        </div>
+      </div>
+      <div class="info">
+        <div class="it"><div class="ic">🎬</div><div><b data-i18n="loc_area_b">База и выезд</b><span data-i18n="loc_area_v">Бруклин · выезд по NY, NJ и CT</span></div></div>
+        <div class="it"><div class="ic">🕐</div><div><b data-i18n="loc_hours_b">График</b><span data-i18n="loc_hours_v">По записи / by appointment</span></div></div>
+        <div class="it"><div class="ic">📞</div><div><b data-i18n="loc_phone_b">Телефон</b><span><a href="tel:+19177768269">(917) 776-8269</a></span></div></div>
+        <div class="it"><div class="ic">📸</div><div><b>Instagram</b><span><a href="https://instagram.com/pushkinstudio.us" target="_blank" rel="noopener">@pushkinstudio.us</a></span></div></div>
+        <div style="margin-top:6px">
+          <button class="btn btn-primary" type="button" onclick="openBM()" data-i18n="loc_cta">Забронировать дату →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 data-i18n="fin_h2">Забронируйте свою дату</h2>
+    <p data-i18n="fin_p">Даты на сезон разбирают заранее. Выберите формат и удобное время — заявка придёт нам мгновенно.</p>
+    <div class="cta-row">
+      <button class="btn btn-primary" type="button" onclick="openBM()" data-i18n="fin_cta1">Забронировать дату →</button>
+      <a class="btn btn-light" href="tel:+19177768269" data-i18n="fin_cta2">Позвонить</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fbrand">Pushkin Studio</div>
+    <div data-i18n="foot_tag">Свадебная фото- и видеосъёмка · Бруклин · NY, NJ, CT</div>
+    <div class="fcontacts">
+      <a href="tel:+19177768269">(917) 776-8269</a>
+      <a href="https://instagram.com/pushkinstudio.us" target="_blank" rel="noopener">@pushkinstudio.us</a>
+    </div>
+    <div class="madeby" data-i18n="foot_made">Демо-сайт · сделано <a href="https://instagram.com/flow_box08" target="_blank" rel="noopener">FLOWBOX</a> для Pushkin Studio. Хотите такой же для своего бизнеса? Напишите нам.</div>
+  </div>
+</footer>
+
+<a class="demo-flag" href="https://instagram.com/flow_box08" target="_blank" rel="noopener">
+  <span class="pulse"></span><span data-i18n="flag">Демо от <b>FLOWBOX</b></span>
+</a>
+
+<div class="bm-overlay" id="bm" role="dialog" aria-modal="true" aria-label="Online booking">
+  <div class="bm-card">
+    <button class="bm-x" type="button" onclick="closeBM()" aria-label="Close">&times;</button>
+    <div class="bm-body">
+      <div id="bm-form-wrap">
+        <h3 class="bm-h serif" data-i18n="bm_title">Онлайн-запись</h3>
+        <p class="bm-subt" data-i18n="bm_sub">Выберите услугу и удобное время — заявка придёт мгновенно.</p>
+        <form id="bm-form" class="bm-form" novalidate>
+          <label data-i18n="bm_service">Услуга</label>
+          <select required>
+            <option value="" disabled selected data-i18n="bm_pick">Выберите услугу…</option>
+            <option data-i18n="o1">Свадебная фотосъёмка — от $1,800</option>
+            <option data-i18n="o2">Свадебное видео — от $1,500</option>
+            <option data-i18n="o3">Фото + видео (пакет) — от $2,900</option>
+            <option data-i18n="o4">Engagement / Love Story — от $500</option>
+            <option data-i18n="o5">Семейная / событийная съёмка — от $400</option>
+          </select>
+          <div class="bm-row">
+            <div><label data-i18n="bm_date">Дата</label><input type="date" required></div>
+            <div><label data-i18n="bm_time">Время</label><input type="time" required></div>
+          </div>
+          <label data-i18n="bm_name">Имя</label>
+          <input type="text" required>
+          <label data-i18n="bm_phone">Телефон</label>
+          <input type="tel" required placeholder="(718) 000-0000">
+          <button type="submit" class="btn btn-primary" data-i18n="bm_submit">Подтвердить запись</button>
+        </form>
+      </div>
+      <div class="bm-done" id="bm-done">
+        <div class="bm-check">&#10003;</div>
+        <h3 class="bm-h serif" data-i18n="bm_done_h">Заявка отправлена!</h3>
+        <p class="bm-subt" data-i18n="bm_done_p">Мы свяжемся с вами, чтобы подтвердить запись.</p>
+        <p class="bm-note" data-i18n="bm_note">Это демонстрация записи. На рабочем сайте заявка автоматически попадает в ваш календарь.</p>
+        <button type="button" class="btn btn-ghost" onclick="closeBM()" data-i18n="bm_close">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openBM(){document.getElementById('bm').classList.add('open');}
+function closeBM(){document.getElementById('bm').classList.remove('open');}
+(function(){var ov=document.getElementById('bm');if(!ov)return;ov.addEventListener('click',function(e){if(e.target===ov)closeBM();});var f=document.getElementById('bm-form');if(f)f.addEventListener('submit',function(e){e.preventDefault();document.getElementById('bm-form-wrap').classList.add('hide');document.getElementById('bm-done').classList.add('show');});})();
+
+(function(){
+  /* ---- language toggle (RU static, EN dict) ---- */
+  var I18N = { en:{
+    nav_packages:"Packages", nav_works:"Portfolio", nav_reviews:"Reviews", nav_contacts:"Contact", nav_book:"Book your date",
+    hero_badge:"★ 4.7 / 5 · WeddingWire · 16 reviews",
+    hero_kicker:"Cinematic wedding photography & cinematography",
+    hero_lead:"Your day, like a film. The emotion, the light and the details you'll return to for years. Brooklyn-based, traveling across New York, New Jersey and Connecticut.",
+    hero_cta1:"Book your date →", hero_cta2:"View portfolio",
+    meta_area:"Brooklyn · travels across NY, NJ, CT", meta_appt:"By appointment",
+    tr1:"WeddingWire rating", tr2:"reviews", tr3b:"Photo + video", tr3:"one team", tr4b:"NY · NJ · CT", tr4:"on-location travel",
+    pkg_eye:"Packages", pkg_h2:"Choose your format",
+    pkg_sub:"From a light love story to a full wedding day with a film. We'll tailor a package to your story and venue.",
+    pkg_from:"from", pkg_pop:"Most popular", pkg_btn:"Book", pkg_btn2:"Book your date",
+    p1n:"Wedding photography", p1d:"Full day, candid and posed coverage, retouching and a high-resolution gallery.",
+    p2n:"Wedding film", p2d:"A cinematic film of your day: editing, color grading, music and sound.",
+    p3n:"Photo + video (package)", p3d:"Full-day coverage: photographer and videographer together. Gallery + a cinematic wedding film.",
+    p4n:"Engagement / Love Story", p4d:"An engagement session at a beautiful location — light, warm, all about the two of you.",
+    p5n:"Family / event", p5d:"Anniversaries, christenings, birthdays and family portraits — coverage of any of your events.",
+    p6n:"Don't see your format?", p6d:"We'll build a custom package around your wedding and budget.", p6b:"Let's talk →",
+    pkg_note:"* Prices shown as starting (“from $”) examples — on the final site we'll plug in your real pricing. Final cost depends on hours of coverage and venue.",
+    work_eye:"Portfolio", work_h2:"Our work",
+    work_sub:"Real weddings shot by Pushkin Studio. The emotion of the day — honest and beautiful.",
+    work_cta:"More work on Instagram →",
+    rev_eye:"Reviews", rev_h2:"What couples say",
+    rev1:"Alex drove from New York to Connecticut well before the wedding started and worked nonstop all day — great quality and a fast turnaround of the footage.",
+    rev1w:"Review · WeddingWire",
+    rev_score_lbl:"average rating<br>WeddingWire · 16 reviews",
+    loc_eye:"Contact", loc_h2:"On-location coverage",
+    loc_sub:"Based in Brooklyn and traveling to you — to the venue, a countryside location or your home. By appointment.",
+    travel_ti:"Travel area", travel_h:"We come to where you celebrate",
+    travel_p:"Brooklyn and all of New York, New Jersey and Connecticut. Longer-distance travel by arrangement.",
+    loc_area_b:"Base & travel", loc_area_v:"Brooklyn · travels across NY, NJ and CT",
+    loc_hours_b:"Schedule", loc_hours_v:"By appointment",
+    loc_phone_b:"Phone", loc_cta:"Book your date →",
+    fin_h2:"Book your date", fin_p:"Season dates get booked up early. Pick a format and a time — your request reaches us instantly.",
+    fin_cta1:"Book your date →", fin_cta2:"Call us",
+    foot_tag:"Wedding photo & cinematography · Brooklyn · NY, NJ, CT",
+    foot_made:"Demo site · made by <a href='https://instagram.com/flow_box08' target='_blank' rel='noopener'>FLOWBOX</a> for Pushkin Studio. Want one for your business? Message us.",
+    flag:"Demo by <b>FLOWBOX</b>",
+    o1:"Wedding photography — from $1,800", o2:"Wedding film — from $1,500", o3:"Photo + video (package) — from $2,900",
+    o4:"Engagement / Love Story — from $500", o5:"Family / event shoot — from $400",
+    bm_title:"Online booking", bm_sub:"Pick a service and a time — your request is sent instantly.",
+    bm_pick:"Choose a service…", bm_service:"Service", bm_date:"Date", bm_time:"Time", bm_name:"Name", bm_phone:"Phone",
+    bm_submit:"Confirm booking", bm_done_h:"Request sent!", bm_done_p:"We'll contact you to confirm your booking.",
+    bm_note:"This is a booking demo. On the live site the request lands in your calendar automatically.", bm_close:"Close"
+  }};
+  var META={ ru:{t:"Pushkin Studio — свадебная фото- и видеосъёмка в Нью-Йорке"}, en:{t:"Pushkin Studio — wedding photography & cinematography in New York"} };
+  var RU={}; document.querySelectorAll('[data-i18n]').forEach(function(el){ RU[el.getAttribute('data-i18n')]=el.innerHTML; });
+  function setLang(l){
+    if(l!=='en') l='ru';
+    var dict=(l==='ru')?RU:I18N.en;
+    document.documentElement.lang=l;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){ var k=el.getAttribute('data-i18n'); if(dict[k]!=null) el.innerHTML=dict[k]; });
+    document.title=(META[l]||META.ru).t;
+    document.querySelectorAll('.lang button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang')===l); });
+    try{ localStorage.setItem('pushkin_lang', l); }catch(e){}
+  }
+  var saved=null; try{ saved=localStorage.getItem('pushkin_lang'); }catch(e){}
+  setLang(saved||'ru');
+  document.querySelectorAll('.lang button').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); }); });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  DEMO site for Marina's Alterations — built by FLOWBOX as a       ║
+  ║  pitch hook. RU is the static HTML (primary). EN lives in the     ║
+  ║  I18N object in the <script> at the bottom. Language toggle in    ║
+  ║  header.                                                          ║
+  ║                                                                    ║
+  ║  Real data (verified June 2026):                                 ║
+  ║   • 229 Brighton Beach Ave, 2nd Floor, Brooklyn, NY 11235        ║
+  ║   • (347) 247-1416 · no Instagram · no website                   ║
+  ║   • 4.2★ (~24 reviews, Google)                                    ║
+  ║  HOURS & PRICES are realistic EXAMPLES — replace with the         ║
+  ║  atelier's real ones.                                            ║
+  ║  NO work photos available — "About" section instead of gallery.  ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marina's Alterations — ателье на Брайтоне</title>
+<meta name="description" content="Marina's Alterations — ателье и подгонка одежды на Брайтоне. Подшив, ушивка, замена молний, свадебные платья, индивидуальный пошив. Brighton Beach, Бруклин.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700;800&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1E2A3A; --bg:#FBF8F3; --bg2:#F3EDE3; --card:#FFFFFF; --line:#E4DBCB;
+    --text:#26303D; --muted:#7A8290; --gold:#B89150; --gold-d:#9A7838; --navy:#1E2A3A;
+    --navy2:#2A3A50; --soft:#F6F1E8;
+    --serif:"Cormorant Garamond",Georgia,serif;
+    --sans:"Inter",-apple-system,"Segoe UI",system-ui,Roboto,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  .serif{font-family:var(--serif)}
+  .gold{color:var(--gold)}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-weight:600;font-size:15px;
+    padding:15px 28px;border-radius:8px;cursor:pointer;transition:.2s;border:0;line-height:1;letter-spacing:.2px}
+  .btn-primary{background:linear-gradient(105deg,var(--gold),var(--gold-d));color:#1a1304;box-shadow:0 10px 26px rgba(184,145,80,.30)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(184,145,80,.40)}
+  .btn-navy{background:linear-gradient(105deg,var(--navy2),var(--navy));color:#fff;box-shadow:0 10px 26px rgba(30,42,58,.30)}
+  .btn-navy:hover{transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-d)}
+  .btn-light{background:rgba(255,255,255,.10);color:#fff;border:1px solid rgba(255,255,255,.30);backdrop-filter:blur(4px)}
+  .btn-light:hover{background:rgba(255,255,255,.18)}
+
+  /* header */
+  header{position:sticky;top:0;z-index:60;background:rgba(30,42,58,.78);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(184,145,80,.20)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+  .brand{display:flex;flex-direction:column;line-height:1}
+  .brand b{font-family:var(--serif);font-weight:700;font-size:24px;color:#fff;letter-spacing:.3px}
+  .brand small{font-size:10px;letter-spacing:3.5px;color:var(--gold);margin-top:5px;text-transform:uppercase;font-weight:600}
+  .menu{display:flex;align-items:center;gap:26px}
+  .menu a{color:rgba(255,255,255,.82);font-size:14.5px;font-weight:500;transition:.15s}
+  .menu a:hover{color:var(--gold)}
+  .navr{display:flex;align-items:center;gap:14px}
+  .lang{display:inline-flex;border:1px solid rgba(255,255,255,.22);border-radius:8px;overflow:hidden;flex:none}
+  .lang button{background:transparent;color:rgba(255,255,255,.6);border:0;padding:7px 12px;font-size:12px;font-weight:700;
+    cursor:pointer;letter-spacing:.5px;transition:.15s;font-family:inherit}
+  .lang button:hover{color:#fff}
+  .lang button.active{background:linear-gradient(105deg,var(--gold),var(--gold-d));color:#1a1304}
+  header .btn{padding:11px 20px;font-size:13.5px}
+
+  /* hero */
+  .hero{position:relative;color:#fff;text-align:center;padding:96px 0 100px;overflow:hidden;
+    background:radial-gradient(120% 120% at 50% -10%,#2a3a50 0%,#1e2a3a 55%,#16202d 100%)}
+  .hero::before{content:"";position:absolute;inset:0;opacity:.55;z-index:0;
+    background:radial-gradient(closest-side,rgba(184,145,80,.26),transparent 70%) -120px -80px/620px 620px no-repeat,
+               radial-gradient(closest-side,rgba(184,145,80,.16),transparent 70%) calc(100% + 120px) 60%/560px 560px no-repeat}
+  .hero .wrap{position:relative;z-index:1}
+  .hbadge{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--gold);border:1px solid rgba(184,145,80,.45);background:rgba(184,145,80,.08);
+    padding:7px 16px;border-radius:999px;margin-bottom:24px;font-weight:600}
+  .hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(42px,8vw,80px);line-height:1.02;letter-spacing:.5px;margin-bottom:8px}
+  .hero .kicker{font-family:var(--serif);font-style:italic;font-size:clamp(18px,3vw,26px);color:rgba(255,255,255,.85);margin-bottom:20px}
+  .hero p.lead{font-size:clamp(15px,2.3vw,18px);color:rgba(255,255,255,.72);max-width:580px;margin:0 auto 34px}
+  .cta-row{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+  .herometa{margin-top:30px;display:flex;gap:10px 26px;justify-content:center;flex-wrap:wrap;
+    color:rgba(255,255,255,.66);font-size:13.5px}
+  .herometa span{display:inline-flex;align-items:center;gap:7px}
+  .herometa i{color:var(--gold);font-style:normal}
+
+  /* trust strip */
+  .trust{background:var(--ink);color:#fff;border-top:1px solid rgba(184,145,80,.16);padding:24px 0}
+  .trust .row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:center}
+  .trust .t b{display:block;font-family:var(--serif);font-size:28px;color:var(--gold);line-height:1.1}
+  .trust .t span{font-size:12.5px;color:rgba(255,255,255,.62);letter-spacing:.3px}
+
+  /* sections */
+  section.block{padding:84px 0}
+  .eyebrow{text-align:center;color:var(--gold-d);font-size:12.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+  h2{font-family:var(--serif);font-weight:700;font-size:clamp(32px,4.8vw,52px);text-align:center;letter-spacing:.3px;margin-bottom:14px;color:var(--ink)}
+  .sub{text-align:center;color:var(--muted);max-width:620px;margin:0 auto 50px;font-size:16.5px}
+  .center{text-align:center}
+
+  /* services / prices */
+  .price-wrap{background:var(--bg2)}
+  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;max-width:920px;margin:0 auto}
+  .mrow{display:flex;align-items:baseline;gap:12px;padding:15px 0;border-bottom:1px dashed var(--line)}
+  .mrow .nm{font-weight:500;color:var(--ink);font-size:16px;white-space:nowrap}
+  .mrow .dots{flex:1 1 auto;border-bottom:1px dotted #cdbfa6;transform:translateY(-4px);min-width:14px}
+  .mrow .pr{font-family:var(--serif);font-weight:700;color:var(--gold-d);font-size:19px;white-space:nowrap}
+  .pricenote{text-align:center;color:var(--muted);font-size:13px;margin-top:30px;font-style:italic}
+
+  /* about / what we do */
+  .ab-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:920px;margin:0 auto}
+  .ab{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:34px 30px;
+    box-shadow:0 10px 30px rgba(40,48,61,.06);transition:.2s}
+  .ab:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(40,48,61,.12);border-color:rgba(184,145,80,.4)}
+  .ab .ic{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;
+    background:var(--soft);border:1px solid var(--line);margin-bottom:18px}
+  .ab h3{font-family:var(--serif);font-weight:700;font-size:25px;color:var(--ink);margin-bottom:8px}
+  .ab p{color:var(--muted);font-size:15px}
+  .fitnote{text-align:center;margin:42px auto 0;max-width:560px;color:var(--ink);font-size:15.5px;
+    background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:18px 24px}
+  .fitnote b{color:var(--gold-d)}
+
+  /* reviews / trust line */
+  .rev-wrap{background:var(--ink);color:#fff}
+  .rev-wrap h2{color:#fff}
+  .ratecard{max-width:620px;margin:0 auto;text-align:center;
+    background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+    border:1px solid rgba(184,145,80,.22);border-radius:22px;padding:46px 34px}
+  .ratecard .big{font-family:var(--serif);font-weight:700;font-size:64px;color:var(--gold);line-height:1}
+  .ratecard .st{color:var(--gold);font-size:22px;letter-spacing:5px;margin:8px 0 6px}
+  .ratecard .cnt{color:rgba(255,255,255,.65);font-size:14px}
+  .ratecard .tline{font-family:var(--serif);font-style:italic;font-size:clamp(20px,3.4vw,28px);color:#fff;margin-top:26px;line-height:1.35}
+  .ratecard .src{color:rgba(255,255,255,.5);font-size:12.5px;letter-spacing:1px;text-transform:uppercase;margin-top:18px}
+
+  /* location */
+  .loc-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:stretch}
+  .mapbox{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);min-height:340px;box-shadow:0 14px 40px rgba(40,48,61,.10)}
+  .mapbox iframe{width:100%;height:100%;min-height:340px;border:0;display:block}
+  .maplink{position:absolute;right:12px;bottom:12px;background:rgba(30,42,58,.94);color:#fff;font-size:12.5px;font-weight:600;
+    padding:9px 14px;border-radius:999px;border:1px solid rgba(184,145,80,.50);box-shadow:0 6px 18px rgba(0,0,0,.25);transition:.2s}
+  .maplink:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-1px)}
+  .info{display:flex;flex-direction:column;justify-content:center;gap:20px}
+  .info .it{display:flex;gap:14px;align-items:flex-start}
+  .info .ic{flex:none;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;
+    background:var(--soft);border:1px solid var(--line)}
+  .info .it b{display:block;font-size:15.5px;color:var(--ink);margin-bottom:2px}
+  .info .it span{color:var(--muted);font-size:14.5px}
+  .info .it a{color:var(--gold-d);font-weight:600}
+
+  /* final */
+  .final{position:relative;color:#fff;text-align:center;overflow:hidden;
+    background:radial-gradient(120% 120% at 50% 0%,#2a3a50,#1e2a3a 70%)}
+  .final::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(closest-side,rgba(184,145,80,.24),transparent 70%) 50% -40px/680px 480px no-repeat}
+  .final .wrap{position:relative;z-index:1;padding:84px 24px}
+  .final h2{color:#fff;margin-bottom:14px}
+  .final p{color:rgba(255,255,255,.74);max-width:540px;margin:0 auto 30px;font-size:16.5px}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.6);padding:46px 0 34px;text-align:center;font-size:14px;
+    border-top:1px solid rgba(184,145,80,.16)}
+  footer .fbrand{font-family:var(--serif);font-size:26px;color:#fff;margin-bottom:6px}
+  footer .fcontacts{display:flex;gap:8px 22px;justify-content:center;flex-wrap:wrap;margin:14px 0 22px}
+  footer .fcontacts a{color:var(--gold);font-weight:600}
+  .madeby{border-top:1px solid rgba(255,255,255,.10);margin-top:8px;padding-top:20px;font-size:12.5px;color:rgba(255,255,255,.45)}
+  .madeby a{color:var(--gold);font-weight:700}
+
+  /* floating demo ribbon */
+  .demo-flag{position:fixed;right:16px;bottom:16px;z-index:90;display:inline-flex;align-items:center;gap:9px;
+    background:rgba(30,42,58,.94);color:#fff;border:1px solid rgba(184,145,80,.45);border-radius:999px;
+    padding:10px 16px;font-size:12.5px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.3);backdrop-filter:blur(6px);transition:.2s}
+  .demo-flag:hover{transform:translateY(-2px);border-color:var(--gold)}
+  .demo-flag b{color:var(--gold);letter-spacing:1px}
+  .demo-flag .pulse{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(184,145,80,.6);animation:pl 2s infinite}
+  @keyframes pl{0%{box-shadow:0 0 0 0 rgba(184,145,80,.55)}70%{box-shadow:0 0 0 10px rgba(184,145,80,0)}100%{box-shadow:0 0 0 0 rgba(184,145,80,0)}}
+
+  /* booking modal */
+  .bm-overlay{position:fixed;inset:0;z-index:300;background:rgba(12,10,8,.62);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px}
+  .bm-overlay.open{display:flex}
+  .bm-card{background:var(--card,#fff);color:var(--text,#222);border:1px solid var(--line,#e6e6e6);border-radius:22px;max-width:440px;width:100%;max-height:92vh;overflow:auto;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .bm-x{position:absolute;top:12px;right:16px;background:transparent;border:0;font-size:30px;line-height:1;color:var(--muted,#999);cursor:pointer}
+  .bm-body{padding:34px 30px 30px}
+  .bm-h{font-size:30px;margin-bottom:6px}
+  .bm-subt{color:var(--muted,#777);font-size:14.5px;margin-bottom:18px}
+  .bm-form{display:flex;flex-direction:column;gap:4px}
+  .bm-form label{font-size:12.5px;font-weight:700;margin-top:10px;letter-spacing:.3px}
+  .bm-form input,.bm-form select{font-family:inherit;font-size:15px;padding:12px 14px;border:1px solid var(--line,#ddd);border-radius:12px;background:#fff;color:#1a1a1a;width:100%}
+  .bm-row{display:flex;gap:12px}.bm-row>div{flex:1}
+  .bm-form .btn{margin-top:18px;width:100%;justify-content:center}
+  .bm-done{display:none;text-align:center}
+  .bm-done.show{display:block}
+  #bm-form-wrap.hide{display:none}
+  .bm-check{width:64px;height:64px;border-radius:50%;margin:4px auto 14px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;background:linear-gradient(135deg,#3cbf7d,#2a9d63)}
+  .bm-note{color:var(--muted,#999);font-size:12px;margin-top:12px;font-style:italic}
+
+  @media(max-width:880px){
+    .loc-grid{grid-template-columns:1fr}
+    .ab-grid{grid-template-columns:1fr}
+    .menu-grid{grid-template-columns:1fr;gap:0}
+  }
+  @media(max-width:680px){
+    .menu{display:none}
+    section.block{padding:60px 0}
+    .hero{padding:72px 0 76px}
+    .trust .row{grid-template-columns:1fr 1fr;gap:22px 14px}
+    .demo-flag{left:16px;right:16px;justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand"><b>Marina's</b><small>Alterations</small></a>
+    <nav class="menu">
+      <a href="#services" data-i18n="nav_services">Услуги и цены</a>
+      <a href="#about" data-i18n="nav_works">О мастерской</a>
+      <a href="#reviews" data-i18n="nav_reviews">Отзывы</a>
+      <a href="#location" data-i18n="nav_contacts">Контакты</a>
+    </nav>
+    <div class="navr">
+      <div class="lang" role="group" aria-label="Язык">
+        <button type="button" data-lang="ru" class="active">RU</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="nav_book">Записаться на примерку</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hbadge" data-i18n="hero_badge">✂ Ателье · Brighton Beach</div>
+    <h1>Marina's Alterations</h1>
+    <div class="kicker" data-i18n="hero_kicker">Подгонка и пошив одежды по фигуре — аккуратно и в срок</div>
+    <p class="lead" data-i18n="hero_lead">Подшив, ушивка, замена молний, свадебные и вечерние платья, индивидуальный пошив. Каждая вещь сядет идеально.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="hero_cta1">Записаться на примерку →</a>
+      <a class="btn btn-light" href="#services" data-i18n="hero_cta2">Услуги и цены</a>
+    </div>
+    <div class="herometa">
+      <span><i>📍</i> <span data-i18n="meta_addr">229 Brighton Beach Ave, Бруклин</span></span>
+      <span><i>🕐</i> <span data-i18n="meta_hours">Пн–Сб 10:00–18:00</span></span>
+      <span><i>📞</i> <a href="tel:+13472471416">(347) 247-1416</a></span>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div class="row">
+      <div class="t"><b>★ 4.2</b><span data-i18n="tr1">рейтинг на Google</span></div>
+      <div class="t"><b>24+</b><span data-i18n="tr2">отзыва клиентов</span></div>
+      <div class="t"><b data-i18n="tr3b">В срок</b><span data-i18n="tr3">точно к примерке</span></div>
+      <div class="t"><b data-i18n="tr4b">Ручная</b><span data-i18n="tr4">работа мастера</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="block price-wrap" id="services">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="svc_eye">Услуги и цены</div>
+    <h2 data-i18n="svc_h2">Прайс-лист ателье</h2>
+    <p class="sub" data-i18n="svc_sub">Подгонка повседневной и деловой одежды, замена молний, свадебные платья и индивидуальный пошив. Запишитесь на примерку — выберите услугу и удобное время.</p>
+    <div class="menu-grid">
+      <div class="mrow"><span class="nm" data-i18n="s1">Подшив брюк</span><span class="dots"></span><span class="pr">$15</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s2">Подшив джинсов (фабричный край)</span><span class="dots"></span><span class="pr">$25</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s3">Ушить по талии</span><span class="dots"></span><span class="pr">$25</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s4">Укоротить рукава (пиджак)</span><span class="dots"></span><span class="pr">$35</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s5">Замена молнии</span><span class="dots"></span><span class="pr" data-i18n="s5p">от $20</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s6">Подгонка платья</span><span class="dots"></span><span class="pr" data-i18n="s6p">от $30</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s7">Подгонка пиджака</span><span class="dots"></span><span class="pr" data-i18n="s7p">от $45</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s8">Подгонка свадебного платья</span><span class="dots"></span><span class="pr" data-i18n="s8p">от $150</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s9">Кожа и спец-изделия</span><span class="dots"></span><span class="pr" data-i18n="s9p">по оценке</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s10">Индивидуальный пошив</span><span class="dots"></span><span class="pr" data-i18n="s10p">по оценке</span></div>
+    </div>
+    <p class="pricenote" data-i18n="svc_note">* Цены и часы работы указаны для примера — на готовом сайте подставим ваш актуальный прайс и расписание. Точная стоимость зависит от изделия и сложности работы.</p>
+    <div class="center" style="margin-top:34px">
+      <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="svc_cta">Записаться на примерку →</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="about">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="ab_eye">О мастерской</div>
+    <h2 data-i18n="ab_h2">Что мы делаем</h2>
+    <p class="sub" data-i18n="ab_sub">Небольшое ателье на Брайтоне с вниманием к каждой детали. Работаем с любой одеждой — от простого подшива до сложного индивидуального пошива.</p>
+    <div class="ab-grid">
+      <div class="ab">
+        <div class="ic">🧵</div>
+        <h3 data-i18n="ab1h">Подгонка и ремонт одежды</h3>
+        <p data-i18n="ab1p">Подшив, ушивка по фигуре, укорачивание рукавов, замена молний и мелкий ремонт. Любимые вещи снова как новые.</p>
+      </div>
+      <div class="ab">
+        <div class="ic">👰</div>
+        <h3 data-i18n="ab2h">Свадебные и вечерние платья</h3>
+        <p data-i18n="ab2p">Деликатная подгонка нарядных и свадебных платьев по фигуре. Аккуратно, бережно и точно к вашей дате.</p>
+      </div>
+      <div class="ab">
+        <div class="ic">📏</div>
+        <h3 data-i18n="ab3h">Индивидуальный пошив</h3>
+        <p data-i18n="ab3p">Сошьём изделие по вашим меркам и пожеланиям. Стоимость и сроки обсуждаем после примерки.</p>
+      </div>
+      <div class="ab">
+        <div class="ic">🧥</div>
+        <h3 data-i18n="ab4h">Кожа и сложные изделия</h3>
+        <p data-i18n="ab4p">Работаем с кожей, пальто, костюмами и спец-изделиями. Цена — по оценке после осмотра вещи.</p>
+      </div>
+    </div>
+    <div class="fitnote" data-i18n="ab_fit">🪡 <b>Примерки — по записи.</b> Так мастер уделит вам всё внимание, без очереди и спешки.</div>
+  </div>
+</section>
+
+<section class="block rev-wrap" id="reviews">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--gold)" data-i18n="rev_eye">Отзывы</div>
+    <h2 data-i18n="rev_h2">Нам доверяют</h2>
+    <div class="ratecard">
+      <div class="big">4.2</div>
+      <div class="st">★★★★☆</div>
+      <div class="cnt" data-i18n="rev_cnt">по 24+ отзывам на Google</div>
+      <div class="tline" data-i18n="rev_tline">«Аккуратно и в срок — клиенты возвращаются.»</div>
+      <div class="src" data-i18n="rev_src">Рейтинг · Google</div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="location">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="loc_eye">Контакты</div>
+    <h2 data-i18n="loc_h2">Как нас найти</h2>
+    <p class="sub" data-i18n="loc_sub">В самом сердце Брайтона, рядом с метро. Приём по записи.</p>
+    <div class="loc-grid">
+      <div class="mapbox">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-73.9701982%2C40.5748550%2C-73.9621982%2C40.5788550&layer=mapnik&marker=40.5768550%2C-73.9661982" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Marina's Alterations map"></iframe>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=229+Brighton+Beach+Ave+Brooklyn+NY+11235" target="_blank" rel="noopener" data-i18n="map_link">Открыть в Google Maps ↗</a>
+      </div>
+      <div class="info">
+        <div class="it"><div class="ic">📍</div><div><b data-i18n="loc_addr_b">Адрес</b><span>229 Brighton Beach Ave, 2&nbsp;этаж<br>Brooklyn, NY 11235</span></div></div>
+        <div class="it"><div class="ic">🕐</div><div><b data-i18n="loc_hours_b">Часы работы</b><span data-i18n="loc_hours_v">Пн–Сб: 10:00 – 18:00<br>Воскресенье: выходной</span></div></div>
+        <div class="it"><div class="ic">📞</div><div><b data-i18n="loc_phone_b">Телефон</b><span><a href="tel:+13472471416">(347) 247-1416</a></span></div></div>
+        <div style="margin-top:6px">
+          <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="loc_cta">Записаться на примерку →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 data-i18n="fin_h2">Запишитесь на примерку</h2>
+    <p data-i18n="fin_p">Выберите услугу и удобное время — заявка придёт мгновенно. Мастер подберёт всё под вашу фигуру.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="fin_cta1">Записаться на примерку →</a>
+      <a class="btn btn-light" href="tel:+13472471416" data-i18n="fin_cta2">Позвонить</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fbrand">Marina's Alterations</div>
+    <div data-i18n="foot_tag">Ателье и подгонка одежды · Brighton Beach, Бруклин</div>
+    <div class="fcontacts">
+      <a href="tel:+13472471416">(347) 247-1416</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=229+Brighton+Beach+Ave+Brooklyn+NY+11235" target="_blank" rel="noopener" data-i18n="foot_map">229 Brighton Beach Ave</a>
+    </div>
+    <div class="madeby" data-i18n="foot_made">Демо-сайт · сделано <a href="https://instagram.com/flow_box08" target="_blank" rel="noopener">FLOWBOX</a> для Marina's Alterations. Хотите такой же для своего бизнеса? Напишите нам.</div>
+  </div>
+</footer>
+
+<a class="demo-flag" href="https://instagram.com/flow_box08" target="_blank" rel="noopener">
+  <span class="pulse"></span><span data-i18n="flag">Демо от <b>FLOWBOX</b></span>
+</a>
+
+<div class="bm-overlay" id="bm" role="dialog" aria-modal="true" aria-label="Online booking">
+  <div class="bm-card">
+    <button class="bm-x" type="button" onclick="closeBM()" aria-label="Close">&times;</button>
+    <div class="bm-body">
+      <div id="bm-form-wrap">
+        <h3 class="bm-h serif" data-i18n="bm_title">Запись на примерку</h3>
+        <p class="bm-subt" data-i18n="bm_sub">Выберите услугу и удобное время — заявка придёт мгновенно.</p>
+        <form id="bm-form" class="bm-form" novalidate>
+          <label data-i18n="bm_service">Услуга</label>
+          <select required>
+            <option value="" disabled selected data-i18n="bm_pick">Выберите услугу…</option>
+            <option data-i18n="bo1">Подшив брюк</option>
+            <option data-i18n="bo2">Подшив джинсов (фабричный край)</option>
+            <option data-i18n="bo3">Ушить по талии</option>
+            <option data-i18n="bo4">Укоротить рукава (пиджак)</option>
+            <option data-i18n="bo5">Замена молнии</option>
+            <option data-i18n="bo6">Подгонка платья</option>
+            <option data-i18n="bo7">Подгонка пиджака</option>
+            <option data-i18n="bo8">Подгонка свадебного платья</option>
+            <option data-i18n="bo9">Кожа и спец-изделия</option>
+            <option data-i18n="bo10">Индивидуальный пошив</option>
+          </select>
+          <div class="bm-row">
+            <div><label data-i18n="bm_date">Дата</label><input type="date" required></div>
+            <div><label data-i18n="bm_time">Время</label><input type="time" required></div>
+          </div>
+          <label data-i18n="bm_name">Имя</label>
+          <input type="text" required>
+          <label data-i18n="bm_phone">Телефон</label>
+          <input type="tel" required placeholder="(718) 000-0000">
+          <button type="submit" class="btn btn-primary" data-i18n="bm_submit">Подтвердить запись</button>
+        </form>
+      </div>
+      <div class="bm-done" id="bm-done">
+        <div class="bm-check">&#10003;</div>
+        <h3 class="bm-h serif" data-i18n="bm_done_h">Заявка отправлена!</h3>
+        <p class="bm-subt" data-i18n="bm_done_p">Мы свяжемся с вами, чтобы подтвердить запись.</p>
+        <p class="bm-note" data-i18n="bm_note">Это демонстрация записи. На рабочем сайте заявка автоматически попадает в ваш календарь.</p>
+        <button type="button" class="btn btn-ghost" onclick="closeBM()" data-i18n="bm_close">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openBM(){document.getElementById('bm').classList.add('open');}
+function closeBM(){document.getElementById('bm').classList.remove('open');}
+(function(){var ov=document.getElementById('bm');if(!ov)return;ov.addEventListener('click',function(e){if(e.target===ov)closeBM();});var f=document.getElementById('bm-form');if(f)f.addEventListener('submit',function(e){e.preventDefault();document.getElementById('bm-form-wrap').classList.add('hide');document.getElementById('bm-done').classList.add('show');});})();
+
+(function(){
+  /* ---- language toggle (RU static, EN dict) ---- */
+  var I18N = { en:{
+    nav_services:"Services & prices", nav_works:"About us", nav_reviews:"Reviews", nav_contacts:"Contact", nav_book:"Book a fitting",
+    hero_badge:"✂ Tailor's atelier · Brighton Beach",
+    hero_kicker:"Clothing alterations & tailoring done right — and on time",
+    hero_lead:"Hemming, taking in, zipper replacement, wedding & evening gowns, custom tailoring. Every piece fits perfectly.",
+    hero_cta1:"Book a fitting →", hero_cta2:"Services & prices",
+    meta_addr:"229 Brighton Beach Ave, Brooklyn", meta_hours:"Mon–Sat 10:00 AM–6:00 PM",
+    tr1:"rating on Google", tr2:"client reviews", tr3b:"On time", tr3:"ready for your fitting", tr4b:"By hand", tr4:"craftsman's work",
+    svc_eye:"Services & prices", svc_h2:"Atelier price list",
+    svc_sub:"Alterations for everyday & business wear, zipper replacement, wedding gowns and custom tailoring. Book a fitting — pick a service and a time that suits you.",
+    s1:"Hem pants", s2:"Hem jeans (original edge kept)", s3:"Take in at the waist", s4:"Shorten sleeves (jacket)",
+    s5:"Zipper replacement", s5p:"from $20", s6:"Dress alteration", s6p:"from $30", s7:"Jacket alteration", s7p:"from $45",
+    s8:"Wedding dress alteration", s8p:"from $150", s9:"Leather & special items", s9p:"by estimate",
+    s10:"Custom tailoring", s10p:"by estimate",
+    svc_note:"* Prices and hours shown as an example — on the final site we'll plug in your real price list and schedule. Final cost depends on the item and complexity of the work.",
+    svc_cta:"Book a fitting →",
+    ab_eye:"About us", ab_h2:"What we do",
+    ab_sub:"A small atelier in Brighton Beach with attention to every detail. We work with any garment — from a simple hem to full custom tailoring.",
+    ab1h:"Alterations & repairs", ab1p:"Hemming, taking in to fit, shortening sleeves, zipper replacement and small repairs. Your favorite pieces, good as new.",
+    ab2h:"Wedding & evening gowns", ab2p:"Delicate fitting of formal and bridal gowns. Careful, gentle and right on time for your date.",
+    ab3h:"Custom tailoring", ab3p:"We'll sew a garment to your measurements and wishes. Price and timing discussed after the fitting.",
+    ab4h:"Leather & special items", ab4p:"We work with leather, coats, suits and special items. Price by estimate after we look at the piece.",
+    ab_fit:"🪡 <b>Fittings are by appointment.</b> That way the tailor gives you full attention — no line, no rush.",
+    rev_eye:"Reviews", rev_h2:"Trusted by our clients",
+    rev_cnt:"from 24+ reviews on Google", rev_tline:"“Neat work, delivered on time — clients keep coming back.”", rev_src:"Rating · Google",
+    loc_eye:"Contact", loc_h2:"Find us", loc_sub:"In the heart of Brighton Beach, near the subway. By appointment.",
+    map_link:"Open in Google Maps ↗",
+    loc_addr_b:"Address", loc_hours_b:"Hours", loc_hours_v:"Mon–Sat: 10:00 AM – 6:00 PM<br>Sunday: closed",
+    loc_phone_b:"Phone", loc_cta:"Book a fitting →",
+    fin_h2:"Book a fitting", fin_p:"Pick a service and a time — your request is sent instantly. The tailor will fit everything to you.",
+    fin_cta1:"Book a fitting →", fin_cta2:"Call us",
+    foot_tag:"Clothing alterations & tailoring · Brighton Beach, Brooklyn", foot_map:"229 Brighton Beach Ave",
+    foot_made:"Demo site · made by <a href='https://instagram.com/flow_box08' target='_blank' rel='noopener'>FLOWBOX</a> for Marina's Alterations. Want one for your business? Message us.",
+    flag:"Demo by <b>FLOWBOX</b>",
+    bo1:"Hem pants", bo2:"Hem jeans (original edge kept)", bo3:"Take in at the waist", bo4:"Shorten sleeves (jacket)",
+    bo5:"Zipper replacement", bo6:"Dress alteration", bo7:"Jacket alteration", bo8:"Wedding dress alteration",
+    bo9:"Leather & special items", bo10:"Custom tailoring",
+    bm_title:"Online booking", bm_sub:"Pick a service and a time — your request is sent instantly.",
+    bm_pick:"Choose a service…", bm_service:"Service", bm_date:"Date", bm_time:"Time", bm_name:"Name", bm_phone:"Phone",
+    bm_submit:"Confirm booking", bm_done_h:"Request sent!", bm_done_p:"We'll contact you to confirm your booking.",
+    bm_note:"This is a booking demo. On the live site the request lands in your calendar automatically.", bm_close:"Close"
+  }};
+  var META={ ru:{t:"Marina's Alterations — ателье на Брайтоне"}, en:{t:"Marina's Alterations — clothing alterations in Brighton Beach"} };
+  var RU={}; document.querySelectorAll('[data-i18n]').forEach(function(el){ RU[el.getAttribute('data-i18n')]=el.innerHTML; });
+  function setLang(l){
+    if(l!=='en') l='ru';
+    var dict=(l==='ru')?RU:I18N.en;
+    document.documentElement.lang=l;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){ var k=el.getAttribute('data-i18n'); if(dict[k]!=null) el.innerHTML=dict[k]; });
+    document.title=(META[l]||META.ru).t;
+    document.querySelectorAll('.lang button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang')===l); });
+    try{ localStorage.setItem('marina_lang', l); }catch(e){}
+  }
+  var saved=null; try{ saved=localStorage.getItem('marina_lang'); }catch(e){}
+  setLang(saved||'ru');
+  document.querySelectorAll('.lang button').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); }); });
+})();
+</script>
+
+</body>
+</html>

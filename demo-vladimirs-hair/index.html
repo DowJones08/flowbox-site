@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  DEMO site for Vladimir's Hair Salon — built by FLOWBOX as a     ║
+  ║  pitch hook. RU is the static HTML (primary). EN lives in the    ║
+  ║  I18N object in the <script> at the bottom. Lang toggle in head. ║
+  ║                                                                    ║
+  ║  Real data (verified June 2026):                                  ║
+  ║   • 3069 Brighton 1st St, 2nd Floor, Brooklyn, NY 11235          ║
+  ║   • (347) 543-9499 · @vladimirs_hair_salon                       ║
+  ║   • 5.0★ / 145 reviews                                            ║
+  ║  PRICES & HOURS are realistic EXAMPLES — replace with the real.  ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vladimir's Hair Salon — салон красоты на Брайтоне</title>
+<meta name="description" content="Vladimir's Hair Salon — унисекс-салон на Брайтоне: стрижки, окрашивание, кератин, укладки. Brooklyn, NY. Запись онлайн.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600;700&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0C2622; --bg:#FBF8F3; --bg2:#F1ECE2; --card:#FFFFFF; --line:#E4DCCD;
+    --text:#1E2A27; --muted:#6E726B; --emerald:#0E5C54; --deep:#0A4540; --gold:#C9A24B;
+    --soft:#F4EEE3;
+    --serif:"Cormorant Garamond",Georgia,serif;
+    --sans:"Jost",-apple-system,"Segoe UI",system-ui,Roboto,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  .serif{font-family:var(--serif)}
+  .gold{color:var(--gold)}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-weight:600;font-size:15px;
+    padding:15px 28px;border-radius:999px;cursor:pointer;transition:.2s;border:0;line-height:1;letter-spacing:.3px}
+  .btn-primary{background:linear-gradient(105deg,var(--deep),var(--emerald));color:#fff;box-shadow:0 10px 26px rgba(14,92,84,.30)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(14,92,84,.40)}
+  .btn-gold{background:linear-gradient(105deg,#d6b35d,#b48a35);color:#1d1407;box-shadow:0 10px 26px rgba(180,138,53,.35)}
+  .btn-gold:hover{transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--emerald);color:var(--emerald)}
+  .btn-light{background:rgba(255,255,255,.10);color:#fff;border:1px solid rgba(255,255,255,.30);backdrop-filter:blur(4px)}
+  .btn-light:hover{background:rgba(255,255,255,.18)}
+
+  /* header */
+  header{position:sticky;top:0;z-index:60;background:rgba(12,38,34,.74);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(201,162,75,.20)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+  .brand{display:flex;flex-direction:column;line-height:1}
+  .brand b{font-family:var(--serif);font-weight:700;font-size:25px;color:#fff;letter-spacing:.3px}
+  .brand small{font-size:10px;letter-spacing:3.5px;color:var(--gold);margin-top:5px;text-transform:uppercase;font-weight:600}
+  .menu{display:flex;align-items:center;gap:26px}
+  .menu a{color:rgba(255,255,255,.84);font-size:14.5px;font-weight:400;transition:.15s}
+  .menu a:hover{color:var(--gold)}
+  .navr{display:flex;align-items:center;gap:14px}
+  .lang{display:inline-flex;border:1px solid rgba(255,255,255,.24);border-radius:999px;overflow:hidden;flex:none}
+  .lang button{background:transparent;color:rgba(255,255,255,.6);border:0;padding:7px 12px;font-size:12px;font-weight:600;
+    cursor:pointer;letter-spacing:.5px;transition:.15s;font-family:inherit}
+  .lang button:hover{color:#fff}
+  .lang button.active{background:linear-gradient(105deg,var(--deep),var(--emerald));color:#fff}
+  header .btn{padding:11px 20px;font-size:13.5px}
+
+  /* hero */
+  .hero{position:relative;color:#fff;text-align:center;padding:96px 0 100px;overflow:hidden;
+    background:radial-gradient(120% 120% at 50% -10%,#15433d 0%,#0C2622 55%,#081c19 100%)}
+  .hero::before{content:"";position:absolute;inset:0;opacity:.55;z-index:0;
+    background:radial-gradient(closest-side,rgba(14,92,84,.45),transparent 70%) -120px -80px/640px 640px no-repeat,
+               radial-gradient(closest-side,rgba(201,162,75,.22),transparent 70%) calc(100% + 120px) 60%/560px 560px no-repeat}
+  .hero .wrap{position:relative;z-index:1}
+  .hbadge{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--gold);border:1px solid rgba(201,162,75,.42);background:rgba(201,162,75,.08);
+    padding:7px 16px;border-radius:999px;margin-bottom:24px;font-weight:600}
+  .hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(42px,8.5vw,82px);line-height:1.0;letter-spacing:.5px;margin-bottom:10px}
+  .hero .kicker{font-family:var(--serif);font-style:italic;font-size:clamp(18px,3vw,25px);color:rgba(255,255,255,.84);margin-bottom:20px}
+  .hero p.lead{font-size:clamp(15px,2.3vw,18px);color:rgba(255,255,255,.74);max-width:580px;margin:0 auto 34px}
+  .cta-row{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+  .herometa{margin-top:30px;display:flex;gap:10px 26px;justify-content:center;flex-wrap:wrap;
+    color:rgba(255,255,255,.68);font-size:13.5px}
+  .herometa span{display:inline-flex;align-items:center;gap:7px}
+  .herometa i{color:var(--gold);font-style:normal}
+
+  /* trust strip */
+  .trust{background:var(--ink);color:#fff;border-top:1px solid rgba(201,162,75,.16);padding:24px 0}
+  .trust .row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:center}
+  .trust .t b{display:block;font-family:var(--serif);font-size:28px;color:var(--gold);line-height:1.1}
+  .trust .t span{font-size:12.5px;color:rgba(255,255,255,.64);letter-spacing:.3px}
+
+  /* sections */
+  section.block{padding:84px 0}
+  .eyebrow{text-align:center;color:var(--emerald);font-size:12.5px;font-weight:600;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+  h2{font-family:var(--serif);font-weight:700;font-size:clamp(34px,5vw,52px);text-align:center;letter-spacing:.3px;margin-bottom:14px;color:var(--ink)}
+  .sub{text-align:center;color:var(--muted);max-width:620px;margin:0 auto 50px;font-size:16.5px}
+  .center{text-align:center}
+
+  /* services / prices */
+  .price-wrap{background:var(--bg2)}
+  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;max-width:920px;margin:0 auto}
+  .mrow{display:flex;align-items:baseline;gap:12px;padding:15px 0;border-bottom:1px dashed var(--line)}
+  .mrow .nm{font-weight:500;color:var(--ink);font-size:16px;white-space:nowrap}
+  .mrow .dots{flex:1 1 auto;border-bottom:1px dotted #d2c8b6;transform:translateY(-4px);min-width:14px}
+  .mrow .pr{font-family:var(--serif);font-weight:700;color:var(--emerald);font-size:19px;white-space:nowrap}
+  .pricenote{text-align:center;color:var(--muted);font-size:13px;margin-top:30px;font-style:italic}
+
+  /* works / instagram */
+  .ig-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;justify-items:center;max-width:1040px;margin:0 auto}
+  .ig-grid .instagram-media{margin:0 auto !important;min-width:260px !important;width:100% !important;max-width:340px !important;border-radius:16px !important}
+
+  /* reviews */
+  .rev-wrap{background:var(--ink);color:#fff}
+  .rev-wrap h2{color:#fff}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+  .rev{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+    border:1px solid rgba(201,162,75,.20);border-radius:20px;padding:30px 26px}
+  .rev .qm{font-family:var(--serif);font-size:52px;color:var(--gold);line-height:.6;height:24px}
+  .rev p{color:rgba(255,255,255,.88);font-size:15.5px;font-style:italic;margin:8px 0 18px}
+  .rev .who{font-size:13px;color:var(--gold);font-weight:600;letter-spacing:.4px}
+  .rev .st{color:var(--gold);font-size:13px;letter-spacing:2px;margin-top:4px}
+  .ratingline{text-align:center;margin-top:42px;color:rgba(255,255,255,.72);font-size:14px}
+  .ratingline b{font-family:var(--serif);color:var(--gold);font-size:32px;display:inline-block;vertical-align:middle;margin-right:8px}
+
+  /* location */
+  .loc-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:stretch}
+  .mapbox{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);min-height:340px;box-shadow:0 14px 40px rgba(20,50,45,.12)}
+  .mapbox iframe{width:100%;height:100%;min-height:340px;border:0;display:block}
+  .maplink{position:absolute;right:12px;bottom:12px;background:rgba(12,38,34,.92);color:#fff;font-size:12.5px;font-weight:600;
+    padding:9px 14px;border-radius:999px;border:1px solid rgba(201,162,75,.45);box-shadow:0 6px 18px rgba(0,0,0,.25);transition:.2s}
+  .maplink:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-1px)}
+  .info{display:flex;flex-direction:column;justify-content:center;gap:20px}
+  .info .it{display:flex;gap:14px;align-items:flex-start}
+  .info .ic{flex:none;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;
+    background:var(--soft);border:1px solid var(--line)}
+  .info .it b{display:block;font-size:15.5px;color:var(--ink);margin-bottom:2px}
+  .info .it span{color:var(--muted);font-size:14.5px}
+  .info .it a{color:var(--emerald);font-weight:600}
+
+  /* final */
+  .final{position:relative;color:#fff;text-align:center;overflow:hidden;
+    background:radial-gradient(120% 120% at 50% 0%,#15433d,#0C2622 70%)}
+  .final::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(closest-side,rgba(14,92,84,.40),transparent 70%) 50% -40px/700px 480px no-repeat}
+  .final .wrap{position:relative;z-index:1;padding:84px 24px}
+  .final h2{color:#fff;margin-bottom:14px}
+  .final p{color:rgba(255,255,255,.76);max-width:540px;margin:0 auto 30px;font-size:16.5px}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.62);padding:46px 0 34px;text-align:center;font-size:14px;
+    border-top:1px solid rgba(201,162,75,.16)}
+  footer .fbrand{font-family:var(--serif);font-size:26px;color:#fff;margin-bottom:6px}
+  footer .fcontacts{display:flex;gap:8px 22px;justify-content:center;flex-wrap:wrap;margin:14px 0 22px}
+  footer .fcontacts a{color:var(--gold);font-weight:600}
+  .madeby{border-top:1px solid rgba(255,255,255,.10);margin-top:8px;padding-top:20px;font-size:12.5px;color:rgba(255,255,255,.46)}
+  .madeby a{color:var(--gold);font-weight:700}
+
+  /* floating demo ribbon */
+  .demo-flag{position:fixed;right:16px;bottom:16px;z-index:90;display:inline-flex;align-items:center;gap:9px;
+    background:rgba(12,38,34,.92);color:#fff;border:1px solid rgba(201,162,75,.4);border-radius:999px;
+    padding:10px 16px;font-size:12.5px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.3);backdrop-filter:blur(6px);transition:.2s}
+  .demo-flag:hover{transform:translateY(-2px);border-color:var(--gold)}
+  .demo-flag b{color:var(--gold);letter-spacing:1px}
+  .demo-flag .pulse{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(201,162,75,.6);animation:pl 2s infinite}
+  @keyframes pl{0%{box-shadow:0 0 0 0 rgba(201,162,75,.55)}70%{box-shadow:0 0 0 10px rgba(201,162,75,0)}100%{box-shadow:0 0 0 0 rgba(201,162,75,0)}}
+
+  /* booking modal */
+  .bm-overlay{position:fixed;inset:0;z-index:300;background:rgba(8,20,18,.62);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px}
+  .bm-overlay.open{display:flex}
+  .bm-card{background:var(--card,#fff);color:var(--text,#222);border:1px solid var(--line,#e6e6e6);border-radius:22px;max-width:440px;width:100%;max-height:92vh;overflow:auto;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .bm-x{position:absolute;top:12px;right:16px;background:transparent;border:0;font-size:30px;line-height:1;color:var(--muted,#999);cursor:pointer}
+  .bm-body{padding:34px 30px 30px}
+  .bm-h{font-size:30px;margin-bottom:6px}
+  .bm-subt{color:var(--muted,#777);font-size:14.5px;margin-bottom:18px}
+  .bm-form{display:flex;flex-direction:column;gap:4px}
+  .bm-form label{font-size:12.5px;font-weight:600;margin-top:10px;letter-spacing:.3px}
+  .bm-form input,.bm-form select{font-family:inherit;font-size:15px;padding:12px 14px;border:1px solid var(--line,#ddd);border-radius:12px;background:#fff;color:#1a1a1a;width:100%}
+  .bm-row{display:flex;gap:12px}.bm-row>div{flex:1}
+  .bm-form .btn{margin-top:18px;width:100%;justify-content:center}
+  .bm-done{display:none;text-align:center}
+  .bm-done.show{display:block}
+  #bm-form-wrap.hide{display:none}
+  .bm-check{width:64px;height:64px;border-radius:50%;margin:4px auto 14px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;background:linear-gradient(135deg,#3cbf7d,#2a9d63)}
+  .bm-note{color:var(--muted,#999);font-size:12px;margin-top:12px;font-style:italic}
+
+  @media(max-width:880px){
+    .loc-grid{grid-template-columns:1fr}
+    .rev-grid{grid-template-columns:1fr}
+    .menu-grid{grid-template-columns:1fr;gap:0}
+  }
+  @media(max-width:680px){
+    .menu{display:none}
+    section.block{padding:60px 0}
+    .hero{padding:70px 0 74px}
+    .trust .row{grid-template-columns:1fr 1fr;gap:22px 14px}
+    .demo-flag{left:16px;right:16px;justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand"><b>Vladimir's</b><small>Hair Salon</small></a>
+    <nav class="menu">
+      <a href="#services" data-i18n="nav_services">Услуги и цены</a>
+      <a href="#works" data-i18n="nav_works">Наши работы</a>
+      <a href="#reviews" data-i18n="nav_reviews">Отзывы</a>
+      <a href="#location" data-i18n="nav_contacts">Контакты</a>
+    </nav>
+    <div class="navr">
+      <div class="lang" role="group" aria-label="Язык">
+        <button type="button" data-lang="ru" class="active">RU</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="nav_book">Записаться</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hbadge" data-i18n="hero_badge">★ 5.0 / 5 · 145 отзывов</div>
+    <h1>Vladimir's Hair Salon</h1>
+    <div class="kicker" data-i18n="hero_kicker">Унисекс-салон красоты на Брайтоне</div>
+    <p class="lead" data-i18n="hero_lead">Стрижки, окрашивание, кератин и укладки от мастеров своего дела. Образ, в котором вам комфортно каждый день.</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="#" onclick="openBM();return false;" data-i18n="hero_cta1">Записаться →</a>
+      <a class="btn btn-light" href="#services" data-i18n="hero_cta2">Услуги и цены</a>
+    </div>
+    <div class="herometa">
+      <span><i>📍</i> <span data-i18n="meta_addr">3069 Brighton 1st St, Бруклин</span></span>
+      <span><i>🕐</i> <span data-i18n="meta_hours">Вт–Сб 10:00–19:00</span></span>
+      <span><i>📞</i> <a href="tel:+13475439499">(347) 543-9499</a></span>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div class="row">
+      <div class="t"><b>★ 5.0</b><span data-i18n="tr1">рейтинг клиентов</span></div>
+      <div class="t"><b>145</b><span data-i18n="tr2">отзывов</span></div>
+      <div class="t"><b data-i18n="tr3b">Унисекс</b><span data-i18n="tr3">для всех и для всей семьи</span></div>
+      <div class="t"><b data-i18n="tr4b">Кератин</b><span data-i18n="tr4">уход и восстановление</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="block price-wrap" id="services">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="svc_eye">Услуги и цены</div>
+    <h2 data-i18n="svc_h2">Прайс-лист салона</h2>
+    <p class="sub" data-i18n="svc_sub">Стрижки, окрашивание, кератиновое выпрямление, укладки и уход. Запись онлайн — выберите услугу и удобное время.</p>
+    <div class="menu-grid">
+      <div class="mrow"><span class="nm" data-i18n="s1">Женская стрижка</span><span class="dots"></span><span class="pr">$50</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s2">Мужская стрижка</span><span class="dots"></span><span class="pr">$35</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s3">Детская стрижка</span><span class="dots"></span><span class="pr">$25</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s4">Укладка / блоудрай</span><span class="dots"></span><span class="pr">$50</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s5">Окрашивание в один тон</span><span class="dots"></span><span class="pr">$90</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s6">Мелирование / балаяж</span><span class="dots"></span><span class="pr">от $160</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s7">Тонирование корней</span><span class="dots"></span><span class="pr">$80</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s8">Кератиновое выпрямление</span><span class="dots"></span><span class="pr">от $220</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s9">Глубокое восстановление</span><span class="dots"></span><span class="pr">$40</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s10">Вечерняя причёска</span><span class="dots"></span><span class="pr">от $80</span></div>
+    </div>
+    <p class="pricenote" data-i18n="svc_note">* Цены указаны для примера — на готовом сайте подставим ваш актуальный прайс. Точная стоимость зависит от длины и густоты волос.</p>
+    <div class="center" style="margin-top:34px">
+      <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="svc_cta">Записаться на услугу →</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="works">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="works_eye">Наши работы</div>
+    <h2 data-i18n="works_h2">Наши работы</h2>
+    <p class="sub" data-i18n="works_sub">Реальные работы мастеров салона — стрижки, окрашивание и укладки прямо из нашего Instagram.</p>
+    <div class="ig-grid">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C5yvDEZJ_t0/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C6G84GaO7ar/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DKZ4I-3JKdF/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DGT-yCeyfjW/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/C_--QWrOr-N/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C-tkNqZpUmr/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+    </div>
+    <div class="center" style="margin-top:38px">
+      <a class="btn btn-ghost" href="https://instagram.com/vladimirs_hair_salon" target="_blank" rel="noopener" data-i18n="works_cta">Смотреть в Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<section class="block rev-wrap" id="reviews">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--gold)" data-i18n="rev_eye">Отзывы</div>
+    <h2 data-i18n="rev_h2">Что говорят клиенты</h2>
+    <div class="rev-grid">
+      <div class="rev">
+        <div class="qm">“</div>
+        <p data-i18n="rev1">Стрижка получилась потрясающая — отличные люди и ещё лучше сервис.</p>
+        <div class="st">★★★★★</div>
+        <div class="who" data-i18n="rev1w">Отзыв · Yelp</div>
+      </div>
+      <div class="rev">
+        <div class="qm">“</div>
+        <p data-i18n="rev2">Делала здесь окрашивание и кератин — цвет идеальный, волосы как шёлк. Вернусь обязательно.</p>
+        <div class="st">★★★★★</div>
+        <div class="who" data-i18n="rev2w">Постоянная клиентка</div>
+      </div>
+      <div class="rev">
+        <div class="qm">“</div>
+        <p data-i18n="rev3">Хожу всей семьёй — и стрижки детям, и укладки. Мастера слышат, что ты хочешь.</p>
+        <div class="st">★★★★★</div>
+        <div class="who" data-i18n="rev3w">Отзыв · Google</div>
+      </div>
+    </div>
+    <div class="ratingline"><b>5.0 / 5</b> <span data-i18n="rev_rate">средняя оценка · 145 отзывов клиентов</span></div>
+  </div>
+</section>
+
+<section class="block" id="location">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="loc_eye">Контакты</div>
+    <h2 data-i18n="loc_h2">Как нас найти</h2>
+    <p class="sub" data-i18n="loc_sub">В самом сердце Брайтона, рядом с метро. Приём по записи.</p>
+    <div class="loc-grid">
+      <div class="mapbox">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-73.9708378%2C40.5749720%2C-73.9628378%2C40.5789720&layer=mapnik&marker=40.5769720%2C-73.9668378" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Vladimir's Hair Salon map"></iframe>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=3069+Brighton+1st+St+Brooklyn+NY+11235" target="_blank" rel="noopener" data-i18n="map_link">Открыть в Google Maps ↗</a>
+      </div>
+      <div class="info">
+        <div class="it"><div class="ic">📍</div><div><b data-i18n="loc_addr_b">Адрес</b><span>3069 Brighton 1st St, 2&nbsp;этаж<br>Brooklyn, NY 11235</span></div></div>
+        <div class="it"><div class="ic">🕐</div><div><b data-i18n="loc_hours_b">Часы работы</b><span data-i18n="loc_hours_v">Вт–Сб: 10:00 – 19:00<br>Вс: 11:00 – 17:00 · Пн: выходной</span></div></div>
+        <div class="it"><div class="ic">📞</div><div><b data-i18n="loc_phone_b">Телефон</b><span><a href="tel:+13475439499">(347) 543-9499</a></span></div></div>
+        <div class="it"><div class="ic">📸</div><div><b>Instagram</b><span><a href="https://instagram.com/vladimirs_hair_salon" target="_blank" rel="noopener">@vladimirs_hair_salon</a></span></div></div>
+        <p class="pricenote" style="text-align:left;margin-top:0" data-i18n="loc_hours_note">* Часы работы указаны для примера — заменим на ваш реальный график.</p>
+        <div style="margin-top:2px">
+          <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="loc_cta">Записаться →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 data-i18n="fin_h2">Запишитесь за минуту</h2>
+    <p data-i18n="fin_p">Выберите услугу, мастера и удобное время — онлайн, 24/7. Подтверждение придёт сразу.</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="#" onclick="openBM();return false;" data-i18n="fin_cta1">Записаться →</a>
+      <a class="btn btn-light" href="tel:+13475439499" data-i18n="fin_cta2">Позвонить</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fbrand">Vladimir's Hair Salon</div>
+    <div data-i18n="foot_tag">Унисекс-салон красоты · Brighton Beach, Бруклин</div>
+    <div class="fcontacts">
+      <a href="tel:+13475439499">(347) 543-9499</a>
+      <a href="https://instagram.com/vladimirs_hair_salon" target="_blank" rel="noopener">@vladimirs_hair_salon</a>
+      <a href="#" onclick="openBM();return false;" data-i18n="foot_book">Запись онлайн</a>
+    </div>
+    <div class="madeby" data-i18n="foot_made">Демо-сайт · сделано <a href="https://instagram.com/flow_box08" target="_blank" rel="noopener">FLOWBOX</a> для Vladimir's Hair Salon. Хотите такой же для своего бизнеса? Напишите нам.</div>
+  </div>
+</footer>
+
+<a class="demo-flag" href="https://instagram.com/flow_box08" target="_blank" rel="noopener">
+  <span class="pulse"></span><span data-i18n="flag">Демо от <b>FLOWBOX</b></span>
+</a>
+
+<div class="bm-overlay" id="bm" role="dialog" aria-modal="true" aria-label="Online booking">
+  <div class="bm-card">
+    <button class="bm-x" type="button" onclick="closeBM()" aria-label="Close">&times;</button>
+    <div class="bm-body">
+      <div id="bm-form-wrap">
+        <h3 class="bm-h serif" data-i18n="bm_title">Онлайн-запись</h3>
+        <p class="bm-subt" data-i18n="bm_sub">Выберите услугу и удобное время — заявка придёт мгновенно.</p>
+        <form id="bm-form" class="bm-form" novalidate>
+          <label data-i18n="bm_service">Услуга</label>
+          <select required>
+            <option value="" disabled selected data-i18n="bm_pick">Выберите услугу…</option>
+            <option data-i18n="bm_o1">Женская стрижка</option>
+            <option data-i18n="bm_o2">Мужская стрижка</option>
+            <option data-i18n="bm_o3">Детская стрижка</option>
+            <option data-i18n="bm_o4">Укладка / блоудрай</option>
+            <option data-i18n="bm_o5">Окрашивание в один тон</option>
+            <option data-i18n="bm_o6">Мелирование / балаяж</option>
+            <option data-i18n="bm_o7">Тонирование корней</option>
+            <option data-i18n="bm_o8">Кератиновое выпрямление</option>
+            <option data-i18n="bm_o9">Глубокое восстановление</option>
+            <option data-i18n="bm_o10">Вечерняя причёска</option>
+          </select>
+          <div class="bm-row">
+            <div><label data-i18n="bm_date">Дата</label><input type="date" required></div>
+            <div><label data-i18n="bm_time">Время</label><input type="time" required></div>
+          </div>
+          <label data-i18n="bm_name">Имя</label>
+          <input type="text" required>
+          <label data-i18n="bm_phone">Телефон</label>
+          <input type="tel" required placeholder="(718) 000-0000">
+          <button type="submit" class="btn btn-primary" data-i18n="bm_submit">Подтвердить запись</button>
+        </form>
+      </div>
+      <div class="bm-done" id="bm-done">
+        <div class="bm-check">&#10003;</div>
+        <h3 class="bm-h serif" data-i18n="bm_done_h">Заявка отправлена!</h3>
+        <p class="bm-subt" data-i18n="bm_done_p">Мы свяжемся с вами, чтобы подтвердить запись.</p>
+        <p class="bm-note" data-i18n="bm_note">Это демонстрация записи. На рабочем сайте заявка автоматически попадает в ваш календарь.</p>
+        <button type="button" class="btn btn-ghost" onclick="closeBM()" data-i18n="bm_close">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openBM(){document.getElementById('bm').classList.add('open');}
+function closeBM(){document.getElementById('bm').classList.remove('open');}
+(function(){var ov=document.getElementById('bm');if(!ov)return;ov.addEventListener('click',function(e){if(e.target===ov)closeBM();});var f=document.getElementById('bm-form');if(f)f.addEventListener('submit',function(e){e.preventDefault();document.getElementById('bm-form-wrap').classList.add('hide');document.getElementById('bm-done').classList.add('show');});})();
+
+(function(){
+  /* ---- language toggle (RU static, EN dict) ---- */
+  var I18N = { en:{
+    nav_services:"Services & prices", nav_works:"Our work", nav_reviews:"Reviews", nav_contacts:"Contact", nav_book:"Book now",
+    hero_badge:"★ 5.0 / 5 · 145 reviews",
+    hero_kicker:"Unisex hair salon in Brighton Beach",
+    hero_lead:"Haircuts, coloring, keratin and styling by true professionals. A look you'll feel great in every day.",
+    hero_cta1:"Book now →", hero_cta2:"Services & prices",
+    meta_addr:"3069 Brighton 1st St, Brooklyn", meta_hours:"Tue–Sat 10:00 AM–7:00 PM",
+    tr1:"client rating", tr2:"reviews", tr3b:"Unisex", tr3:"for everyone & the whole family", tr4b:"Keratin", tr4:"treatment & repair",
+    svc_eye:"Services & prices", svc_h2:"Salon price list",
+    svc_sub:"Haircuts, coloring, keratin smoothing, blowouts and treatments. Book online — pick a service and a time that suits you.",
+    s1:"Women's haircut", s2:"Men's haircut", s3:"Kids' haircut", s4:"Styling / blow-dry", s5:"Single-tone coloring",
+    s6:"Highlights / balayage", s7:"Root touch-up", s8:"Keratin smoothing", s9:"Deep repair treatment", s10:"Evening / updo styling",
+    svc_note:"* Prices shown as an example — on the final site we'll plug in your real price list. Final cost depends on hair length and thickness.",
+    svc_cta:"Book a service →",
+    works_eye:"Our work", works_h2:"Our work",
+    works_sub:"Real work by the salon's stylists — haircuts, coloring and styling straight from our Instagram.",
+    works_cta:"See on Instagram →",
+    rev_eye:"Reviews", rev_h2:"What clients say",
+    rev1:"My haircut turned out amazing — great people and even better service.", rev1w:"Review · Yelp",
+    rev2:"I had coloring and keratin done here — perfect color, hair like silk. I'll definitely be back.", rev2w:"Regular client",
+    rev3:"The whole family comes here — kids' cuts and blowouts alike. The stylists really listen.", rev3w:"Review · Google",
+    rev_rate:"average rating · 145 client reviews",
+    loc_eye:"Contact", loc_h2:"Find us", loc_sub:"In the heart of Brighton Beach, near the subway. By appointment.",
+    map_link:"Open in Google Maps ↗",
+    loc_addr_b:"Address", loc_hours_b:"Hours", loc_hours_v:"Tue–Sat: 10:00 AM – 7:00 PM<br>Sun: 11:00 AM – 5:00 PM · Mon: closed",
+    loc_hours_note:"* Hours shown as an example — we'll replace them with your real schedule.",
+    loc_phone_b:"Phone", loc_cta:"Book now →",
+    fin_h2:"Book in under a minute", fin_p:"Choose your service, stylist and time — online, 24/7. Instant confirmation.",
+    fin_cta1:"Book now →", fin_cta2:"Call us",
+    foot_tag:"Unisex hair salon · Brighton Beach, Brooklyn", foot_book:"Online booking",
+    foot_made:"Demo site · made by <a href='https://instagram.com/flow_box08' target='_blank' rel='noopener'>FLOWBOX</a> for Vladimir's Hair Salon. Want one for your business? Message us.",
+    flag:"Demo by <b>FLOWBOX</b>",
+    bm_title:"Online booking", bm_sub:"Pick a service and a time — your request is sent instantly.",
+    bm_pick:"Choose a service…", bm_service:"Service", bm_date:"Date", bm_time:"Time", bm_name:"Name", bm_phone:"Phone",
+    bm_submit:"Confirm booking", bm_done_h:"Request sent!", bm_done_p:"We'll contact you to confirm your booking.",
+    bm_note:"This is a booking demo. On the live site the request lands in your calendar automatically.", bm_close:"Close",
+    bm_o1:"Women's haircut", bm_o2:"Men's haircut", bm_o3:"Kids' haircut", bm_o4:"Styling / blow-dry", bm_o5:"Single-tone coloring",
+    bm_o6:"Highlights / balayage", bm_o7:"Root touch-up", bm_o8:"Keratin smoothing", bm_o9:"Deep repair treatment", bm_o10:"Evening / updo styling"
+  }};
+  var META={ ru:{t:"Vladimir's Hair Salon — салон красоты на Брайтоне"}, en:{t:"Vladimir's Hair Salon — hair salon in Brighton Beach"} };
+  var RU={}; document.querySelectorAll('[data-i18n]').forEach(function(el){ RU[el.getAttribute('data-i18n')]=el.innerHTML; });
+  function setLang(l){
+    if(l!=='en') l='ru';
+    var dict=(l==='ru')?RU:I18N.en;
+    document.documentElement.lang=l;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){ var k=el.getAttribute('data-i18n'); if(dict[k]!=null) el.innerHTML=dict[k]; });
+    document.title=(META[l]||META.ru).t;
+    document.querySelectorAll('.lang button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang')===l); });
+    try{ localStorage.setItem('vladimirs_lang', l); }catch(e){}
+  }
+  var saved=null; try{ saved=localStorage.getItem('vladimirs_lang'); }catch(e){}
+  setLang(saved||'ru');
+  document.querySelectorAll('.lang button').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); }); });
+})();
+</script>
+<script async src="//www.instagram.com/embed.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  DEMO site for Brooklyn Cutz Barbershop — built by FLOWBOX as a   ║
+  ║  pitch hook. RU is the static HTML (primary). EN lives in the     ║
+  ║  I18N object in the <script> at the bottom. Language toggle in    ║
+  ║  the header. Booking via in-page modal (demo).                   ║
+  ║                                                                    ║
+  ║  Real data (verified June 2026):                                  ║
+  ║   • 3139 Coney Island Ave, Brooklyn, NY 11235                     ║
+  ║   • (718) 769-3874 · no Instagram / no website                    ║
+  ║   • 4.1★ Yelp / 9.3 Atly                                          ║
+  ║  HOURS & PRICES are realistic EXAMPLES — replace with the real.   ║
+  ║  No work photos available → honest "Why us" section, no fakes.    ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brooklyn Cutz — барбершоп на Брайтоне</title>
+<meta name="description" content="Brooklyn Cutz — классический барбершоп в Бруклине. Фейды, скин-фейды, стрижка бороды, бритьё опасной бритвой. Brighton Beach. Онлайн-запись.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15110D; --bg:#19140F; --bg2:#1F1812; --card:#241C15; --line:#3A2E22;
+    --text:#EFE6D7; --muted:#A89A85; --amber:#E0A33E; --copper:#C57F2E; --cream:#F4ECDD;
+    --soft:#241C15;
+    --serif:"Oswald",Impact,"Arial Narrow",sans-serif;
+    --sans:"Inter",-apple-system,"Segoe UI",system-ui,Roboto,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  .serif{font-family:var(--serif);text-transform:uppercase;letter-spacing:.5px}
+  .amber{color:var(--amber)}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--serif);font-weight:600;font-size:15px;
+    text-transform:uppercase;letter-spacing:1px;
+    padding:15px 30px;border-radius:6px;cursor:pointer;transition:.2s;border:0;line-height:1}
+  .btn-primary{background:linear-gradient(105deg,var(--copper),var(--amber));color:#1a1208;box-shadow:0 10px 26px rgba(224,163,62,.28)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(224,163,62,.40)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--amber);color:var(--amber)}
+  .btn-light{background:rgba(244,236,221,.07);color:#fff;border:1px solid rgba(244,236,221,.24);backdrop-filter:blur(4px)}
+  .btn-light:hover{background:rgba(244,236,221,.14)}
+
+  /* header */
+  header{position:sticky;top:0;z-index:60;background:rgba(21,17,13,.78);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(224,163,62,.18)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+  .brand{display:flex;flex-direction:column;line-height:1}
+  .brand b{font-family:var(--serif);font-weight:700;font-size:24px;color:#fff;letter-spacing:1px;text-transform:uppercase}
+  .brand small{font-size:10px;letter-spacing:4px;color:var(--amber);margin-top:5px;text-transform:uppercase;font-weight:600}
+  .menu{display:flex;align-items:center;gap:26px}
+  .menu a{color:rgba(239,230,215,.82);font-size:14px;font-weight:500;transition:.15s;text-transform:uppercase;letter-spacing:.5px}
+  .menu a:hover{color:var(--amber)}
+  .navr{display:flex;align-items:center;gap:14px}
+  .lang{display:inline-flex;border:1px solid rgba(244,236,221,.22);border-radius:6px;overflow:hidden;flex:none}
+  .lang button{background:transparent;color:rgba(244,236,221,.6);border:0;padding:7px 12px;font-size:12px;font-weight:700;
+    cursor:pointer;letter-spacing:.5px;transition:.15s;font-family:inherit}
+  .lang button:hover{color:#fff}
+  .lang button.active{background:linear-gradient(105deg,var(--copper),var(--amber));color:#1a1208}
+  header .btn{padding:11px 20px;font-size:13px}
+
+  /* hero */
+  .hero{position:relative;color:#fff;text-align:center;padding:96px 0 100px;overflow:hidden;
+    background:radial-gradient(120% 120% at 50% -10%,#2a2016 0%,#19140f 55%,#120d09 100%)}
+  .hero::before{content:"";position:absolute;inset:0;opacity:.55;z-index:0;
+    background:radial-gradient(closest-side,rgba(224,163,62,.26),transparent 70%) -120px -80px/640px 640px no-repeat,
+               radial-gradient(closest-side,rgba(197,127,46,.20),transparent 70%) calc(100% + 120px) 60%/560px 560px no-repeat}
+  /* barber-pole stripe accent at very top of hero */
+  .hero::after{content:"";position:absolute;top:0;left:0;right:0;height:5px;z-index:2;
+    background:repeating-linear-gradient(115deg,var(--copper) 0 14px,#15110d 14px 18px,var(--amber) 18px 32px,#15110d 32px 36px)}
+  .hero .wrap{position:relative;z-index:1}
+  .stars{color:var(--amber);letter-spacing:3px;font-size:15px;margin-bottom:14px}
+  .hbadge{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--amber);border:1px solid rgba(224,163,62,.4);background:rgba(224,163,62,.08);
+    padding:7px 16px;border-radius:6px;margin-bottom:24px;font-weight:600}
+  .hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(46px,9vw,90px);line-height:.96;letter-spacing:1.5px;
+    text-transform:uppercase;margin-bottom:10px}
+  .hero .kicker{font-family:var(--serif);font-weight:400;text-transform:uppercase;letter-spacing:2px;
+    font-size:clamp(14px,3vw,20px);color:var(--amber);margin-bottom:20px}
+  .hero p.lead{font-size:clamp(15px,2.3vw,18px);color:rgba(244,236,221,.72);max-width:560px;margin:0 auto 34px}
+  .cta-row{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+  .herometa{margin-top:30px;display:flex;gap:10px 26px;justify-content:center;flex-wrap:wrap;
+    color:rgba(244,236,221,.66);font-size:13.5px}
+  .herometa span{display:inline-flex;align-items:center;gap:7px}
+  .herometa i{color:var(--amber);font-style:normal}
+
+  /* trust strip */
+  .trust{background:var(--ink);color:#fff;border-top:1px solid rgba(224,163,62,.16);padding:24px 0}
+  .trust .row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:center}
+  .trust .t b{display:block;font-family:var(--serif);font-size:26px;color:var(--amber);line-height:1.1;letter-spacing:.5px}
+  .trust .t span{font-size:12.5px;color:rgba(244,236,221,.62);letter-spacing:.3px}
+
+  /* sections */
+  section.block{padding:84px 0}
+  .eyebrow{text-align:center;color:var(--copper);font-size:12.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+  h2{font-family:var(--serif);font-weight:700;font-size:clamp(32px,5vw,52px);text-align:center;letter-spacing:1px;
+    text-transform:uppercase;margin-bottom:14px;color:var(--cream)}
+  .sub{text-align:center;color:var(--muted);max-width:600px;margin:0 auto 50px;font-size:16.5px}
+  .center{text-align:center}
+
+  /* services / prices */
+  .price-wrap{background:var(--bg2)}
+  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;max-width:920px;margin:0 auto}
+  .mrow{display:flex;align-items:baseline;gap:12px;padding:15px 0;border-bottom:1px dashed var(--line)}
+  .mrow .nm{font-weight:600;color:var(--cream);font-size:16px;white-space:nowrap}
+  .mrow .dots{flex:1 1 auto;border-bottom:1px dotted #4a3c2c;transform:translateY(-4px);min-width:14px}
+  .mrow .pr{font-family:var(--serif);font-weight:600;color:var(--amber);font-size:18px;white-space:nowrap;letter-spacing:.5px}
+  .pricenote{text-align:center;color:var(--muted);font-size:13px;margin-top:30px;font-style:italic}
+
+  /* why us */
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:8px}
+  .whycard{background:linear-gradient(180deg,rgba(244,236,221,.05),rgba(244,236,221,.015));
+    border:1px solid rgba(224,163,62,.18);border-radius:14px;padding:30px 24px;transition:.2s}
+  .whycard:hover{transform:translateY(-4px);border-color:rgba(224,163,62,.42)}
+  .whycard .wi{font-size:34px;line-height:1;margin-bottom:16px;display:block}
+  .whycard h3{font-family:var(--serif);text-transform:uppercase;letter-spacing:.5px;font-size:19px;color:var(--cream);margin-bottom:8px}
+  .whycard p{color:var(--muted);font-size:14.5px;line-height:1.6}
+
+  /* reviews */
+  .rev-wrap{background:var(--ink);color:#fff}
+  .rev-wrap h2{color:var(--cream)}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+  .rev{background:linear-gradient(180deg,rgba(244,236,221,.05),rgba(244,236,221,.02));
+    border:1px solid rgba(224,163,62,.20);border-radius:16px;padding:30px 26px}
+  .rev .qm{font-family:var(--serif);font-size:46px;color:var(--amber);line-height:.6;height:24px}
+  .rev p{color:rgba(244,236,221,.86);font-size:15.5px;font-style:italic;margin:8px 0 18px}
+  .rev .who{font-size:13px;color:var(--amber);font-weight:600;letter-spacing:.4px}
+  .rev .st{color:var(--amber);font-size:13px;letter-spacing:2px;margin-top:4px}
+  .ratingline{text-align:center;margin-top:42px;color:rgba(244,236,221,.7);font-size:14px}
+  .ratingline b{font-family:var(--serif);color:var(--amber);font-size:30px;display:inline-block;vertical-align:middle;margin-right:8px;letter-spacing:.5px}
+
+  /* location */
+  .loc-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:stretch}
+  .mapbox{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);min-height:340px;box-shadow:0 14px 40px rgba(0,0,0,.35)}
+  .mapbox iframe{width:100%;height:100%;min-height:340px;border:0;display:block}
+  .maplink{position:absolute;right:12px;bottom:12px;background:rgba(21,17,13,.92);color:#fff;font-size:12.5px;font-weight:600;
+    padding:9px 14px;border-radius:6px;border:1px solid rgba(224,163,62,.45);box-shadow:0 6px 18px rgba(0,0,0,.35);transition:.2s}
+  .maplink:hover{border-color:var(--amber);color:var(--amber);transform:translateY(-1px)}
+  .info{display:flex;flex-direction:column;justify-content:center;gap:20px}
+  .info .it{display:flex;gap:14px;align-items:flex-start}
+  .info .ic{flex:none;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;
+    background:var(--soft);border:1px solid var(--line)}
+  .info .it b{display:block;font-size:15.5px;color:var(--cream);margin-bottom:2px}
+  .info .it span{color:var(--muted);font-size:14.5px}
+  .info .it a{color:var(--amber);font-weight:600}
+
+  /* final */
+  .final{position:relative;color:#fff;text-align:center;overflow:hidden;
+    background:radial-gradient(120% 120% at 50% 0%,#2a2016,#19140f 70%)}
+  .final::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(closest-side,rgba(224,163,62,.24),transparent 70%) 50% -40px/680px 480px no-repeat}
+  .final .wrap{position:relative;z-index:1;padding:84px 24px}
+  .final h2{color:var(--cream);margin-bottom:14px}
+  .final p{color:rgba(244,236,221,.74);max-width:520px;margin:0 auto 30px;font-size:16.5px}
+
+  footer{background:var(--ink);color:rgba(244,236,221,.6);padding:46px 0 34px;text-align:center;font-size:14px;
+    border-top:1px solid rgba(224,163,62,.16)}
+  footer .fbrand{font-family:var(--serif);font-size:24px;color:#fff;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+  footer .fcontacts{display:flex;gap:8px 22px;justify-content:center;flex-wrap:wrap;margin:14px 0 22px}
+  footer .fcontacts a{color:var(--amber);font-weight:600}
+  .madeby{border-top:1px solid rgba(244,236,221,.10);margin-top:8px;padding-top:20px;font-size:12.5px;color:rgba(244,236,221,.45)}
+  .madeby a{color:var(--copper);font-weight:700}
+
+  /* floating demo ribbon */
+  .demo-flag{position:fixed;right:16px;bottom:16px;z-index:90;display:inline-flex;align-items:center;gap:9px;
+    background:rgba(21,17,13,.92);color:#fff;border:1px solid rgba(224,163,62,.4);border-radius:999px;
+    padding:10px 16px;font-size:12.5px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.4);backdrop-filter:blur(6px);transition:.2s}
+  .demo-flag:hover{transform:translateY(-2px);border-color:var(--amber)}
+  .demo-flag b{color:var(--amber);letter-spacing:1px}
+  .demo-flag .pulse{width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 0 rgba(224,163,62,.6);animation:pl 2s infinite}
+  @keyframes pl{0%{box-shadow:0 0 0 0 rgba(224,163,62,.55)}70%{box-shadow:0 0 0 10px rgba(224,163,62,0)}100%{box-shadow:0 0 0 0 rgba(224,163,62,0)}}
+
+  /* booking modal */
+  .bm-overlay{position:fixed;inset:0;z-index:300;background:rgba(12,10,8,.62);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px}
+  .bm-overlay.open{display:flex}
+  .bm-card{background:var(--card,#fff);color:var(--text,#222);border:1px solid var(--line,#e6e6e6);border-radius:22px;max-width:440px;width:100%;max-height:92vh;overflow:auto;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .bm-x{position:absolute;top:12px;right:16px;background:transparent;border:0;font-size:30px;line-height:1;color:var(--muted,#999);cursor:pointer}
+  .bm-body{padding:34px 30px 30px}
+  .bm-h{font-size:24px;margin-bottom:6px}
+  .bm-subt{color:var(--muted,#777);font-size:14.5px;margin-bottom:18px}
+  .bm-form{display:flex;flex-direction:column;gap:4px}
+  .bm-form label{font-size:12.5px;font-weight:700;margin-top:10px;letter-spacing:.3px}
+  .bm-form input,.bm-form select{font-family:inherit;font-size:15px;padding:12px 14px;border:1px solid var(--line,#ddd);border-radius:12px;background:#fff;color:#1a1a1a;width:100%}
+  .bm-row{display:flex;gap:12px}.bm-row>div{flex:1}
+  .bm-form .btn{margin-top:18px;width:100%;justify-content:center}
+  .bm-done{display:none;text-align:center}
+  .bm-done.show{display:block}
+  #bm-form-wrap.hide{display:none}
+  .bm-check{width:64px;height:64px;border-radius:50%;margin:4px auto 14px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;background:linear-gradient(135deg,#3cbf7d,#2a9d63)}
+  .bm-note{color:var(--muted,#999);font-size:12px;margin-top:12px;font-style:italic}
+
+  @media(max-width:880px){
+    .loc-grid{grid-template-columns:1fr}
+    .rev-grid{grid-template-columns:1fr}
+    .why-grid{grid-template-columns:1fr 1fr}
+    .menu-grid{grid-template-columns:1fr;gap:0}
+  }
+  @media(max-width:680px){
+    .menu{display:none}
+    section.block{padding:60px 0}
+    .hero{padding:70px 0 76px}
+    .trust .row{grid-template-columns:1fr 1fr;gap:22px 14px}
+    .why-grid{grid-template-columns:1fr}
+    .demo-flag{left:16px;right:16px;justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand"><b>Brooklyn Cutz</b><small>Barbershop · 💈</small></a>
+    <nav class="menu">
+      <a href="#services" data-i18n="nav_services">Услуги и цены</a>
+      <a href="#why" data-i18n="nav_works">Почему мы</a>
+      <a href="#reviews" data-i18n="nav_reviews">Отзывы</a>
+      <a href="#location" data-i18n="nav_contacts">Контакты</a>
+    </nav>
+    <div class="navr">
+      <div class="lang" role="group" aria-label="Язык">
+        <button type="button" data-lang="ru" class="active">RU</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="nav_book">Записаться</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hbadge" data-i18n="hero_badge">★ 4.1 Yelp · 9.3 Atly · Брайтон</div>
+    <h1>Brooklyn Cutz</h1>
+    <div class="kicker" data-i18n="hero_kicker">Классический барбершоп · Brighton Beach</div>
+    <p class="lead" data-i18n="hero_lead">Талантливые мастера, фейды и скин-фейды, борода и бритьё опасной бритвой с горячим полотенцем. Чисто, профессионально и по-мужски.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="hero_cta1">Записаться →</a>
+      <a class="btn btn-light" href="#services" data-i18n="hero_cta2">Услуги и цены</a>
+    </div>
+    <div class="herometa">
+      <span><i>📍</i> <span data-i18n="meta_addr">3139 Coney Island Ave, Бруклин</span></span>
+      <span><i>🕐</i> <span data-i18n="meta_hours">Пн–Сб 9:00–19:00</span></span>
+      <span><i>📞</i> <a href="tel:+17187693874">(718) 769-3874</a></span>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div class="row">
+      <div class="t"><b>★ 4.1</b><span data-i18n="tr1">рейтинг на Yelp</span></div>
+      <div class="t"><b>9.3</b><span data-i18n="tr2">оценка на Atly</span></div>
+      <div class="t"><b data-i18n="tr3b">Фейд</b><span data-i18n="tr3">скин-фейд · бритьё</span></div>
+      <div class="t"><b data-i18n="tr4b">Брайтон</b><span data-i18n="tr4">русскоговорящие мастера</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="block price-wrap" id="services">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="svc_eye">Услуги и цены</div>
+    <h2 data-i18n="svc_h2">Прайс-лист барбершопа</h2>
+    <p class="sub" data-i18n="svc_sub">Мужские стрижки, фейды, борода и классическое бритьё опасной бритвой. Запись онлайн — выберите услугу и удобное время.</p>
+    <div class="menu-grid">
+      <div class="mrow"><span class="nm" data-i18n="s1">Мужская стрижка</span><span class="dots"></span><span class="pr">$30</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s2">Фейд / скин-фейд</span><span class="dots"></span><span class="pr">$35</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s3">Стрижка бороды</span><span class="dots"></span><span class="pr">$20</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s4">Стрижка + борода</span><span class="dots"></span><span class="pr">$50</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s5">Бритьё опасной бритвой (hot towel)</span><span class="dots"></span><span class="pr">$35</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s6">Кант / оформление (line up)</span><span class="dots"></span><span class="pr">$15</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s7">Детская стрижка (до 12 лет)</span><span class="dots"></span><span class="pr">$25</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s8">Стрижка для пенсионеров</span><span class="dots"></span><span class="pr">$25</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s9">Узор / дизайн</span><span class="dots"></span><span class="pr" data-i18n="s9p">от $10</span></div>
+    </div>
+    <p class="pricenote" data-i18n="svc_note">* Цены и часы работы указаны для примера — на готовом сайте подставим ваш актуальный прайс и расписание.</p>
+    <div class="center" style="margin-top:34px">
+      <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="svc_cta">Записаться на услугу →</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="why">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="why_eye">Почему мы</div>
+    <h2 data-i18n="why_h2">Наш барбершоп</h2>
+    <p class="sub" data-i18n="why_sub">Место, куда возвращаются. Мастера, которые слышат, что вам нужно, и делают это чисто и без спешки.</p>
+    <div class="why-grid">
+      <div class="whycard">
+        <span class="wi">✂️</span>
+        <h3 data-i18n="why1h">Опытные барберы</h3>
+        <p data-i18n="why1p">Талантливые и мастеровитые специалисты. Фейды, классика, борода, узоры — стрижка под вас, а не под шаблон.</p>
+      </div>
+      <div class="whycard">
+        <span class="wi">🧼</span>
+        <h3 data-i18n="why2h">Чистота и стерильность</h3>
+        <p data-i18n="why2p">Дезинфекция инструмента после каждого клиента, свежие лезвия и полотенца. Аккуратно и гигиенично — как должно быть.</p>
+      </div>
+      <div class="whycard">
+        <span class="wi">💈</span>
+        <h3 data-i18n="why3h">Атмосфера района</h3>
+        <p data-i18n="why3p">Свой барбершоп на Брайтоне: профессионально, чисто и весело. Русскоговорящие мастера, разговор по-человечески.</p>
+      </div>
+      <div class="whycard">
+        <span class="wi">⏱️</span>
+        <h3 data-i18n="why4h">Без долгого ожидания</h3>
+        <p data-i18n="why4p">Запись онлайн на удобное время — приходите к своему мастеру без очередей и сидения в зале.</p>
+      </div>
+    </div>
+    <div class="center" style="margin-top:38px">
+      <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="why_cta">Записаться в кресло →</a>
+    </div>
+  </div>
+</section>
+
+<section class="block rev-wrap" id="reviews">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--amber)" data-i18n="rev_eye">Отзывы</div>
+    <h2 data-i18n="rev_h2">Что говорят клиенты</h2>
+    <div class="rev-grid">
+      <div class="rev">
+        <div class="qm">“</div>
+        <p data-i18n="rev1">Барберы очень талантливые и мастеровитые — отличное место в Бруклине: профессионально, чисто и весело.</p>
+        <div class="st">★★★★★</div>
+        <div class="who" data-i18n="rev1w">Отзыв · Yelp</div>
+      </div>
+      <div class="rev">
+        <div class="qm">“</div>
+        <p data-i18n="rev2">Лучший фейд на районе. Сделали ровно так, как я хотел, и без спешки.</p>
+        <div class="st">★★★★★</div>
+        <div class="who" data-i18n="rev2w">Постоянный клиент</div>
+      </div>
+      <div class="rev">
+        <div class="qm">“</div>
+        <p data-i18n="rev3">Бритьё опасной бритвой с горячим полотенцем — отдельный кайф. Чисто, аккуратно, по-мужски.</p>
+        <div class="st">★★★★★</div>
+        <div class="who" data-i18n="rev3w">Отзыв · Atly</div>
+      </div>
+    </div>
+    <div class="ratingline"><b>4.1★</b> <span data-i18n="rev_rate">Yelp · 9.3 на Atly · барбершоп на Брайтоне</span></div>
+  </div>
+</section>
+
+<section class="block" id="location">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="loc_eye">Контакты</div>
+    <h2 data-i18n="loc_h2">Как нас найти</h2>
+    <p class="sub" data-i18n="loc_sub">На Coney Island Ave, рядом с Брайтоном. Приходите по записи или звоните.</p>
+    <div class="loc-grid">
+      <div class="mapbox">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-73.9634191%2C40.5774645%2C-73.9554191%2C40.5814645&layer=mapnik&marker=40.5794645%2C-73.9594191" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Brooklyn Cutz map"></iframe>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=3139+Coney+Island+Ave+Brooklyn+NY+11235" target="_blank" rel="noopener" data-i18n="map_link">Открыть в Google Maps ↗</a>
+      </div>
+      <div class="info">
+        <div class="it"><div class="ic">📍</div><div><b data-i18n="loc_addr_b">Адрес</b><span>3139 Coney Island Ave<br>Brooklyn, NY 11235</span></div></div>
+        <div class="it"><div class="ic">🕐</div><div><b data-i18n="loc_hours_b">Часы работы</b><span data-i18n="loc_hours_v">Пн–Сб: 9:00 – 19:00<br>Вс: 10:00 – 17:00</span></div></div>
+        <div class="it"><div class="ic">📞</div><div><b data-i18n="loc_phone_b">Телефон</b><span><a href="tel:+17187693874">(718) 769-3874</a></span></div></div>
+        <div class="it"><div class="ic">💡</div><div><b data-i18n="loc_note_b">Примечание</b><span data-i18n="loc_note_v"><i>Часы работы указаны для примера — заменим на ваши.</i></span></div></div>
+        <div style="margin-top:6px">
+          <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="loc_cta">Записаться →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 data-i18n="fin_h2">Займите своё кресло</h2>
+    <p data-i18n="fin_p">Выберите услугу, мастера и удобное время — онлайн, без звонков и очередей. Подтверждение придёт сразу.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="fin_cta1">Записаться →</a>
+      <a class="btn btn-light" href="tel:+17187693874" data-i18n="fin_cta2">Позвонить</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fbrand">Brooklyn Cutz 💈</div>
+    <div data-i18n="foot_tag">Барбершоп · Brighton Beach, Бруклин</div>
+    <div class="fcontacts">
+      <a href="tel:+17187693874">(718) 769-3874</a>
+      <a href="#" onclick="openBM();return false;" data-i18n="foot_book">Запись онлайн</a>
+    </div>
+    <div class="madeby" data-i18n="foot_made">Демо-сайт · сделано <a href="https://instagram.com/flow_box08" target="_blank" rel="noopener">FLOWBOX</a> для Brooklyn Cutz. Хотите такой же для своего бизнеса? Напишите нам.</div>
+  </div>
+</footer>
+
+<a class="demo-flag" href="https://instagram.com/flow_box08" target="_blank" rel="noopener">
+  <span class="pulse"></span><span data-i18n="flag">Демо от <b>FLOWBOX</b></span>
+</a>
+
+<div class="bm-overlay" id="bm" role="dialog" aria-modal="true" aria-label="Online booking">
+  <div class="bm-card">
+    <button class="bm-x" type="button" onclick="closeBM()" aria-label="Close">&times;</button>
+    <div class="bm-body">
+      <div id="bm-form-wrap">
+        <h3 class="bm-h serif" data-i18n="bm_title">Онлайн-запись</h3>
+        <p class="bm-subt" data-i18n="bm_sub">Выберите услугу и удобное время — заявка придёт мгновенно.</p>
+        <form id="bm-form" class="bm-form" novalidate>
+          <label data-i18n="bm_service">Услуга</label>
+          <select required>
+            <option value="" disabled selected data-i18n="bm_pick">Выберите услугу…</option>
+            <option data-i18n="s1">Мужская стрижка — $30</option>
+            <option data-i18n="s2">Фейд / скин-фейд — $35</option>
+            <option data-i18n="s3">Стрижка бороды — $20</option>
+            <option data-i18n="s4">Стрижка + борода — $50</option>
+            <option data-i18n="s5">Бритьё опасной бритвой (hot towel) — $35</option>
+            <option data-i18n="s6">Кант / оформление (line up) — $15</option>
+            <option data-i18n="s7">Детская стрижка (до 12 лет) — $25</option>
+            <option data-i18n="s8">Стрижка для пенсионеров — $25</option>
+            <option data-i18n="s9">Узор / дизайн — от $10</option>
+          </select>
+          <div class="bm-row">
+            <div><label data-i18n="bm_date">Дата</label><input type="date" required></div>
+            <div><label data-i18n="bm_time">Время</label><input type="time" required></div>
+          </div>
+          <label data-i18n="bm_name">Имя</label>
+          <input type="text" required>
+          <label data-i18n="bm_phone">Телефон</label>
+          <input type="tel" required placeholder="(718) 000-0000">
+          <button type="submit" class="btn btn-primary" data-i18n="bm_submit">Подтвердить запись</button>
+        </form>
+      </div>
+      <div class="bm-done" id="bm-done">
+        <div class="bm-check">&#10003;</div>
+        <h3 class="bm-h serif" data-i18n="bm_done_h">Заявка отправлена!</h3>
+        <p class="bm-subt" data-i18n="bm_done_p">Мы свяжемся с вами, чтобы подтвердить запись.</p>
+        <p class="bm-note" data-i18n="bm_note">Это демонстрация записи. На рабочем сайте заявка автоматически попадает в ваш календарь.</p>
+        <button type="button" class="btn btn-ghost" onclick="closeBM()" data-i18n="bm_close">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openBM(){document.getElementById('bm').classList.add('open');}
+function closeBM(){document.getElementById('bm').classList.remove('open');}
+(function(){var ov=document.getElementById('bm');if(!ov)return;ov.addEventListener('click',function(e){if(e.target===ov)closeBM();});var f=document.getElementById('bm-form');if(f)f.addEventListener('submit',function(e){e.preventDefault();document.getElementById('bm-form-wrap').classList.add('hide');document.getElementById('bm-done').classList.add('show');});})();
+
+(function(){
+  /* ---- language toggle (RU static, EN dict) ---- */
+  var I18N = { en:{
+    nav_services:"Services & prices", nav_works:"Why us", nav_reviews:"Reviews", nav_contacts:"Contact", nav_book:"Book a chair",
+    hero_badge:"★ 4.1 Yelp · 9.3 Atly · Brighton Beach",
+    hero_kicker:"Classic barbershop · Brighton Beach",
+    hero_lead:"Talented barbers, fades and skin fades, beard work and a hot-towel straight-razor shave. Clean, professional and built for men.",
+    hero_cta1:"Book a chair →", hero_cta2:"Services & prices",
+    meta_addr:"3139 Coney Island Ave, Brooklyn", meta_hours:"Mon–Sat 9:00 AM–7:00 PM",
+    tr1:"rating on Yelp", tr2:"score on Atly", tr3b:"Fade", tr3:"skin fade · shave", tr4b:"Brighton", tr4:"Russian-speaking barbers",
+    svc_eye:"Services & prices", svc_h2:"Barbershop price list",
+    svc_sub:"Men's haircuts, fades, beard work and a classic straight-razor shave. Book online — pick a service and a time that suits you.",
+    s1:"Men's haircut", s2:"Fade / skin fade", s3:"Beard trim", s4:"Haircut + beard",
+    s5:"Straight-razor shave (hot towel)", s6:"Line up / edge up", s7:"Kids' cut (under 12)",
+    s8:"Senior cut", s9:"Hair design / pattern", s9p:"from $10",
+    svc_note:"* Prices and hours are shown as an example — on the final site we'll plug in your real price list and schedule.",
+    svc_cta:"Book a service →",
+    why_eye:"Why us", why_h2:"Our barbershop", why_sub:"A place men come back to. Barbers who actually listen, and get it clean and right — no rush.",
+    why1h:"Skilled barbers", why1p:"Talented, experienced hands. Fades, classics, beards, designs — a cut built around you, not a template.",
+    why2h:"Clean & sanitary", why2p:"Tools disinfected after every client, fresh blades and towels. Neat and hygienic — the way it should be.",
+    why3h:"Neighborhood vibe", why3p:"Your local barbershop in Brighton Beach: professional, clean and fun. Russian-speaking barbers, real conversation.",
+    why4h:"No long waits", why4p:"Book online for a time that works — show up to your barber without lines or sitting around.",
+    why_cta:"Book a chair →",
+    rev_eye:"Reviews", rev_h2:"What clients say",
+    rev1:"The barbers are very talented and skilled — a great spot in Brooklyn: professional, clean and fun.", rev1w:"Review · Yelp",
+    rev2:"Best fade in the neighborhood. They did it exactly how I wanted, no rush.", rev2w:"Regular client",
+    rev3:"The hot-towel straight-razor shave is a whole experience. Clean, sharp, the way a barbershop should be.", rev3w:"Review · Atly",
+    rev_rate:"on Yelp · 9.3 on Atly · barbershop in Brighton Beach",
+    loc_eye:"Contact", loc_h2:"Find us", loc_sub:"On Coney Island Ave, right by Brighton Beach. Come by appointment or give us a call.",
+    map_link:"Open in Google Maps ↗",
+    loc_addr_b:"Address", loc_hours_b:"Hours", loc_hours_v:"Mon–Sat: 9:00 AM – 7:00 PM<br>Sun: 10:00 AM – 5:00 PM",
+    loc_phone_b:"Phone", loc_note_b:"Note", loc_note_v:"<i>Hours shown are an example — we'll swap in yours.</i>", loc_cta:"Book a chair →",
+    fin_h2:"Take your chair", fin_p:"Choose your service, barber and time — online, no calls, no lines. Instant confirmation.",
+    fin_cta1:"Book a chair →", fin_cta2:"Call us",
+    foot_tag:"Barbershop · Brighton Beach, Brooklyn", foot_book:"Online booking",
+    foot_made:"Demo site · made by <a href='https://instagram.com/flow_box08' target='_blank' rel='noopener'>FLOWBOX</a> for Brooklyn Cutz. Want one for your business? Message us.",
+    flag:"Demo by <b>FLOWBOX</b>",
+    bm_title:"Online booking", bm_sub:"Pick a service and a time — your request is sent instantly.",
+    bm_pick:"Choose a service…", bm_service:"Service", bm_date:"Date", bm_time:"Time", bm_name:"Name", bm_phone:"Phone",
+    bm_submit:"Confirm booking", bm_done_h:"Request sent!", bm_done_p:"We'll contact you to confirm your booking.",
+    bm_note:"This is a booking demo. On the live site the request lands in your calendar automatically.", bm_close:"Close"
+  }};
+  var META={ ru:{t:"Brooklyn Cutz — барбершоп на Брайтоне"}, en:{t:"Brooklyn Cutz — barbershop in Brighton Beach"} };
+  var RU={}; document.querySelectorAll('[data-i18n]').forEach(function(el){ RU[el.getAttribute('data-i18n')]=el.innerHTML; });
+  function setLang(l){
+    if(l!=='en') l='ru';
+    var dict=(l==='ru')?RU:I18N.en;
+    document.documentElement.lang=l;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){ var k=el.getAttribute('data-i18n'); if(dict[k]!=null) el.innerHTML=dict[k]; });
+    document.title=(META[l]||META.ru).t;
+    document.querySelectorAll('.lang button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang')===l); });
+    try{ localStorage.setItem('bcutz_lang', l); }catch(e){}
+  }
+  var saved=null; try{ saved=localStorage.getItem('bcutz_lang'); }catch(e){}
+  setLang(saved||'ru');
+  document.querySelectorAll('.lang button').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); }); });
+})();
+</script>
+
+</body>
+</html>

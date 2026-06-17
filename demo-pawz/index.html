@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  DEMO site for Pawz-R-Us — Luxury Grooming Studio.                ║
+  ║  Built by FLOWBOX as a pitch hook. RU is the static HTML          ║
+  ║  (primary). EN lives in the I18N object in the <script> below.    ║
+  ║  Language toggle (RU/EN) in header.                               ║
+  ║                                                                    ║
+  ║  Real data (verified June 2026):                                 ║
+  ║   • 2613 East 16th Street, Ground Floor, Brooklyn, NY 11235       ║
+  ║   • (347) 548-9020 · @pawz.r.us                                   ║
+  ║   • Rating 4.6★ / 144 reviews (Atly 8.6/10)                       ║
+  ║  HOURS & PRICES are realistic EXAMPLES — replace with the real.  ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pawz-R-Us — груминг-студия для собак и кошек в Бруклине</title>
+<meta name="description" content="Pawz-R-Us — премиальный груминг собак и кошек. Заботливые мастера, бережный уход, стрижка, купание, де-шеддинг. Sheepshead Bay, Бруклин. Запись онлайн.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap&subset=cyrillic,cyrillic-ext,latin" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15302A; --bg:#FCF8F1; --bg2:#F3EEE2; --card:#FFFFFF; --line:#E7DECB;
+    --text:#23332E; --muted:#7C8579; --teal:#1FA37A; --teal2:#15805F; --orange:#F39A52; --orange2:#E0873B;
+    --soft:#EEF6F1;
+    --serif:"Quicksand",-apple-system,"Segoe UI",system-ui,sans-serif;
+    --sans:"Nunito",-apple-system,"Segoe UI",system-ui,Roboto,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.65;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  .serif{font-family:var(--serif)}
+  .teal{color:var(--teal)}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--sans);font-weight:800;font-size:15px;
+    padding:15px 28px;border-radius:999px;cursor:pointer;transition:.2s;border:0;line-height:1;letter-spacing:.2px}
+  .btn-primary{background:linear-gradient(105deg,var(--teal2),var(--teal));color:#fff;box-shadow:0 10px 26px rgba(31,163,122,.30)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(31,163,122,.40)}
+  .btn-orange{background:linear-gradient(105deg,var(--orange),var(--orange2));color:#fff;box-shadow:0 10px 26px rgba(243,154,82,.36)}
+  .btn-orange:hover{transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal2)}
+  .btn-light{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.30);backdrop-filter:blur(4px)}
+  .btn-light:hover{background:rgba(255,255,255,.20)}
+
+  /* header */
+  header{position:sticky;top:0;z-index:60;background:rgba(21,48,42,.78);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(243,154,82,.20)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+  .brand{display:flex;flex-direction:column;line-height:1}
+  .brand b{font-family:var(--serif);font-weight:700;font-size:22px;color:#fff;letter-spacing:.3px}
+  .brand b .paw{color:var(--orange)}
+  .brand small{font-size:10px;letter-spacing:3px;color:var(--orange);margin-top:5px;text-transform:uppercase;font-weight:700}
+  .menu{display:flex;align-items:center;gap:26px}
+  .menu a{color:rgba(255,255,255,.84);font-size:14.5px;font-weight:600;transition:.15s}
+  .menu a:hover{color:var(--orange)}
+  .navr{display:flex;align-items:center;gap:14px}
+  .lang{display:inline-flex;border:1px solid rgba(255,255,255,.24);border-radius:999px;overflow:hidden;flex:none}
+  .lang button{background:transparent;color:rgba(255,255,255,.62);border:0;padding:7px 12px;font-size:12px;font-weight:800;
+    cursor:pointer;letter-spacing:.5px;transition:.15s;font-family:inherit}
+  .lang button:hover{color:#fff}
+  .lang button.active{background:linear-gradient(105deg,var(--teal2),var(--teal));color:#fff}
+  header .btn{padding:11px 20px;font-size:13.5px}
+
+  /* hero */
+  .hero{position:relative;color:#fff;text-align:center;padding:92px 0 96px;overflow:hidden;
+    background:radial-gradient(120% 120% at 50% -10%,#1d4339 0%,#15302a 55%,#0f241f 100%)}
+  .hero::before{content:"";position:absolute;inset:0;opacity:.55;z-index:0;
+    background:radial-gradient(closest-side,rgba(31,163,122,.34),transparent 70%) -120px -80px/620px 620px no-repeat,
+               radial-gradient(closest-side,rgba(243,154,82,.26),transparent 70%) calc(100% + 120px) 60%/560px 560px no-repeat}
+  .hero .wrap{position:relative;z-index:1}
+  .hbadge{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:1.4px;text-transform:uppercase;
+    color:var(--orange);border:1px solid rgba(243,154,82,.42);background:rgba(243,154,82,.10);
+    padding:7px 16px;border-radius:999px;margin-bottom:24px;font-weight:700}
+  .hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(40px,8vw,74px);line-height:1.02;letter-spacing:.3px;margin-bottom:10px}
+  .hero h1 .paw{color:var(--orange)}
+  .hero .kicker{font-family:var(--serif);font-weight:600;font-size:clamp(17px,3vw,23px);color:rgba(255,255,255,.85);margin-bottom:20px}
+  .hero p.lead{font-size:clamp(15px,2.3vw,18px);color:rgba(255,255,255,.74);max-width:580px;margin:0 auto 34px}
+  .cta-row{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+  .herometa{margin-top:30px;display:flex;gap:10px 26px;justify-content:center;flex-wrap:wrap;
+    color:rgba(255,255,255,.70);font-size:13.5px}
+  .herometa span{display:inline-flex;align-items:center;gap:7px}
+  .herometa i{color:var(--orange);font-style:normal}
+  .herometa a{font-weight:700}
+
+  /* trust strip */
+  .trust{background:var(--ink);color:#fff;border-top:1px solid rgba(243,154,82,.18);padding:24px 0}
+  .trust .row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:center}
+  .trust .t b{display:block;font-family:var(--serif);font-weight:700;font-size:24px;color:var(--orange);line-height:1.1}
+  .trust .t span{font-size:12.5px;color:rgba(255,255,255,.66);letter-spacing:.3px}
+
+  /* sections */
+  section.block{padding:84px 0}
+  .eyebrow{text-align:center;color:var(--teal2);font-size:12.5px;font-weight:800;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+  h2{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4.6vw,46px);text-align:center;letter-spacing:.2px;margin-bottom:14px;color:var(--ink)}
+  .sub{text-align:center;color:var(--muted);max-width:620px;margin:0 auto 50px;font-size:16.5px}
+  .center{text-align:center}
+
+  /* services / prices */
+  .price-wrap{background:var(--bg2)}
+  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;max-width:920px;margin:0 auto}
+  .mrow{display:flex;align-items:baseline;gap:12px;padding:15px 0;border-bottom:1px dashed var(--line)}
+  .mrow .nm{font-weight:700;color:var(--ink);font-size:16px;white-space:nowrap}
+  .mrow .dots{flex:1 1 auto;border-bottom:1px dotted #d4c9b3;transform:translateY(-4px);min-width:14px}
+  .mrow .pr{font-family:var(--serif);font-weight:700;color:var(--teal2);font-size:17px;white-space:nowrap}
+  .pricenote{text-align:center;color:var(--muted);font-size:13px;margin-top:30px;font-style:italic}
+
+  /* works gallery */
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:980px;margin:0 auto}
+  .gal a{display:block;position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);
+    box-shadow:0 10px 28px rgba(40,60,50,.10);background:var(--soft);aspect-ratio:1}
+  .gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
+  .gal a:hover img{transform:scale(1.07)}
+
+  /* reviews */
+  .rev-wrap{background:var(--ink);color:#fff}
+  .rev-wrap h2{color:#fff}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+  .rev{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+    border:1px solid rgba(243,154,82,.22);border-radius:20px;padding:30px 26px}
+  .rev .qm{font-family:var(--serif);font-weight:700;font-size:46px;color:var(--orange);line-height:.6;height:24px}
+  .rev p{color:rgba(255,255,255,.88);font-size:15.5px;font-style:italic;margin:8px 0 18px}
+  .rev .who{font-size:13px;color:var(--orange);font-weight:700;letter-spacing:.4px}
+  .rev .st{color:var(--orange);font-size:13px;letter-spacing:2px;margin-top:4px}
+  .ratingline{text-align:center;margin-top:42px;color:rgba(255,255,255,.74);font-size:14px}
+  .ratingline b{font-family:var(--serif);font-weight:700;color:var(--orange);font-size:30px;display:inline-block;vertical-align:middle;margin-right:8px}
+
+  /* location */
+  .loc-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:stretch}
+  .mapbox{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);min-height:340px;box-shadow:0 14px 40px rgba(40,60,50,.10)}
+  .mapbox iframe{width:100%;height:100%;min-height:340px;border:0;display:block}
+  .maplink{position:absolute;right:12px;bottom:12px;background:rgba(21,48,42,.92);color:#fff;font-size:12.5px;font-weight:700;
+    padding:9px 14px;border-radius:999px;border:1px solid rgba(243,154,82,.50);box-shadow:0 6px 18px rgba(0,0,0,.25);transition:.2s}
+  .maplink:hover{border-color:var(--orange);color:var(--orange);transform:translateY(-1px)}
+  .info{display:flex;flex-direction:column;justify-content:center;gap:20px}
+  .info .it{display:flex;gap:14px;align-items:flex-start}
+  .info .ic{flex:none;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;
+    background:var(--soft);border:1px solid var(--line)}
+  .info .it b{display:block;font-size:15.5px;color:var(--ink);margin-bottom:2px}
+  .info .it span{color:var(--muted);font-size:14.5px}
+  .info .it a{color:var(--teal2);font-weight:700}
+  .loc-note{text-align:center;color:var(--muted);font-size:12.5px;margin-top:18px;font-style:italic}
+
+  /* final */
+  .final{position:relative;color:#fff;text-align:center;overflow:hidden;
+    background:radial-gradient(120% 120% at 50% 0%,#1d4339,#15302a 70%)}
+  .final::before{content:"";position:absolute;inset:0;
+    background:radial-gradient(closest-side,rgba(243,154,82,.28),transparent 70%) 50% -40px/680px 480px no-repeat}
+  .final .wrap{position:relative;z-index:1;padding:84px 24px}
+  .final h2{color:#fff;margin-bottom:14px}
+  .final p{color:rgba(255,255,255,.78);max-width:540px;margin:0 auto 30px;font-size:16.5px}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.62);padding:46px 0 34px;text-align:center;font-size:14px;
+    border-top:1px solid rgba(243,154,82,.18)}
+  footer .fbrand{font-family:var(--serif);font-weight:700;font-size:22px;color:#fff;margin-bottom:6px}
+  footer .fbrand .paw{color:var(--orange)}
+  footer .fcontacts{display:flex;gap:8px 22px;justify-content:center;flex-wrap:wrap;margin:14px 0 22px}
+  footer .fcontacts a{color:var(--orange);font-weight:700}
+  .madeby{border-top:1px solid rgba(255,255,255,.10);margin-top:8px;padding-top:20px;font-size:12.5px;color:rgba(255,255,255,.48)}
+  .madeby a{color:var(--teal);font-weight:800}
+
+  /* floating demo ribbon */
+  .demo-flag{position:fixed;right:16px;bottom:16px;z-index:90;display:inline-flex;align-items:center;gap:9px;
+    background:rgba(21,48,42,.92);color:#fff;border:1px solid rgba(243,154,82,.45);border-radius:999px;
+    padding:10px 16px;font-size:12.5px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.3);backdrop-filter:blur(6px);transition:.2s}
+  .demo-flag:hover{transform:translateY(-2px);border-color:var(--orange)}
+  .demo-flag b{color:var(--orange);letter-spacing:1px}
+  .demo-flag .pulse{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 0 rgba(243,154,82,.6);animation:pl 2s infinite}
+  @keyframes pl{0%{box-shadow:0 0 0 0 rgba(243,154,82,.55)}70%{box-shadow:0 0 0 10px rgba(243,154,82,0)}100%{box-shadow:0 0 0 0 rgba(243,154,82,0)}}
+
+  /* booking modal */
+  .bm-overlay{position:fixed;inset:0;z-index:300;background:rgba(12,10,8,.62);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px}
+  .bm-overlay.open{display:flex}
+  .bm-card{background:var(--card,#fff);color:var(--text,#222);border:1px solid var(--line,#e6e6e6);border-radius:22px;max-width:440px;width:100%;max-height:92vh;overflow:auto;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .bm-x{position:absolute;top:12px;right:16px;background:transparent;border:0;font-size:30px;line-height:1;color:var(--muted,#999);cursor:pointer}
+  .bm-body{padding:34px 30px 30px}
+  .bm-h{font-size:24px;margin-bottom:6px}
+  .bm-subt{color:var(--muted,#777);font-size:14.5px;margin-bottom:18px}
+  .bm-form{display:flex;flex-direction:column;gap:4px}
+  .bm-form label{font-size:12.5px;font-weight:800;margin-top:10px;letter-spacing:.3px}
+  .bm-form input,.bm-form select{font-family:inherit;font-size:15px;padding:12px 14px;border:1px solid var(--line,#ddd);border-radius:12px;background:#fff;color:#1a1a1a;width:100%}
+  .bm-row{display:flex;gap:12px}.bm-row>div{flex:1}
+  .bm-form .btn{margin-top:18px;width:100%;justify-content:center}
+  .bm-done{display:none;text-align:center}
+  .bm-done.show{display:block}
+  #bm-form-wrap.hide{display:none}
+  .bm-check{width:64px;height:64px;border-radius:50%;margin:4px auto 14px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;background:linear-gradient(135deg,#3cbf7d,#2a9d63)}
+  .bm-note{color:var(--muted,#999);font-size:12px;margin-top:12px;font-style:italic}
+
+  @media(max-width:880px){
+    .loc-grid{grid-template-columns:1fr}
+    .rev-grid{grid-template-columns:1fr}
+    .menu-grid{grid-template-columns:1fr;gap:0}
+    .gal{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:680px){
+    .menu{display:none}
+    section.block{padding:60px 0}
+    .hero{padding:70px 0 74px}
+    .trust .row{grid-template-columns:1fr 1fr;gap:22px 14px}
+    .demo-flag{left:16px;right:16px;justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand"><b>Pawz-R-Us <span class="paw">🐾</span></b><small>Luxury Grooming</small></a>
+    <nav class="menu">
+      <a href="#services" data-i18n="nav_services">Услуги и цены</a>
+      <a href="#works" data-i18n="nav_works">Наши работы</a>
+      <a href="#reviews" data-i18n="nav_reviews">Отзывы</a>
+      <a href="#location" data-i18n="nav_contacts">Контакты</a>
+    </nav>
+    <div class="navr">
+      <div class="lang" role="group" aria-label="Язык">
+        <button type="button" data-lang="ru" class="active">RU</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="nav_book">Записаться</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hbadge" data-i18n="hero_badge">★ 4.6 / 5 · 144 отзыва</div>
+    <h1>Pawz-R-Us <span class="paw">🐾</span></h1>
+    <div class="kicker" data-i18n="hero_kicker">Премиальный груминг собак и кошек в Бруклине</div>
+    <p class="lead" data-i18n="hero_lead">Заботливые мастера, бережный уход и любовь к каждому питомцу. Стрижка, купание, де-шеддинг и уход за когтями — ваш любимец выйдет счастливым и ухоженным.</p>
+    <div class="cta-row">
+      <a class="btn btn-orange" href="#" onclick="openBM();return false;" data-i18n="hero_cta1">Записаться на груминг →</a>
+      <a class="btn btn-light" href="#services" data-i18n="hero_cta2">Услуги и цены</a>
+    </div>
+    <div class="herometa">
+      <span><i>📍</i> <span data-i18n="meta_addr">2613 East 16th St, Бруклин</span></span>
+      <span><i>🕐</i> <span data-i18n="meta_hours">Пн–Сб 9:00–18:00</span></span>
+      <span><i>📞</i> <a href="tel:+13475489020">(347) 548-9020</a></span>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div class="row">
+      <div class="t"><b>★ 4.6</b><span data-i18n="tr1">рейтинг · 144 отзыва</span></div>
+      <div class="t"><b data-i18n="tr2b">🐶 🐱</b><span data-i18n="tr2">собаки и кошки</span></div>
+      <div class="t"><b data-i18n="tr3b">Бережно</b><span data-i18n="tr3">без стресса для питомца</span></div>
+      <div class="t"><b data-i18n="tr4b">Premium</b><span data-i18n="tr4">профессиональная косметика</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="block price-wrap" id="services">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="svc_eye">Услуги и цены</div>
+    <h2 data-i18n="svc_h2">Прайс-лист студии</h2>
+    <p class="sub" data-i18n="svc_sub">Полный груминг, купание, стрижка, де-шеддинг и уход за когтями для собак и кошек. Запись онлайн — выберите услугу и удобное время.</p>
+    <div class="menu-grid">
+      <div class="mrow"><span class="nm" data-i18n="s1">Полный груминг · мелкие собаки</span><span class="dots"></span><span class="pr">$55–70</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s2">Полный груминг · средние собаки</span><span class="dots"></span><span class="pr">$70–90</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s3">Полный груминг · крупные собаки</span><span class="dots"></span><span class="pr">$90–130</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s4">Купание и сушка</span><span class="dots"></span><span class="pr">от $35</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s5">Удаление подшёрстка (de-shedding)</span><span class="dots"></span><span class="pr">от $25</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s6">Стрижка когтей</span><span class="dots"></span><span class="pr">$15</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s7">Чистка зубов</span><span class="dots"></span><span class="pr">$10</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s8">Груминг кошек</span><span class="dots"></span><span class="pr">от $70</span></div>
+      <div class="mrow"><span class="nm" data-i18n="s9">Первый груминг щенка</span><span class="dots"></span><span class="pr">$40</span></div>
+    </div>
+    <p class="pricenote" data-i18n="svc_note">* Цены и часы работы указаны для примера — на готовом сайте подставим ваш актуальный прайс. Точная стоимость зависит от породы, размера и состояния шерсти.</p>
+    <div class="center" style="margin-top:34px">
+      <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="svc_cta">Записаться на груминг →</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="works">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="wk_eye">Наши работы</div>
+    <h2 data-i18n="wk_h2">Наши работы</h2>
+    <p class="sub" data-i18n="wk_sub">Настоящие питомцы после визита к нам — ухоженные, чистые и счастливые. Стрижка, купание, уход за шерстью и когтями.</p>
+    <div class="gal">
+      <a href="https://instagram.com/pawz.r.us" target="_blank" rel="noopener"><img src="img/work1.jpg" alt="Груминг собаки в Pawz-R-Us" loading="lazy"></a>
+      <a href="https://instagram.com/pawz.r.us" target="_blank" rel="noopener"><img src="img/work2.jpg" alt="Стрижка питомца в студии Pawz-R-Us" loading="lazy"></a>
+      <a href="https://instagram.com/pawz.r.us" target="_blank" rel="noopener"><img src="img/work3.jpg" alt="Купание собаки в Pawz-R-Us" loading="lazy"></a>
+      <a href="https://instagram.com/pawz.r.us" target="_blank" rel="noopener"><img src="img/work4.jpg" alt="Ухоженный питомец после груминга" loading="lazy"></a>
+      <a href="https://instagram.com/pawz.r.us" target="_blank" rel="noopener"><img src="img/work5.jpg" alt="Уход за когтями в Pawz-R-Us" loading="lazy"></a>
+      <a href="https://instagram.com/pawz.r.us" target="_blank" rel="noopener"><img src="img/work6.jpg" alt="Счастливая собака после груминга" loading="lazy"></a>
+    </div>
+    <div class="center" style="margin-top:38px">
+      <a class="btn btn-ghost" href="https://instagram.com/pawz.r.us" target="_blank" rel="noopener" data-i18n="wk_cta">Больше в Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<section class="block rev-wrap" id="reviews">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--orange)" data-i18n="rev_eye">Отзывы</div>
+    <h2 data-i18n="rev_h2">Что говорят клиенты</h2>
+    <div class="rev-grid">
+      <div class="rev">
+        <div class="qm">“</div>
+        <p data-i18n="rev1">Здесь так заботливо и профессионально обращаются с собаками. Мой пёс выходит счастливым каждый раз.</p>
+        <div class="st">★★★★★</div>
+        <div class="who" data-i18n="rev1w">Отзыв клиента</div>
+      </div>
+      <div class="rev">
+        <div class="qm">“</div>
+        <p data-i18n="rev2">Бережный подход и аккуратная стрижка. Видно, что мастера любят животных и знают своё дело.</p>
+        <div class="st">★★★★★</div>
+        <div class="who" data-i18n="rev2w">Постоянный клиент</div>
+      </div>
+      <div class="rev">
+        <div class="qm">“</div>
+        <p data-i18n="rev3">Привожу и собаку, и кошку. Всегда чисто, без стресса для питомца и отличный результат.</p>
+        <div class="st">★★★★★</div>
+        <div class="who" data-i18n="rev3w">Отзыв · Google</div>
+      </div>
+    </div>
+    <div class="ratingline"><b>4.6/5</b> <span data-i18n="rev_rate">средний рейтинг · 144 отзыва (Atly 8.6/10)</span></div>
+  </div>
+</section>
+
+<section class="block" id="location">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="loc_eye">Контакты</div>
+    <h2 data-i18n="loc_h2">Как нас найти</h2>
+    <p class="sub" data-i18n="loc_sub">Sheepshead Bay, Бруклин. Приём по записи — выберите удобное время онлайн.</p>
+    <div class="loc-grid">
+      <div class="mapbox">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-73.9570838%2C40.5858409%2C-73.9490838%2C40.5898409&layer=mapnik&marker=40.5878409%2C-73.9530838" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Pawz-R-Us map"></iframe>
+        <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=2613+East+16th+Street+Brooklyn+NY+11235" target="_blank" rel="noopener" data-i18n="map_link">Открыть в Google Maps ↗</a>
+      </div>
+      <div class="info">
+        <div class="it"><div class="ic">📍</div><div><b data-i18n="loc_addr_b">Адрес</b><span>2613 East 16th Street, Ground Floor<br>Brooklyn, NY 11235</span></div></div>
+        <div class="it"><div class="ic">🕐</div><div><b data-i18n="loc_hours_b">Часы работы</b><span data-i18n="loc_hours_v">Пн–Сб: 9:00 – 18:00<br>Воскресенье: выходной</span></div></div>
+        <div class="it"><div class="ic">📞</div><div><b data-i18n="loc_phone_b">Телефон</b><span><a href="tel:+13475489020">(347) 548-9020</a></span></div></div>
+        <div class="it"><div class="ic">📸</div><div><b>Instagram</b><span><a href="https://instagram.com/pawz.r.us" target="_blank" rel="noopener">@pawz.r.us</a></span></div></div>
+        <div style="margin-top:6px">
+          <a class="btn btn-primary" href="#" onclick="openBM();return false;" data-i18n="loc_cta">Записаться на груминг →</a>
+        </div>
+      </div>
+    </div>
+    <p class="loc-note" data-i18n="loc_note">* Часы работы указаны для примера — заменим на ваши реальные.</p>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 data-i18n="fin_h2">Запишите питомца за минуту</h2>
+    <p data-i18n="fin_p">Выберите услугу и удобное время — онлайн, без звонков. Подтверждение придёт сразу.</p>
+    <div class="cta-row">
+      <a class="btn btn-orange" href="#" onclick="openBM();return false;" data-i18n="fin_cta1">Записаться на груминг →</a>
+      <a class="btn btn-light" href="tel:+13475489020" data-i18n="fin_cta2">Позвонить</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fbrand">Pawz-R-Us <span class="paw">🐾</span></div>
+    <div data-i18n="foot_tag">Груминг собак и кошек · Sheepshead Bay, Бруклин</div>
+    <div class="fcontacts">
+      <a href="tel:+13475489020">(347) 548-9020</a>
+      <a href="https://instagram.com/pawz.r.us" target="_blank" rel="noopener">@pawz.r.us</a>
+      <a href="#" onclick="openBM();return false;" data-i18n="foot_book">Запись онлайн</a>
+    </div>
+    <div class="madeby" data-i18n="foot_made">Демо-сайт · сделано <a href="https://instagram.com/flow_box08" target="_blank" rel="noopener">FLOWBOX</a> для Pawz-R-Us. Хотите такой же для своего бизнеса? Напишите нам.</div>
+  </div>
+</footer>
+
+<a class="demo-flag" href="https://instagram.com/flow_box08" target="_blank" rel="noopener">
+  <span class="pulse"></span><span data-i18n="flag">Демо от <b>FLOWBOX</b></span>
+</a>
+
+<div class="bm-overlay" id="bm" role="dialog" aria-modal="true" aria-label="Online booking">
+  <div class="bm-card">
+    <button class="bm-x" type="button" onclick="closeBM()" aria-label="Close">&times;</button>
+    <div class="bm-body">
+      <div id="bm-form-wrap">
+        <h3 class="bm-h serif" data-i18n="bm_title">Онлайн-запись</h3>
+        <p class="bm-subt" data-i18n="bm_sub">Выберите услугу и удобное время — заявка придёт мгновенно.</p>
+        <form id="bm-form" class="bm-form" novalidate>
+          <label data-i18n="bm_service">Услуга</label>
+          <select required>
+            <option value="" disabled selected data-i18n="bm_pick">Выберите услугу…</option>
+            <option data-i18n="bo1">Полный груминг · мелкие собаки ($55–70)</option>
+            <option data-i18n="bo2">Полный груминг · средние собаки ($70–90)</option>
+            <option data-i18n="bo3">Полный груминг · крупные собаки ($90–130)</option>
+            <option data-i18n="bo4">Купание и сушка (от $35)</option>
+            <option data-i18n="bo5">Удаление подшёрстка / de-shedding (от $25)</option>
+            <option data-i18n="bo6">Стрижка когтей ($15)</option>
+            <option data-i18n="bo7">Чистка зубов ($10)</option>
+            <option data-i18n="bo8">Груминг кошек (от $70)</option>
+            <option data-i18n="bo9">Первый груминг щенка ($40)</option>
+          </select>
+          <div class="bm-row">
+            <div><label data-i18n="bm_date">Дата</label><input type="date" required></div>
+            <div><label data-i18n="bm_time">Время</label><input type="time" required></div>
+          </div>
+          <label data-i18n="bm_name">Имя</label>
+          <input type="text" required>
+          <label data-i18n="bm_phone">Телефон</label>
+          <input type="tel" required placeholder="(718) 000-0000">
+          <button type="submit" class="btn btn-primary" data-i18n="bm_submit">Подтвердить запись</button>
+        </form>
+      </div>
+      <div class="bm-done" id="bm-done">
+        <div class="bm-check">&#10003;</div>
+        <h3 class="bm-h serif" data-i18n="bm_done_h">Заявка отправлена!</h3>
+        <p class="bm-subt" data-i18n="bm_done_p">Мы свяжемся с вами, чтобы подтвердить запись.</p>
+        <p class="bm-note" data-i18n="bm_note">Это демонстрация записи. На рабочем сайте заявка автоматически попадает в ваш календарь.</p>
+        <button type="button" class="btn btn-ghost" onclick="closeBM()" data-i18n="bm_close">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openBM(){document.getElementById('bm').classList.add('open');}
+function closeBM(){document.getElementById('bm').classList.remove('open');}
+(function(){var ov=document.getElementById('bm');if(!ov)return;ov.addEventListener('click',function(e){if(e.target===ov)closeBM();});var f=document.getElementById('bm-form');if(f)f.addEventListener('submit',function(e){e.preventDefault();document.getElementById('bm-form-wrap').classList.add('hide');document.getElementById('bm-done').classList.add('show');});})();
+
+(function(){
+  /* ---- language toggle (RU static, EN dict) ---- */
+  var I18N = { en:{
+    nav_services:"Services & prices", nav_works:"Our work", nav_reviews:"Reviews", nav_contacts:"Contact", nav_book:"Book now",
+    hero_badge:"★ 4.6 / 5 · 144 reviews",
+    hero_kicker:"Premium dog & cat grooming in Brooklyn",
+    hero_lead:"Caring groomers, gentle handling and love for every pet. Haircuts, baths, de-shedding and nail care — your companion leaves happy and beautifully groomed.",
+    hero_cta1:"Book grooming →", hero_cta2:"Services & prices",
+    meta_addr:"2613 East 16th St, Brooklyn", meta_hours:"Mon–Sat 9:00 AM–6:00 PM",
+    tr1:"rating · 144 reviews", tr2b:"🐶 🐱", tr2:"dogs & cats", tr3b:"Gentle", tr3:"stress-free for your pet",
+    tr4b:"Premium", tr4:"professional grooming products",
+    svc_eye:"Services & prices", svc_h2:"Studio price list",
+    svc_sub:"Full grooming, bath, haircut, de-shedding and nail care for dogs and cats. Book online — pick a service and a time that suits you.",
+    s1:"Full grooming · small dogs", s2:"Full grooming · medium dogs", s3:"Full grooming · large dogs",
+    s4:"Bath & blow-dry", s5:"De-shedding (undercoat removal)", s6:"Nail trim", s7:"Teeth cleaning",
+    s8:"Cat grooming", s9:"Puppy's first groom",
+    svc_note:"* Prices and hours shown as an example — on the final site we'll plug in your real price list. Final cost depends on breed, size and coat condition.",
+    svc_cta:"Book grooming →",
+    wk_eye:"Our work", wk_h2:"Our work",
+    wk_sub:"Real pets after a visit with us — clean, beautifully groomed and happy. Haircuts, baths, coat and nail care.",
+    wk_cta:"More on Instagram →",
+    rev_eye:"Reviews", rev_h2:"What clients say",
+    rev1:"They handle the dogs so caringly and professionally here. My dog comes out happy every time.", rev1w:"Customer review",
+    rev2:"Gentle handling and a neat haircut. You can tell the groomers love animals and know their craft.", rev2w:"Regular client",
+    rev3:"I bring both my dog and my cat. Always clean, stress-free for the pet and great results.", rev3w:"Review · Google",
+    rev_rate:"average rating · 144 reviews (Atly 8.6/10)",
+    loc_eye:"Contact", loc_h2:"Find us", loc_sub:"Sheepshead Bay, Brooklyn. By appointment — pick a time online.",
+    map_link:"Open in Google Maps ↗",
+    loc_addr_b:"Address", loc_hours_b:"Hours", loc_hours_v:"Mon–Sat: 9:00 AM – 6:00 PM<br>Sunday: closed",
+    loc_phone_b:"Phone", loc_cta:"Book grooming →",
+    loc_note:"* Hours shown as an example — we'll replace them with your real ones.",
+    fin_h2:"Book your pet in under a minute", fin_p:"Choose a service and a time — online, no phone calls. Instant confirmation.",
+    fin_cta1:"Book grooming →", fin_cta2:"Call us",
+    foot_tag:"Dog & cat grooming · Sheepshead Bay, Brooklyn", foot_book:"Online booking",
+    foot_made:"Demo site · made by <a href='https://instagram.com/flow_box08' target='_blank' rel='noopener'>FLOWBOX</a> for Pawz-R-Us. Want one for your business? Message us.",
+    flag:"Demo by <b>FLOWBOX</b>",
+    bm_title:"Online booking", bm_sub:"Pick a service and a time — your request is sent instantly.",
+    bm_pick:"Choose a service…", bm_service:"Service", bm_date:"Date", bm_time:"Time", bm_name:"Name", bm_phone:"Phone",
+    bm_submit:"Confirm booking", bm_done_h:"Request sent!", bm_done_p:"We'll contact you to confirm your booking.",
+    bm_note:"This is a booking demo. On the live site the request lands in your calendar automatically.", bm_close:"Close",
+    bo1:"Full grooming · small dogs ($55–70)", bo2:"Full grooming · medium dogs ($70–90)", bo3:"Full grooming · large dogs ($90–130)",
+    bo4:"Bath & blow-dry (from $35)", bo5:"De-shedding / undercoat removal (from $25)", bo6:"Nail trim ($15)",
+    bo7:"Teeth cleaning ($10)", bo8:"Cat grooming (from $70)", bo9:"Puppy's first groom ($40)"
+  }};
+  var META={ ru:{t:"Pawz-R-Us — груминг-студия для собак и кошек в Бруклине"}, en:{t:"Pawz-R-Us — dog & cat grooming studio in Brooklyn"} };
+  var RU={}; document.querySelectorAll('[data-i18n]').forEach(function(el){ RU[el.getAttribute('data-i18n')]=el.innerHTML; });
+  function setLang(l){
+    if(l!=='en') l='ru';
+    var dict=(l==='ru')?RU:I18N.en;
+    document.documentElement.lang=l;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){ var k=el.getAttribute('data-i18n'); if(dict[k]!=null) el.innerHTML=dict[k]; });
+    document.title=(META[l]||META.ru).t;
+    document.querySelectorAll('.lang button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang')===l); });
+    try{ localStorage.setItem('pawz_lang', l); }catch(e){}
+  }
+  var saved=null; try{ saved=localStorage.getItem('pawz_lang'); }catch(e){}
+  setLang(saved||'ru');
+  document.querySelectorAll('.lang button').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); }); });
+})();
+</script>
+
+</body>
+</html>
