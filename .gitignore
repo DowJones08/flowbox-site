@@ -3,3 +3,7 @@ brand_kit.md
 
 *.ps1
 *.py
+
+# Private — never publish to the public Pages repo
+leads_brooklyn.md
+SESSION_*.md
