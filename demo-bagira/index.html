@@ -112,6 +112,8 @@
   .pricenote{text-align:center;color:var(--muted);font-size:13px;margin-top:30px;font-style:italic}
 
   /* palette / gallery */
+  .ig-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;justify-items:center;max-width:1040px;margin:0 auto}
+  .ig-grid .instagram-media{margin:0 auto !important;min-width:260px !important;width:100% !important;max-width:340px !important;border-radius:16px !important}
   .palette{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:12px;max-width:820px;margin:0 auto}
   .sw{aspect-ratio:1;border-radius:16px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06),0 6px 16px rgba(60,40,30,.10);
     position:relative;transition:.2s;cursor:default}
@@ -266,11 +268,20 @@
 <section class="block" id="palette">
   <div class="wrap">
     <div class="eyebrow" data-i18n="pal_eye">Наши работы</div>
-    <h2 data-i18n="pal_h2">600+ оттенков — найдётся ваш</h2>
-    <p class="sub" data-i18n="pal_sub">От нежных нюдов до глубокого винного и хрома. Полная палитра гель-лака — каждый раз новый образ.</p>
+    <h2 data-i18n="pal_h2">Свежие работы из Instagram</h2>
+    <p class="sub" data-i18n="pal_sub">Реальные работы студии. 600+ оттенков гель-лака — от нежных нюдов до глубокого винного и хрома.</p>
+    <div class="ig-grid">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZplZZcjDUv/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZnlCCwjEiP/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZnLvJFjOf8/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZfb6_oDPwS/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZdXAKPjPlN/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DZdI3tNjHxN/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14"></blockquote>
+    </div>
+    <p class="sub" style="margin:38px auto 14px" data-i18n="pal_palh">600+ оттенков гель-лака — найдётся ваш</p>
     <div class="palette" id="palette-grid" aria-hidden="true"></div>
     <div class="center" style="margin-top:38px">
-      <a class="btn btn-ghost" href="https://instagram.com/bagiranailsstudio" target="_blank" rel="noopener" data-i18n="pal_cta">Смотреть работы в Instagram →</a>
+      <a class="btn btn-ghost" href="https://instagram.com/bagiranailsstudio" target="_blank" rel="noopener" data-i18n="pal_cta">Смотреть все работы в Instagram →</a>
     </div>
   </div>
 </section>
@@ -392,9 +403,10 @@
     s9:"Nail art / design", s9p:"from $5/nail", s10:"French / ombré / chrome", s11:"IBX strengthening", s12:"Manicure + pedicure (combo)",
     svc_note:"* Prices shown as an example — on the final site we'll plug in your real price list. Final cost depends on length and complexity.",
     svc_cta:"Book a service →",
-    pal_eye:"Our work", pal_h2:"600+ shades — find yours",
-    pal_sub:"From soft nudes to deep wine and chrome. A full gel-polish palette — a new look every time.",
-    pal_cta:"See our work on Instagram →",
+    pal_eye:"Our work", pal_h2:"Latest work from Instagram",
+    pal_sub:"Real work from the studio. 600+ gel-polish shades — from soft nudes to deep wine and chrome.",
+    pal_palh:"600+ gel-polish shades — find yours",
+    pal_cta:"See all our work on Instagram →",
     rev_eye:"Reviews", rev_h2:"What clients say",
     rev1:"I considered it the best manicure in the city. Flawlessly neat work, down to the smallest detail.",
     rev1w:"Regular client",
@@ -427,6 +439,7 @@
   document.querySelectorAll('.lang button').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); }); });
 })();
 </script>
+<script async src="//www.instagram.com/embed.js"></script>
 
 </body>
 </html>
