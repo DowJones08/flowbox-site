@@ -315,7 +315,7 @@
         b.disabled=false; b.textContent=label;
         if(j && j.audit){
           out.textContent=j.audit;
-          var a=document.createElement('a'); a.className='tg'; a.href='https://instagram.com/flow_box08'; a.target='_blank'; a.rel='noopener'; a.textContent='Продолжить →';
+          var a=document.createElement('a'); a.className='tg'; a.href='https://t.me/FlowBox08_bot'; a.target='_blank'; a.rel='noopener'; a.textContent='Продолжить в Telegram →';
           out.appendChild(document.createElement('br')); out.appendChild(a);
         } else { out.textContent='Не получилось прямо сейчас — напишите нам, разберём вручную: instagram.com/flow_box08'; }
       })
@@ -702,5 +702,46 @@
 })();
 </script>
 
+<!-- Flowbox chat widget -->
+<style>
+#fbChat{position:fixed;right:18px;bottom:18px;z-index:9000;font-family:'Manrope',system-ui,sans-serif}
+#fbFab{width:60px;height:60px;border-radius:50%;border:0;cursor:pointer;background:linear-gradient(150deg,#3da9fc,#5fe3d2);color:#06121f;font-size:25px;box-shadow:0 14px 34px -10px rgba(61,169,252,.6)}
+#fbPanel{position:absolute;right:0;bottom:74px;width:340px;max-width:86vw;height:460px;max-height:72vh;display:none;flex-direction:column;background:#0d1320;border:1px solid rgba(120,160,220,.2);border-radius:18px;overflow:hidden;box-shadow:0 40px 90px -30px #000}
+#fbChat.open #fbPanel{display:flex}
+#fbHead{padding:13px 16px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.07);color:#eaf0f7;font-weight:700;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+#fbHead small{color:#5fe3d2;font-weight:600;font-size:11px}
+#fbClose{background:none;border:0;color:#8a97ab;font-size:20px;cursor:pointer}
+#fbBody{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px}
+.fbm{max-width:84%;padding:10px 13px;border-radius:13px;font-size:14px;line-height:1.45;white-space:pre-wrap}
+.fbm.bot{background:rgba(255,255,255,.05);color:#dbe3ef;align-self:flex-start;border-bottom-left-radius:4px}
+.fbm.me{background:linear-gradient(150deg,#3da9fc,#5fe3d2);color:#06121f;align-self:flex-end;border-bottom-right-radius:4px;font-weight:500}
+#fbForm{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(255,255,255,.07)}
+#fbInput{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 12px;color:#eaf0f7;font-size:14px;font-family:inherit}
+#fbInput:focus{outline:1px solid #5fe3d2}
+#fbSend{background:#5fe3d2;border:0;border-radius:10px;color:#06121f;font-weight:700;padding:0 15px;cursor:pointer}
+</style>
+<div id="fbChat">
+  <div id="fbPanel">
+    <div id="fbHead"><span>Flowbox · ИИ-консультант<br><small>отвечает за секунды</small></span><button id="fbClose" aria-label="закрыть">×</button></div>
+    <div id="fbBody"></div>
+    <form id="fbForm"><input id="fbInput" placeholder="Спросите про ИИ-сотрудника…" autocomplete="off"><button id="fbSend" type="submit">→</button></form>
+  </div>
+  <button id="fbFab" aria-label="чат">💬</button>
+</div>
+<script>
+(function(){
+  var AGENT='https://frosting-hydrated-paralyze.ngrok-free.dev';
+  var wrap=document.getElementById('fbChat'),fab=document.getElementById('fbFab'),body=document.getElementById('fbBody'),form=document.getElementById('fbForm'),inp=document.getElementById('fbInput');
+  var sid='fb-'+Math.random().toString(36).slice(2)+Date.now().toString(36),opened=false,busy=false;
+  function add(t,who){var d=document.createElement('div');d.className='fbm '+who;d.textContent=t;body.appendChild(d);body.scrollTop=body.scrollHeight;return d;}
+  fab.addEventListener('click',function(){wrap.classList.toggle('open');if(!opened){opened=true;add('Здравствуйте! 🤍 Я ИИ-консультант Flowbox. Расскажите про ваш бизнес или спросите про пакеты — подскажу и подберу.','bot');}inp.focus();});
+  document.getElementById('fbClose').addEventListener('click',function(){wrap.classList.remove('open');});
+  form.addEventListener('submit',function(e){e.preventDefault();var t=inp.value.trim();if(!t||busy)return;busy=true;add(t,'me');inp.value='';var typ=add('…','bot');
+    fetch(AGENT+'/chat',{method:'POST',headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'true'},body:JSON.stringify({message:t,sessionId:sid,business:'flowbox'})})
+      .then(function(r){return r.json();}).then(function(j){typ.remove();add((j&&j.reply)?j.reply:'Напишите нам в Telegram @FlowBox08_bot — отвечу там.','bot');busy=false;})
+      .catch(function(){typ.remove();add('Связь прервалась — напишите @FlowBox08_bot в Telegram.','bot');busy=false;});
+  });
+})();
+</script>
 </body>
 </html>
