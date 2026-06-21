@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flowbox — ROI / Окупаемость</title>
+<style>
+:root{--bg:#0b0e14;--card:#11151e;--line:rgba(255,255,255,.08);--ink:#eef2f8;--muted:#93a0b4;--blue:#3da9fc;--cyan:#5fe3d2;--good:#46d39a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(120% 80% at 50% -10%,#13203a,#0b0e14 60%);color:var(--ink);
+  font:400 16px/1.55 "Segoe UI",system-ui,-apple-system,sans-serif;min-height:100vh;padding:34px 18px 60px}
+.wrap{max-width:780px;margin:0 auto}
+.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+.brand{font-weight:800;letter-spacing:.5px;font-size:20px}
+.brand span{background:linear-gradient(90deg,var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.toggle{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.toggle button{background:none;border:0;color:var(--muted);padding:8px 16px;font:600 13px sans-serif;cursor:pointer}
+.toggle button.on{background:linear-gradient(90deg,var(--blue),var(--cyan));color:#06121f}
+h1{font-size:30px;line-height:1.15;margin:6px 0 10px;letter-spacing:-.3px}
+.lead{color:var(--muted);font-size:16px;margin-bottom:26px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 22px;margin:16px 0;box-shadow:0 30px 70px -40px #000}
+.k{font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue);font-weight:700;margin-bottom:12px}
+table{width:100%;border-collapse:collapse}
+td{padding:9px 4px;border-bottom:1px solid var(--line);font-size:15px}
+td:last-child{text-align:right;font-weight:700;color:#fff;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.math{font-size:15px;color:#cdd6e4}
+.math b{color:#fff}
+.big{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:20px;font-weight:800}
+.big .num{color:var(--good)}
+.note{font-size:14.5px;color:var(--cyan);margin-top:10px}
+ul{list-style:none;margin:4px 0 0}
+li{padding:7px 0 7px 26px;position:relative;font-size:15px}
+li::before{content:"✓";position:absolute;left:0;color:var(--good);font-weight:800}
+.price{font-size:18px}.price b{color:#fff;font-size:21px}
+.dis{font-size:12.5px;color:#6b7687;margin-top:24px;text-align:center;line-height:1.5}
+.lang{display:none}.lang.on{display:block}
+@media print{body{background:#fff;color:#000}.toggle{display:none}.card{box-shadow:none;border-color:#ddd}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand">Flow<span>box</span></div>
+    <div class="toggle">
+      <button id="btnEn" class="on" onclick="setLang('en')">EN</button>
+      <button id="btnRu" onclick="setLang('ru')">RU</button>
+    </div>
+  </div>
+
+  <!-- EN -->
+  <div class="lang on" id="en">
+    <h1>The leads you never see</h1>
+    <p class="lead">Most people message a detailing shop <b>after hours</b>, or expect a reply <b>within minutes</b>. If no one answers fast, they book the next shop on the list. An AI assistant answers <b>instantly, 24/7</b> on your website, Instagram &amp; WhatsApp — and books the appointment before the lead cools off.</p>
+
+    <div class="card">
+      <div class="k">Illustrative assumptions</div>
+      <table>
+        <tr><td>Inquiries per month</td><td>200</td></tr>
+        <tr><td>Arrive after hours / off-hours</td><td>40%</td></tr>
+        <tr><td>Lost when reply is slow</td><td>50%</td></tr>
+        <tr><td>Booking (conversion) rate</td><td>30%</td></tr>
+        <tr><td>Average ticket</td><td>$180</td></tr>
+        <tr><td>Share the assistant recovers</td><td>60%</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="k">The month's math</div>
+      <div class="math">
+        After-hours inquiries: 200 × 40% = <b>80</b><br>
+        Lost to slow reply: 80 × 50% = <b>40</b><br>
+        Assistant saves 60%: 40 × 60% = <b>24</b><br>
+        Book at 30%: 24 × 30% = <b>~7 jobs</b>
+      </div>
+      <div class="big">Recovered revenue: <span class="num">≈ $1,260 / month</span></div>
+      <div class="note">One $1,500 ceramic lead that would have walked covers a whole year of the service by itself.</div>
+    </div>
+
+    <div class="card">
+      <div class="k">What you get</div>
+      <ul>
+        <li>Instant 24/7 replies on your site, Instagram &amp; WhatsApp</li>
+        <li>Answers prices, services and hours automatically</li>
+        <li>Books appointments straight into your calendar</li>
+        <li>Speaks Russian and English</li>
+        <li>Done-for-you setup — nothing for you to learn</li>
+      </ul>
+      <p class="price" style="margin-top:16px"><b>$300</b> one-time setup, then <b>$99</b>/month — versus ~$1,260/month recovered in this example. It pays for itself from the first saved job.</p>
+    </div>
+  </div>
+
+  <!-- RU -->
+  <div class="lang" id="ru">
+    <h1>Клиенты, которых вы не видите</h1>
+    <p class="lead">Большинство людей пишут в детейлинг <b>в нерабочее время</b> или ждут ответа <b>за пару минут</b>. Если никто не отвечает быстро — они записываются к следующему салону. ИИ-ассистент отвечает <b>мгновенно, 24/7</b> на сайте, в Instagram и WhatsApp — и записывает клиента, пока он не остыл.</p>
+
+    <div class="card">
+      <div class="k">Иллюстративные допущения</div>
+      <table>
+        <tr><td>Обращений в месяц</td><td>200</td></tr>
+        <tr><td>Приходят в нерабочее время</td><td>40%</td></tr>
+        <tr><td>Теряется из-за медленного ответа</td><td>50%</td></tr>
+        <tr><td>Доля записавшихся (конверсия)</td><td>30%</td></tr>
+        <tr><td>Средний чек</td><td>$180</td></tr>
+        <tr><td>Доля, которую возвращает ассистент</td><td>60%</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="k">Расчёт за месяц</div>
+      <div class="math">
+        Обращений в нерабочее время: 200 × 40% = <b>80</b><br>
+        Теряется из-за медленного ответа: 80 × 50% = <b>40</b><br>
+        Ассистент спасает 60%: 40 × 60% = <b>24</b><br>
+        Записываются (30%): 24 × 30% = <b>~7 заказов</b>
+      </div>
+      <div class="big">Возвращённая выручка: <span class="num">≈ $1 260 / месяц</span></div>
+      <div class="note">Один заказ на керамику за $1 500, который ушёл бы к конкуренту, окупает услугу на целый год.</div>
+    </div>
+
+    <div class="card">
+      <div class="k">Что вы получаете</div>
+      <ul>
+        <li>Мгновенные ответы 24/7 на сайте, в Instagram и WhatsApp</li>
+        <li>Автоматически отвечает про цены, услуги и часы работы</li>
+        <li>Записывает клиентов прямо в ваш календарь</li>
+        <li>Говорит по-русски и по-английски</li>
+        <li>Настройка «под ключ» — вам ничему не нужно учиться</li>
+      </ul>
+      <p class="price" style="margin-top:16px"><b>$300</b> разовая настройка, далее <b>$99</b>/месяц — против ~$1 260/месяц возвращённой выручки в этом примере. Окупается с первого спасённого заказа.</p>
+    </div>
+  </div>
+
+  <p class="dis" id="dis">All figures are illustrative assumptions showing how the math works, not promised results. Your real numbers depend on your traffic, pricing and service mix.</p>
+</div>
+<script>
+function setLang(l){
+  document.getElementById('en').className = 'lang' + (l==='en'?' on':'');
+  document.getElementById('ru').className = 'lang' + (l==='ru'?' on':'');
+  document.getElementById('btnEn').className = l==='en'?'on':'';
+  document.getElementById('btnRu').className = l==='ru'?'on':'';
+  document.getElementById('dis').textContent = l==='ru'
+    ? 'Все цифры — иллюстративные допущения, показывающие логику расчёта, а не обещанный результат. Ваши реальные показатели зависят от трафика, цен и набора услуг.'
+    : 'All figures are illustrative assumptions showing how the math works, not promised results. Your real numbers depend on your traffic, pricing and service mix.';
+  document.documentElement.lang = l;
+}
+</script>
+</body>
+</html>
