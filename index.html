@@ -274,6 +274,56 @@
   </div>
 </section>
 
+<!-- ====================== FREE AI AUDIT ====================== -->
+<section class="block" id="audit">
+  <div class="wrap">
+    <div class="kicker" data-i18n="audit_kicker">Free AI audit</div>
+    <h2 data-i18n="audit_h2">Drop your site — get an instant audit</h2>
+    <p class="sub" data-i18n="audit_sub">Paste your website and Instagram. Our AI reviews them, shows where you're losing clients and recommends the right package — free, in seconds.</p>
+    <style>
+    .audit-box{max-width:560px;margin:30px auto 0;display:flex;flex-direction:column;gap:12px;text-align:left}
+    .audit-box input{padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#eaf0f7;font-size:15px;font-family:inherit}
+    .audit-box input:focus{outline:2px solid #5fe3d2;border-color:transparent}
+    .audit-box button{padding:15px;border:0;border-radius:12px;background:linear-gradient(150deg,#3da9fc,#5fe3d2);color:#06121f;font-weight:700;font-size:15px;cursor:pointer}
+    .audit-box button:disabled{opacity:.6;cursor:wait}
+    .audit-out{display:none;margin-top:4px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 20px;white-space:pre-wrap;line-height:1.62;font-size:15px;color:#cdd6e4}
+    .audit-out.show{display:block}
+    .audit-out a.tg{display:inline-block;margin-top:14px;padding:11px 18px;border-radius:999px;background:#5fe3d2;color:#06121f;font-weight:700;text-decoration:none;font-size:14px}
+    </style>
+    <div class="audit-box">
+      <input id="auSite" type="text" placeholder="yoursite.com" autocomplete="off">
+      <input id="auIg" type="text" placeholder="@instagram" autocomplete="off">
+      <button id="auBtn" data-i18n="audit_btn">Get my free audit →</button>
+      <div id="auOut" class="audit-out"></div>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  var AGENT='https://frosting-hydrated-paralyze.ngrok-free.dev';
+  var b=document.getElementById('auBtn'), out=document.getElementById('auOut');
+  if(!b) return;
+  b.addEventListener('click', function(){
+    var site=(document.getElementById('auSite').value||'').trim();
+    var ig=(document.getElementById('auIg').value||'').trim();
+    if(!site && !ig){ document.getElementById('auSite').focus(); return; }
+    var label=b.textContent; b.disabled=true; b.textContent='…';
+    out.className='audit-out show'; out.textContent='⏳ ИИ смотрит ваш сайт… (10–20 сек)';
+    fetch(AGENT+'/audit',{method:'POST',headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'true'},body:JSON.stringify({site:site,ig:ig})})
+      .then(function(r){return r.json();})
+      .then(function(j){
+        b.disabled=false; b.textContent=label;
+        if(j && j.audit){
+          out.textContent=j.audit;
+          var a=document.createElement('a'); a.className='tg'; a.href='https://instagram.com/flow_box08'; a.target='_blank'; a.rel='noopener'; a.textContent='Продолжить →';
+          out.appendChild(document.createElement('br')); out.appendChild(a);
+        } else { out.textContent='Не получилось прямо сейчас — напишите нам, разберём вручную: instagram.com/flow_box08'; }
+      })
+      .catch(function(){ b.disabled=false; b.textContent=label; out.textContent='Сервис временно недоступен — напишите @flow_box08, сделаем разбор вручную.'; });
+  });
+})();
+</script>
+
 <section class="block" id="prices">
   <div class="wrap">
     <div class="kicker" data-i18n="price_kicker">Pricing</div>
@@ -425,6 +475,10 @@
       price_kicker:"Цены",
       price_h2:"Наймите своего ИИ-сотрудника",
       price_sub:"Выберите готовый пакет или соберите своего из модулей. Разовое подключение + абонентка — настраиваем и ведём за вас, расходы на ИИ (Claude + видео) уже включены.",
+      audit_kicker:"Бесплатный ИИ-разбор",
+      audit_h2:"Вставьте сайт — получите разбор за секунды",
+      audit_sub:"Вставьте ссылку на сайт и Instagram. ИИ посмотрит, покажет где вы теряете клиентов и подберёт пакет — бесплатно, за секунды.",
+      audit_btn:"Получить бесплатный разбор →",
       mod_head:"Соберите своего — модули",
       mod1:"AI-чат на сайте",
       mod2:"Telegram-диспетчер",
@@ -543,6 +597,10 @@
       price_kicker:"Precios",
       price_h2:"Contrata a tu empleado IA",
       price_sub:"Elige un paquete listo o arma el tuyo con módulos. Configuración única + mensualidad — lo configuramos y lo operamos por ti, con el cómputo de IA (Claude + video) incluido.",
+      audit_kicker:"Auditoría IA gratis",
+      audit_h2:"Pega tu sitio — recibe una auditoría al instante",
+      audit_sub:"Pega el enlace de tu sitio e Instagram. La IA los revisa, muestra dónde pierdes clientes y recomienda el paquete — gratis, en segundos.",
+      audit_btn:"Quiero mi auditoría gratis →",
       mod_head:"Arma el tuyo — módulos",
       mod1:"Chat IA en tu sitio",
       mod2:"Despachador en Telegram",
