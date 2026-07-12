@@ -1,738 +1,946 @@
 <!DOCTYPE html>
 <!--
   ╔══════════════════════════════════════════════════════════════╗
-  ║  FLOWBOX landing — trilingual EN / RU / ES (EN default).       ║
-  ║  Contacts already set: IG @flow_box08, WhatsApp/tel +1 332 277 8090
-  ║  Translations live in the I18N object in the <script> at the   ║
-  ║  bottom. Header buttons switch language instantly (no reload). ║
+  ║  FLOWBOX · ABU AI — premium landing v2 (2026-07-12)           ║
+  ║  Trilingual EN / RU / ES (EN static default, I18N at bottom). ║
+  ║  Contacts: IG @flow_box08 · WhatsApp/tel +1 332 277 8090      ║
+  ║  Live engine: AGENT const → ngrok (chat /audit /health).      ║
+  ║  Pricing ladder: 2-week pilot → $500 setup + $149/249/349.    ║
   ╚══════════════════════════════════════════════════════════════╝
 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FLOWBOX — ABU AI, your invisible employee</title>
-<meta name="description" content="ABU AI by FLOWBOX — a done-for-you AI employee that answers clients 24/7, books, dispatches to your team and runs the back office. First month free.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>FLOWBOX — ABU AI, the invisible employee for your business</title>
+<meta name="description" content="ABU AI answers your clients in seconds, 24/7 — books appointments, reminds, reports revenue every evening. Done-for-you setup. 2-week pilot: if it doesn't bring bookings, you don't pay.">
+<meta property="og:title" content="FLOWBOX — ABU AI, your invisible employee">
+<meta property="og:description" content="AI administrator that answers in seconds, books 24/7 and reports every evening. Try the live demo right on this page.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#0A0D14; --bg2:#10141E; --card:#141A26; --line:#232C3D;
-    --text:#EAEEF6; --muted:#9AA6BB; --accent:#4F7CFF; --accent2:#22D3EE;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{
-    font-family:-apple-system,"Segoe UI",system-ui,Roboto,Arial,sans-serif;
-    background:var(--bg);color:var(--text);line-height:1.6;
-    -webkit-font-smoothing:antialiased;overflow-x:hidden;
-  }
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
-  .grad{background:linear-gradient(105deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;
-    padding:14px 24px;border-radius:12px;cursor:pointer;transition:.18s;border:0;line-height:1}
-  .btn-primary{background:linear-gradient(105deg,var(--accent),var(--accent2));color:#06101f}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(79,124,255,.35)}
-  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
-  .btn-ghost:hover{border-color:var(--accent);color:#fff}
+:root{
+  --bg:#05070D; --bg2:#090D16; --panel:#0C1220; --panel2:#101828;
+  --line:rgba(148,170,210,.13); --line2:rgba(148,170,210,.22);
+  --ink:#F2F5FB; --mut:#93A0B8; --dim:#5F6C84;
+  --blue:#4F7CFF; --cyan:#22D3EE; --ok:#34D399; --warn:#FBBF24;
+  --grad:linear-gradient(100deg,var(--blue),var(--cyan));
+  --r:18px; --rs:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Manrope',system-ui,-apple-system,sans-serif;
+  line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .04 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+.disp{font-family:'Unbounded',sans-serif;letter-spacing:-.01em}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--cyan);margin-bottom:18px}
+.eyebrow .n{font-family:'Unbounded';color:var(--dim);letter-spacing:0}
+.eyebrow::after{content:"";height:1px;width:56px;background:linear-gradient(90deg,var(--cyan),transparent)}
+h2{font-size:clamp(26px,4.2vw,42px);line-height:1.15;font-weight:600;font-family:'Unbounded';letter-spacing:-.01em}
+.sub{color:var(--mut);font-size:clamp(15px,1.6vw,17.5px);max-width:640px;margin-top:14px}
+section{padding:clamp(64px,9vw,110px) 0;position:relative}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;font-size:15px;
+  font-family:'Manrope';padding:15px 26px;border-radius:14px;cursor:pointer;border:0;line-height:1;
+  transition:transform .18s,box-shadow .18s,border-color .18s,background .18s;white-space:nowrap}
+.btn-p{background:var(--grad);color:#04101E;box-shadow:0 8px 28px -8px rgba(79,124,255,.55)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 16px 40px -10px rgba(79,124,255,.65)}
+.btn-g{background:rgba(148,170,210,.06);color:var(--ink);border:1px solid var(--line2)}
+.btn-g:hover{border-color:var(--blue);background:rgba(79,124,255,.08)}
+.rev{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.rev.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}}
 
-  /* header */
-  header{position:sticky;top:0;z-index:50;background:rgba(10,13,20,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(35,44,61,.6)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:14px}
-  .logo{font-weight:800;font-size:22px;letter-spacing:.5px}
-  .logo span{font-weight:400;opacity:.55;font-size:13px;display:block;letter-spacing:2px;margin-top:-4px}
-  .nav .btn{padding:11px 18px;font-size:14px}
-  .navr{display:flex;align-items:center;gap:12px}
-  .lang{display:inline-flex;border:1px solid var(--line);border-radius:99px;overflow:hidden;flex:none}
-  .lang button{background:transparent;color:var(--muted);border:0;padding:7px 11px;font-size:12.5px;font-weight:700;cursor:pointer;letter-spacing:.5px;transition:.15s;font-family:inherit}
-  .lang button:hover{color:var(--text)}
-  .lang button.active{background:linear-gradient(105deg,var(--accent),var(--accent2));color:#06101f}
+/* ─ nav ─ */
+header{position:sticky;top:0;z-index:80;background:rgba(5,7,13,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px;gap:14px}
+.logo{font-family:'Unbounded';font-weight:700;font-size:19px;letter-spacing:.02em}
+.logo em{font-style:normal;display:block;font-family:'Manrope';font-weight:600;font-size:10.5px;
+  letter-spacing:.34em;color:var(--cyan);margin-top:1px}
+.navr{display:flex;align-items:center;gap:12px}
+.lang{display:inline-flex;border:1px solid var(--line2);border-radius:99px;overflow:hidden;flex:none}
+.lang button{background:none;border:0;color:var(--mut);font:700 12px 'Manrope';padding:8px 12px;cursor:pointer;transition:.15s}
+.lang button.on{background:rgba(79,124,255,.16);color:#fff}
+.nav .btn{padding:12px 20px;font-size:14px}
+@media(max-width:560px){.nav .btn{display:none}}
 
-  /* hero */
-  .hero{position:relative;padding:72px 0 60px;text-align:center;overflow:hidden}
-  .hero::before{content:"";position:absolute;top:-180px;left:50%;transform:translateX(-50%);
-    width:760px;height:520px;background:radial-gradient(closest-side,rgba(79,124,255,.22),transparent 70%);filter:blur(20px);z-index:0}
-  .hero .wrap{position:relative;z-index:1}
-  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--accent2);
-    background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.25);padding:7px 14px;border-radius:99px;margin-bottom:22px}
-  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);box-shadow:0 0 10px var(--accent2)}
-  h1{font-size:clamp(30px,5.4vw,52px);line-height:1.12;font-weight:800;letter-spacing:-.5px;margin-bottom:20px}
-  .lead{font-size:clamp(16px,2.3vw,20px);color:var(--muted);max-width:620px;margin:0 auto 32px}
-  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+/* ─ hero ─ */
+.hero{padding:clamp(70px,10vw,130px) 0 clamp(56px,7vw,90px);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:center}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:44px}}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
+.orb1{width:520px;height:520px;background:rgba(79,124,255,.16);top:-160px;left:-140px}
+.orb2{width:420px;height:420px;background:rgba(34,211,238,.10);top:120px;right:-120px}
+.hpill{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--cyan);border:1px solid rgba(34,211,238,.3);border-radius:99px;
+  padding:8px 16px;margin-bottom:26px;background:rgba(34,211,238,.05)}
+.hpill .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 rgba(52,211,153,.7);animation:pulse 2.2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+h1{font-family:'Unbounded';font-weight:600;font-size:clamp(30px,4.9vw,54px);line-height:1.12;letter-spacing:-.015em}
+.lead{color:var(--mut);font-size:clamp(15.5px,1.8vw,18px);margin:22px 0 32px;max-width:560px}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.hmeta{display:flex;gap:26px;margin-top:38px;flex-wrap:wrap}
+.hmeta div{font-size:13px;color:var(--dim);font-weight:600}
+.hmeta b{display:block;font-family:'Unbounded';font-weight:600;font-size:21px;color:var(--ink);margin-bottom:2px}
+.hmeta b i{font-style:normal;color:var(--cyan)}
 
-  /* pain strip */
-  .pain{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0}
-  .pain p{text-align:center;font-size:clamp(16px,2.4vw,20px);color:var(--text);max-width:760px;margin:0 auto}
-  .pain b{color:var(--accent2);font-weight:600}
+/* phone mockup */
+.phone{width:min(340px,88vw);margin:0 auto;background:linear-gradient(165deg,#111A2C,#0A0F1B);
+  border:1px solid var(--line2);border-radius:34px;padding:16px 14px 18px;position:relative;
+  box-shadow:0 50px 100px -40px rgba(0,0,0,.9),0 0 0 8px rgba(148,170,210,.04),inset 0 1px 0 rgba(255,255,255,.06)}
+.phone::before{content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);width:86px;height:5px;border-radius:9px;background:rgba(148,170,210,.18)}
+.ph-head{display:flex;align-items:center;gap:11px;padding:16px 8px 13px;border-bottom:1px solid var(--line)}
+.ph-ava{width:38px;height:38px;border-radius:12px;background:var(--grad);display:grid;place-items:center;
+  font-family:'Unbounded';font-weight:700;font-size:16px;color:#04101E;flex:none}
+.ph-head b{font-size:14.5px;display:block;line-height:1.2}
+.ph-head span{font-size:11.5px;color:var(--ok);font-weight:600}
+.ph-body{padding:16px 6px 6px;display:flex;flex-direction:column;gap:10px;min-height:320px}
+.bub{max-width:82%;padding:10px 14px;border-radius:15px;font-size:13.5px;line-height:1.5;opacity:0;transform:translateY(10px);animation:bubin .5s forwards}
+.bub.c{align-self:flex-end;background:rgba(79,124,255,.2);border:1px solid rgba(79,124,255,.3);border-bottom-right-radius:5px}
+.bub.a{align-self:flex-start;background:var(--panel2);border:1px solid var(--line);border-bottom-left-radius:5px}
+.bub time{display:block;font-size:10px;color:var(--dim);margin-top:4px}
+@keyframes bubin{to{opacity:1;transform:none}}
+.ph-note{text-align:center;font-size:11.5px;color:var(--dim);padding:10px 6px 2px;font-weight:600}
 
-  /* sections */
-  section.block{padding:66px 0}
-  .kicker{text-align:center;color:var(--accent);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
-  h2{font-size:clamp(24px,3.6vw,36px);text-align:center;font-weight:800;letter-spacing:-.4px;margin-bottom:14px}
-  .sub{text-align:center;color:var(--muted);max-width:600px;margin:0 auto 44px;font-size:17px}
+/* strip */
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;background:var(--bg2)}
+.strip .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.strip span{font-size:13.5px;font-weight:700;color:var(--mut);display:flex;align-items:center;gap:9px}
+.strip svg{width:16px;height:16px;color:var(--cyan);flex:none}
 
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px;transition:.2s}
-  .card:hover{border-color:rgba(79,124,255,.5);transform:translateY(-3px)}
-  .ico{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;
-    background:linear-gradient(135deg,rgba(79,124,255,.18),rgba(34,211,238,.12));border:1px solid rgba(79,124,255,.25);margin-bottom:18px}
-  .card h3{font-size:19px;font-weight:700;margin-bottom:8px}
-  .card p{color:var(--muted);font-size:15px}
+/* pain */
+.pain{max-width:780px;margin:0 auto;text-align:center}
+.pain p{font-size:clamp(19px,2.6vw,26px);line-height:1.5;font-weight:500;color:var(--mut)}
+.pain b{color:var(--ink)}
+.pain .x{color:#F87171}
 
-  /* steps */
-  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;counter-reset:s}
-  .step{position:relative;background:var(--bg2);border:1px solid var(--line);border-radius:18px;padding:30px 24px 26px}
-  .step::before{counter-increment:s;content:"0" counter(s);position:absolute;top:18px;right:22px;font-size:34px;font-weight:800;
-    background:linear-gradient(105deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.65}
-  .step h3{font-size:19px;font-weight:700;margin:6px 0 8px}
-  .step p{color:var(--muted);font-size:15px}
+/* live demo */
+.demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
+@media(max-width:860px){.demo-grid{grid-template-columns:1fr}}
+.dcard{background:linear-gradient(170deg,var(--panel),var(--bg2));border:1px solid var(--line2);
+  border-radius:var(--r);padding:34px 30px;position:relative;overflow:hidden}
+.dcard::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--grad);opacity:.6}
+.dcard h3{font-size:20px;font-weight:800;margin-bottom:9px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.dcard p{color:var(--mut);font-size:14.5px;margin-bottom:22px}
+.dtag{font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#04101E;
+  background:var(--grad);border-radius:6px;padding:4px 8px}
+.aud-form{display:flex;flex-direction:column;gap:11px}
+.aud-form input{background:rgba(5,7,13,.7);border:1px solid var(--line2);border-radius:12px;color:var(--ink);
+  font:500 14.5px 'Manrope';padding:14px 16px;outline:0;transition:.15s}
+.aud-form input:focus{border-color:var(--blue)}
+.aud-out{margin-top:16px;font-size:14px;color:var(--mut);white-space:pre-wrap;max-height:340px;overflow:auto;
+  border-top:1px solid var(--line);padding-top:14px;display:none;line-height:1.7}
 
-  /* audience */
-  .aud{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .tags{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
-  .tag{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:11px 20px;font-size:15px;font-weight:500}
-  .tag i{color:var(--accent2);font-style:normal;margin-right:6px}
+/* services */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+@media(max-width:960px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.cards{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:28px 26px;transition:.25s}
+.card:hover{border-color:var(--line2);transform:translateY(-4px);background:var(--panel2)}
+.card .ic{width:44px;height:44px;border-radius:13px;background:rgba(79,124,255,.12);border:1px solid rgba(79,124,255,.25);
+  display:grid;place-items:center;margin-bottom:18px}
+.card .ic svg{width:21px;height:21px;color:var(--cyan)}
+.card h3{font-size:16.5px;font-weight:800;margin-bottom:8px}
+.card p{color:var(--mut);font-size:14px;line-height:1.6}
 
-  /* why */
-  .why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-  .why .card{text-align:center}
-  .why .ico{margin:0 auto 16px}
+/* honest */
+.honest{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.hon-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:40px}
+@media(max-width:860px){.hon-grid{grid-template-columns:1fr}}
+.hon{border-radius:var(--r);padding:30px 28px;border:1px solid var(--line2)}
+.hon.no{background:rgba(248,113,113,.04);border-color:rgba(248,113,113,.2)}
+.hon.yes{background:rgba(52,211,153,.04);border-color:rgba(52,211,153,.22)}
+.hon h3{font-size:15px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.hon.no h3{color:#F87171}.hon.yes h3{color:var(--ok)}
+.hon li{list-style:none;color:var(--mut);font-size:14.5px;padding:9px 0 9px 30px;position:relative;border-top:1px solid var(--line)}
+.hon li:first-child{border-top:0}
+.hon li b{color:var(--ink)}
+.hon li::before{position:absolute;left:2px;font-weight:800}
+.hon.no li::before{content:"✕";color:#F87171}
+.hon.yes li::before{content:"✓";color:var(--ok)}
+.hon-note{margin-top:22px;color:var(--dim);font-size:13.5px;max-width:720px}
 
-  /* final cta */
-  .final{text-align:center;background:linear-gradient(135deg,rgba(79,124,255,.14),rgba(34,211,238,.07));
-    border:1px solid rgba(79,124,255,.3);border-radius:26px;padding:54px 28px;margin:30px 0}
-  .final h2{margin-bottom:12px}
-  .final .sub{margin-bottom:28px}
+/* case */
+.case{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-top:14px}
+@media(max-width:880px){.case{grid-template-columns:1fr}}
+.case-shot{border-radius:var(--r);border:1px solid var(--line2);overflow:hidden;position:relative;
+  box-shadow:0 40px 80px -40px rgba(0,0,0,.8)}
+.case-shot img{width:100%;display:block}
+.case-shot .lbl{position:absolute;top:14px;left:14px;font-size:10.5px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;background:rgba(5,7,13,.82);border:1px solid var(--line2);backdrop-filter:blur(6px);
+  color:var(--cyan);border-radius:8px;padding:6px 10px}
+.case ul{margin:20px 0 28px}
+.case li{list-style:none;color:var(--mut);font-size:15px;padding:8px 0 8px 28px;position:relative}
+.case li::before{content:"→";position:absolute;left:0;color:var(--cyan);font-weight:800}
 
-  footer{border-top:1px solid var(--line);padding:34px 0;text-align:center;color:var(--muted);font-size:14px}
-  footer .logo{font-size:18px;margin-bottom:8px;color:var(--text)}
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;position:relative}
+.step .num{font-family:'Unbounded';font-weight:700;font-size:38px;background:var(--grad);
+  -webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:16px}
+.step h3{font-size:16.5px;font-weight:800;margin-bottom:8px}
+.step p{color:var(--mut);font-size:14px}
+.step .t{position:absolute;top:26px;right:24px;font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
 
-  /* pricing */
-  .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;align-items:stretch}
-  .price{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column}
-  .price.feat{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 22px 55px rgba(79,124,255,.20);position:relative}
-  .price .badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(105deg,var(--accent),var(--accent2));color:#06101f;font-size:12px;font-weight:700;padding:6px 15px;border-radius:99px;white-space:nowrap}
-  .price h3{font-size:21px;margin-bottom:6px}
-  .price .tg{color:var(--muted);font-size:14px;min-height:42px;margin-bottom:16px}
-  .price .amt{font-size:36px;font-weight:800;letter-spacing:-.5px;line-height:1}
-  .price .mo{color:var(--accent2);font-size:14px;font-weight:600;margin:6px 0 18px}
-  .price ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:0 0 24px;padding:0}
-  .price li{position:relative;padding-left:26px;font-size:14.5px;line-height:1.45}
-  .price li::before{content:"✓";position:absolute;left:0;top:0;color:var(--accent2);font-weight:800}
-  .price .btn{margin-top:auto;justify-content:center;width:100%}
-  .entry{background:linear-gradient(105deg,rgba(79,124,255,.12),rgba(34,211,238,.06));border:1px solid rgba(79,124,255,.32);border-radius:16px;padding:24px;margin-top:26px;text-align:center}
-  .entry p{max-width:680px;margin:0 auto}
-  .entry b{color:var(--accent2)}
-  .note{color:var(--muted);font-size:13.5px;max-width:760px;margin:18px auto 0;text-align:center}
+/* pricing */
+.pilot{background:linear-gradient(120deg,rgba(79,124,255,.12),rgba(34,211,238,.07));border:1px solid rgba(79,124,255,.35);
+  border-radius:var(--r);padding:34px 32px;margin-top:44px;display:grid;grid-template-columns:1.4fr .6fr;gap:26px;align-items:center}
+@media(max-width:820px){.pilot{grid-template-columns:1fr}}
+.pilot h3{font-size:22px;font-weight:800;margin-bottom:10px}
+.pilot h3 .dtag{vertical-align:3px;margin-left:8px}
+.pilot p{color:var(--mut);font-size:15px}
+.pilot p b{color:var(--ink)}
+.pilot .btn{justify-self:end}
+@media(max-width:820px){.pilot .btn{justify-self:start}}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+@media(max-width:900px){.tiers{grid-template-columns:1fr}}
+.tier{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:32px 28px;position:relative;transition:.25s}
+.tier:hover{transform:translateY(-4px)}
+.tier.hot{border-color:rgba(79,124,255,.5);background:linear-gradient(175deg,rgba(79,124,255,.09),var(--panel))}
+.tier .pop{position:absolute;top:-11px;left:26px;font-size:10.5px;font-weight:800;letter-spacing:.13em;
+  text-transform:uppercase;background:var(--grad);color:#04101E;border-radius:7px;padding:4px 10px}
+.tier h3{font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.tier .pr{font-family:'Unbounded';font-weight:600;font-size:36px;margin:14px 0 2px}
+.tier .pr span{font-family:'Manrope';font-size:14px;color:var(--dim);font-weight:600}
+.tier ul{margin:20px 0 26px}
+.tier li{list-style:none;color:var(--mut);font-size:13.8px;padding:7px 0 7px 26px;position:relative;border-top:1px solid var(--line)}
+.tier li:first-child{border-top:0}
+.tier li::before{content:"✓";position:absolute;left:2px;color:var(--cyan);font-weight:800}
+.tier .btn{width:100%}
+.setup-note{margin-top:24px;color:var(--dim);font-size:13.5px;text-align:center}
+.setup-note b{color:var(--mut)}
+.guar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.guar span{font-size:12.5px;font-weight:700;color:var(--mut);border:1px solid var(--line2);border-radius:99px;padding:8px 15px;display:flex;gap:7px;align-items:center}
+.guar svg{width:14px;height:14px;color:var(--ok)}
 
-  @media(max-width:600px){
-    .nav .hide{display:none}
-    section.block{padding:48px 0}
-    .hero{padding:54px 0 44px}
-    .prices{grid-template-columns:1fr}
-    .navr{gap:8px}
-  }
+/* founder */
+.founder{display:grid;grid-template-columns:.65fr 1.35fr;gap:44px;align-items:center}
+@media(max-width:820px){.founder{grid-template-columns:1fr}}
+.f-photo{border-radius:var(--r);overflow:hidden;border:1px solid var(--line2);max-width:340px}
+.f-photo img{width:100%;display:block}
+.founder blockquote{font-size:clamp(16px,2vw,19px);line-height:1.7;color:var(--mut);font-weight:500}
+.founder blockquote b{color:var(--ink)}
+.founder cite{display:block;margin-top:18px;font-style:normal;font-weight:800;font-size:15px}
+.founder cite span{display:block;font-weight:600;font-size:13px;color:var(--dim);margin-top:2px}
+
+/* faq */
+.faq{max-width:760px;margin:40px auto 0}
+.faq details{border:1px solid var(--line);border-radius:14px;background:var(--panel);margin-bottom:12px;overflow:hidden}
+.faq summary{cursor:pointer;list-style:none;padding:20px 24px;font-weight:700;font-size:15.5px;display:flex;justify-content:space-between;gap:14px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:'Unbounded';color:var(--cyan);font-size:18px;transition:.2s;flex:none}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .a{padding:0 24px 20px;color:var(--mut);font-size:14.5px}
+
+/* final */
+.final{text-align:center;background:linear-gradient(160deg,rgba(79,124,255,.13),rgba(34,211,238,.06));
+  border:1px solid rgba(79,124,255,.3);border-radius:26px;padding:clamp(46px,7vw,80px) 30px;position:relative;overflow:hidden}
+.final h2{font-size:clamp(28px,4.4vw,44px)}
+.final .sub{margin:16px auto 34px}
+footer{border-top:1px solid var(--line);padding:44px 0 60px;color:var(--dim);font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+footer .logo{font-size:16px}
+footer .fl{display:flex;gap:22px;flex-wrap:wrap}
+footer a:hover{color:var(--ink)}
+
+/* ─ chat widget ─ */
+#cw-btn{position:fixed;right:22px;bottom:22px;z-index:90;width:62px;height:62px;border-radius:50%;border:0;cursor:pointer;
+  background:var(--grad);display:grid;place-items:center;box-shadow:0 14px 40px -8px rgba(79,124,255,.65);transition:.2s}
+#cw-btn:hover{transform:scale(1.07)}
+#cw-btn svg{width:27px;height:27px;color:#04101E}
+#cw-btn .ring{position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(34,211,238,.5);animation:ring 2.4s infinite}
+@keyframes ring{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.35);opacity:0}}
+#cw{position:fixed;right:22px;bottom:96px;z-index:95;width:min(390px,calc(100vw - 28px));height:min(560px,calc(100dvh - 130px));
+  background:#0A0F1B;border:1px solid var(--line2);border-radius:22px;display:none;flex-direction:column;overflow:hidden;
+  box-shadow:0 40px 90px -20px rgba(0,0,0,.9)}
+#cw.open{display:flex;animation:cwin .3s cubic-bezier(.16,1,.3,1)}
+@keyframes cwin{from{opacity:0;transform:translateY(16px) scale(.98)}}
+.cw-h{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line);background:var(--panel)}
+.cw-h .ph-ava{width:40px;height:40px}
+.cw-h b{font-size:15px;display:block;line-height:1.25}
+.cw-h .st{font-size:11.5px;font-weight:700}
+.cw-h .st.on{color:var(--ok)}.cw-h .st.off{color:var(--warn)}
+.cw-x{margin-left:auto;background:none;border:0;color:var(--dim);cursor:pointer;font-size:22px;line-height:1;padding:4px}
+.cw-b{flex:1;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:10px}
+.cw-m{max-width:84%;padding:11px 14px;border-radius:15px;font-size:14px;line-height:1.55;white-space:pre-wrap}
+.cw-m.u{align-self:flex-end;background:rgba(79,124,255,.22);border:1px solid rgba(79,124,255,.32);border-bottom-right-radius:5px}
+.cw-m.b{align-self:flex-start;background:var(--panel2);border:1px solid var(--line);border-bottom-left-radius:5px}
+.cw-m.b a{color:var(--cyan);font-weight:700}
+.cw-typing{align-self:flex-start;display:flex;gap:5px;padding:13px 16px;background:var(--panel2);border:1px solid var(--line);border-radius:15px;border-bottom-left-radius:5px}
+.cw-typing i{width:7px;height:7px;border-radius:50%;background:var(--mut);animation:tp 1.1s infinite}
+.cw-typing i:nth-child(2){animation-delay:.18s}.cw-typing i:nth-child(3){animation-delay:.36s}
+@keyframes tp{0%,60%,100%{opacity:.3;transform:none}30%{opacity:1;transform:translateY(-4px)}}
+.cw-chips{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px 10px}
+.cw-chips button{background:rgba(79,124,255,.1);border:1px solid rgba(79,124,255,.3);color:var(--ink);
+  font:600 12.5px 'Manrope';border-radius:99px;padding:8px 13px;cursor:pointer;transition:.15s}
+.cw-chips button:hover{background:rgba(79,124,255,.2)}
+.cw-f{display:flex;gap:10px;padding:14px 14px 16px;border-top:1px solid var(--line);background:var(--panel)}
+.cw-f input{flex:1;background:rgba(5,7,13,.7);border:1px solid var(--line2);border-radius:12px;color:var(--ink);
+  font:500 14px 'Manrope';padding:13px 15px;outline:0}
+.cw-f input:focus{border-color:var(--blue)}
+.cw-f button{background:var(--grad);border:0;border-radius:12px;width:48px;cursor:pointer;display:grid;place-items:center;flex:none}
+.cw-f button svg{width:19px;height:19px;color:#04101E}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <div class="logo">FLOWBOX<span data-i18n="logo_sub">ABU AI</span></div>
+    <a class="logo" href="#top">FLOWBOX<em data-i18n="logo_sub">ABU AI</em></a>
     <div class="navr">
-      <div class="lang" role="group" aria-label="Language">
-        <button type="button" data-lang="en" class="active">EN</button>
-        <button type="button" data-lang="ru">RU</button>
-        <button type="button" data-lang="es">ES</button>
+      <div class="lang">
+        <button data-lang="en" class="on">EN</button><button data-lang="ru">RU</button><button data-lang="es">ES</button>
       </div>
-      <a class="btn btn-primary hide" data-i18n="nav_cta" href="https://instagram.com/flow_box08">Get started</a>
+      <button class="btn btn-p" data-i18n="nav_cta" onclick="cwOpen()">Talk to ABU AI</button>
     </div>
   </div>
 </header>
 
-<section class="hero">
+<section class="hero" id="top">
+  <div class="orb orb1"></div><div class="orb orb2"></div>
   <div class="wrap">
-    <div class="eyebrow"><span class="dot"></span> <span data-i18n="hero_eyebrow">ABU AI · your invisible employee</span></div>
-    <h1 data-i18n="hero_h1">Hire an AI administrator<br>that answers in 5 seconds and books itself</h1>
-    <p class="lead" data-i18n="hero_lead">Meet <b class="grad">ABU AI</b> — your invisible employee on Claude. Answers clients on your site, Instagram, WhatsApp and Telegram, books, sends each order to your team and runs the back office. Done-for-you, 24/7.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" data-i18n="hero_cta1" href="https://instagram.com/flow_box08">Book a free demo →</a>
-      <a class="btn btn-ghost" data-i18n="hero_cta2" href="#how">How it works</a>
+    <div>
+      <div class="hpill"><span class="dot"></span><span data-i18n="hero_pill">Live demo on this page — talk to it</span></div>
+      <h1 data-i18n="hero_h1">The invisible employee<br>your clients <span class="grad">never wait for</span></h1>
+      <p class="lead" data-i18n="hero_lead"><b>ABU AI</b> answers your clients in seconds — day and night. It books appointments, sends reminders, coordinates your team and reports your revenue every evening. You do the craft; it does the front desk.</p>
+      <div class="cta-row">
+        <button class="btn btn-p" data-i18n="hero_cta1" onclick="cwOpen()">▶ Try the live demo</button>
+        <a class="btn btn-g" data-i18n="hero_cta2" href="#prices">Pricing</a>
+      </div>
+      <div class="hmeta">
+        <div><b>&lt;5 <i>s</i></b><span data-i18n="m1">reply time</span></div>
+        <div><b>24/7</b><span data-i18n="m2">no days off</span></div>
+        <div><b>3 <i>days</i></b><span data-i18n="m3">to launch</span></div>
+        <div><b>EN·RU·ES</b><span data-i18n="m4">languages</span></div>
+      </div>
+    </div>
+    <div class="phone rev">
+      <div class="ph-head">
+        <div class="ph-ava">A</div>
+        <div><b>ABU AI</b><span data-i18n="ph_st">online · replies in seconds</span></div>
+      </div>
+      <div class="ph-body" id="ph-body"></div>
+      <div class="ph-note" data-i18n="ph_note">↑ a real night conversation your business no longer misses</div>
     </div>
   </div>
 </section>
 
-<div class="pain">
+<div class="strip">
   <div class="wrap">
-    <p data-i18n="pain">A client messages you on Instagram at <b>11:40 PM</b>. You reply in the morning. They've already <b>booked with a competitor.</b></p>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M13 2 3 14h7l-1 8 11-13h-7l0-7z"/></svg><span data-i18n="s1">Answers while you sleep</span></span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span data-i18n="s2">Books straight into your schedule</span></span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 20v-8M6 20v-4M18 20V8"/></svg><span data-i18n="s3">Evening revenue report</span></span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75M13 7A4 4 0 1 1 5 7a4 4 0 0 1 8 0z"/></svg><span data-i18n="s4">Keeps the whole team in sync</span></span>
   </div>
 </div>
 
-<section class="block">
+<section>
+  <div class="wrap pain rev">
+    <p data-i18n="pain">A client writes you at <b>11:40 PM</b>: “Is tomorrow free?”<br>You see it at 9 AM. <span class="x">They booked with a competitor at 11:47 PM.</span><br><b>ABU answers at 11:40:08.</b></p>
+  </div>
+</section>
+
+<section id="demo" style="padding-top:0">
   <div class="wrap">
-    <div class="kicker" data-i18n="svc_kicker">Your AI employee</div>
-    <h2 data-i18n="svc_h2">Everything an employee does — done for you</h2>
-    <p class="sub" data-i18n="svc_sub">It answers, books and reminds — on your site, Instagram and WhatsApp, 24/7.</p>
-    <div class="grid">
-      <div class="card">
-        <div class="ico">📅</div>
-        <h3 data-i18n="svc1_h3">Online booking 24/7</h3>
-        <p data-i18n="svc1_p">Clients pick the service, staff and time themselves — no calls, no back-and-forth. The booking lands in your calendar.</p>
+    <div class="eyebrow rev"><span class="n">01</span><span data-i18n="d_eb">Live demo</span></div>
+    <h2 class="rev" data-i18n="d_h2">Don’t take our word for it. <span class="grad">Test it right now.</span></h2>
+    <p class="sub rev" data-i18n="d_sub">This is not a video and not screenshots — below is the same live agent we install for our clients.</p>
+    <div class="demo-grid">
+      <div class="dcard rev">
+        <h3><span data-i18n="d1_h">Chat with ABU AI</span> <span class="dtag">LIVE</span></h3>
+        <p data-i18n="d1_p">Ask anything — as if you were a client of a salon, barbershop or auto spa. It answers in your language, quotes services and books a visit.</p>
+        <button class="btn btn-p" data-i18n="d1_cta" onclick="cwOpen()">Open the chat →</button>
       </div>
-      <div class="card">
-        <div class="ico">💬</div>
-        <h3 data-i18n="svc2_h3">Auto-replies on Instagram & WhatsApp</h3>
-        <p data-i18n="svc2_p">Prices, address, hours and a booking link — the system replies instantly, even at night and on weekends.</p>
-      </div>
-      <div class="card">
-        <div class="ico">🔔</div>
-        <h3 data-i18n="svc3_h3">Appointment reminders</h3>
-        <p data-i18n="svc3_p">An automatic reminder the day before the visit. Fewer no-shows — more filled chairs and revenue.</p>
+      <div class="dcard rev">
+        <h3><span data-i18n="d2_h">Free AI audit of your business</span> <span class="dtag">60 SEC</span></h3>
+        <p data-i18n="d2_p">Drop your website or Instagram — ABU reads it and tells you where you’re losing clients and what to automate first.</p>
+        <form class="aud-form" id="audit-form">
+          <input type="text" id="aud-site" data-i18n-ph="d2_in1" placeholder="Your website (optional)">
+          <input type="text" id="aud-ig" data-i18n-ph="d2_in2" placeholder="Your Instagram, e.g. @mysalon">
+          <button class="btn btn-g" type="submit" data-i18n="d2_cta">Get my audit</button>
+        </form>
+        <div class="aud-out" id="aud-out"></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="block" id="how">
+<section style="padding-top:20px">
   <div class="wrap">
-    <div class="kicker" data-i18n="how_kicker">How it works</div>
-    <h2 data-i18n="how_h2">You don't set up anything</h2>
-    <p class="sub" data-i18n="how_sub">All the technical work is on us. You just take clients.</p>
+    <div class="eyebrow rev"><span class="n">02</span><span data-i18n="svc_eb">What ABU does</span></div>
+    <h2 class="rev" data-i18n="svc_h2">Everything a front-desk admin does.<br><span class="grad">Without the salary.</span></h2>
+    <div class="cards">
+      <div class="card rev"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18M9 15l2 2 4-4"/></svg></div><h3 data-i18n="c1_h">Booking 24/7</h3><p data-i18n="c1_p">Clients pick a service and time in chat; the appointment lands in your calendar. No double bookings, no notebook.</p></div>
+      <div class="card rev"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.6 8.6 0 0 1-3.9-.9L3 21l1.9-5.6a8.4 8.4 0 0 1-.9-3.9A8.4 8.4 0 0 1 12.5 3a8.4 8.4 0 0 1 8.5 8.5z"/></svg></div><h3 data-i18n="c2_h">Replies everywhere</h3><p data-i18n="c2_p">Website chat, Instagram, WhatsApp, Telegram — one brain across every channel, in English, Russian and Spanish.</p></div>
+      <div class="card rev"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 1 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg></div><h3 data-i18n="c3_h">Reminders & no-shows</h3><p data-i18n="c3_p">Automatic visit reminders and “we haven’t seen you in a while” win-back messages that bring clients back.</p></div>
+      <div class="card rev"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v-8M6 20v-4M18 20V8M3 20h18"/></svg></div><h3 data-i18n="c4_h">Evening report</h3><p data-i18n="c4_p">Every evening in Telegram: how many requests, bookings and dollars today. You always know your numbers.</p></div>
+      <div class="card rev"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87"/></svg></div><h3 data-i18n="c5_h">Team coordination</h3><p data-i18n="c5_p">New booking → the right master gets a notification instantly. No more “I forgot to tell you”.</p></div>
+      <div class="card rev"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 19 7-7 3 3-7 7-3-3zM18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5zM2 2l7.6 7.6"/></svg></div><h3 data-i18n="c6_h">Content on request</h3><p data-i18n="c6_p">Post texts, promo copy, even AI videos for your services — ask in chat, get it back in minutes.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="honest">
+  <div class="wrap">
+    <div class="eyebrow rev"><span class="n">03</span><span data-i18n="h_eb">Honest terms</span></div>
+    <h2 class="rev" data-i18n="h_h2">What ABU does — <span class="grad">and what it honestly doesn’t</span></h2>
+    <p class="sub rev" data-i18n="h_sub">We work with your neighbors. One broken promise and everyone knows — so we only promise what we deliver.</p>
+    <div class="hon-grid">
+      <div class="hon yes rev">
+        <h3 data-i18n="hy_h">What you get</h3>
+        <ul>
+          <li data-i18n="hy1"><b>Every incoming message answered</b> in seconds, 24/7 — site, IG, WhatsApp, Telegram</li>
+          <li data-i18n="hy2"><b>More repeat visits</b> — reminders and win-back messages return clients who’d forget</li>
+          <li data-i18n="hy3"><b>Admin work for a fraction of a salary</b> — a front-desk employee costs $3,000+/mo in Brooklyn</li>
+          <li data-i18n="hy4"><b>Content & ad materials prepared</b> — texts, creatives, audience lists. You approve, you post</li>
+        </ul>
+      </div>
+      <div class="hon no rev">
+        <h3 data-i18n="hn_h">What we don’t promise</h3>
+        <ul>
+          <li data-i18n="hn1">It does <b>not</b> mass-DM strangers — that violates Meta rules and gets accounts banned</li>
+          <li data-i18n="hn2">It does <b>not</b> launch paid ads without your approval — real money needs a human decision</li>
+          <li data-i18n="hn3">It does <b>not</b> “bring new clients out of thin air” — it converts and keeps the ones who contact you</li>
+        </ul>
+      </div>
+    </div>
+    <p class="hon-note rev" data-i18n="h_note">If someone promises you an AI that “finds clients by itself” — ask them how, and watch the answer carefully. We’d rather under-promise and over-deliver.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow rev"><span class="n">04</span><span data-i18n="cs_eb">Live project</span></div>
+    <div class="case">
+      <div class="case-shot rev">
+        <span class="lbl">WHITE SWAN AUTO SPA · BROOKLYN</span>
+        <img src="img/case-whiteswan.jpg" alt="White Swan Auto Spa — website with ABU AI concierge" loading="lazy">
+      </div>
+      <div class="rev">
+        <h2 data-i18n="cs_h2">Built end-to-end for a Brooklyn auto spa</h2>
+        <ul>
+          <li data-i18n="cs1">Premium website with an AI concierge answering in 3 languages</li>
+          <li data-i18n="cs2">Booking flow that lands straight in the team’s Telegram</li>
+          <li data-i18n="cs3">Owner’s AI assistant: reports, video generation, client follow-ups</li>
+        </ul>
+        <a class="btn btn-p" data-i18n="cs_cta" href="https://dowjones08.github.io/white-swan-site/" target="_blank" rel="noopener">Open the live project ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0" id="how">
+  <div class="wrap">
+    <div class="eyebrow rev"><span class="n">05</span><span data-i18n="st_eb">How it works</span></div>
+    <h2 class="rev" data-i18n="st_h2">From first call to a working employee<br>in <span class="grad">three days</span></h2>
     <div class="steps">
-      <div class="step">
-        <h3 data-i18n="step1_h3">Free audit & demo</h3>
-        <p data-i18n="step1_p">15 minutes. We review your site, Instagram and booking, show exactly where you're losing clients — and give you a live demo. Free.</p>
-      </div>
-      <div class="step">
-        <h3 data-i18n="step2_h3">Done-for-you setup</h3>
-        <p data-i18n="step2_p">We set everything up for you in 2–3 days. From you — just access and a couple of answers.</p>
-      </div>
-      <div class="step">
-        <h3 data-i18n="step3_h3">It works for you</h3>
-        <p data-i18n="step3_p">The system books, replies and reminds. You focus on clients, not on your phone.</p>
-      </div>
+      <div class="step rev"><span class="t" data-i18n="st1_t">15 min</span><div class="num">01</div><h3 data-i18n="st1_h">Audit call</h3><p data-i18n="st1_p">We look at how clients reach you today and find where money leaks — missed DMs, no-shows, slow replies.</p></div>
+      <div class="step rev"><span class="t" data-i18n="st2_t">3 days</span><div class="num">02</div><h3 data-i18n="st2_h">We build ABU for you</h3><p data-i18n="st2_p">Your services, prices, tone of voice, schedule. We set up every channel and test it with you. You lift a finger only to approve.</p></div>
+      <div class="step rev"><span class="t" data-i18n="st3_t">ongoing</span><div class="num">03</div><h3 data-i18n="st3_h">Launch & support</h3><p data-i18n="st3_p">ABU starts answering. We watch it daily, tune it weekly and respond to you within 4 hours. You watch the evening reports.</p></div>
     </div>
   </div>
 </section>
 
-<section class="block aud">
+<section id="prices" style="padding-top:0">
   <div class="wrap">
-    <div class="kicker" data-i18n="aud_kicker">Who it's for</div>
-    <h2 data-i18n="aud_h2">We know your business</h2>
-    <p class="sub" data-i18n="aud_sub">We speak English, Russian and Spanish. We work online — with businesses anywhere.</p>
-    <div class="tags">
-      <div class="tag"><i>✦</i><span data-i18n="tag1">Beauty salons</span></div>
-      <div class="tag"><i>✦</i><span data-i18n="tag2">Barbershops</span></div>
-      <div class="tag"><i>✦</i><span data-i18n="tag3">Nail studios</span></div>
-      <div class="tag"><i>✦</i><span data-i18n="tag4">Beauty pros</span></div>
-      <div class="tag"><i>✦</i><span data-i18n="tag5">Skincare & cosmetology</span></div>
+    <div class="eyebrow rev"><span class="n">06</span><span data-i18n="pr_eb">Pricing</span></div>
+    <h2 class="rev" data-i18n="pr_h2">Start with a pilot.<br><span class="grad">Pay when it works.</span></h2>
+
+    <div class="pilot rev">
+      <div>
+        <h3><span data-i18n="pl_h">2-week pilot</span> <span class="dtag" data-i18n="pl_tag">STEP 1</span></h3>
+        <p data-i18n="pl_p">We install ABU on one channel and agree on a target together — for example, <b>“X recovered bookings in 14 days.”</b> Hit the target → you continue on a plan and the setup fee is <b>waived</b>. Miss it → you owe <b>nothing</b> and we part as friends.</p>
+      </div>
+      <button class="btn btn-p" data-i18n="pl_cta" onclick="cwOpen()">Claim a pilot slot →</button>
     </div>
-  </div>
-</section>
 
-<section class="block">
-  <div class="wrap">
-    <div class="kicker" data-i18n="why_kicker">Why us</div>
-    <h2 data-i18n="why_h2">A real person, not another agency</h2>
-    <div class="why">
-      <div class="card">
-        <div class="ico">🗣️</div>
-        <h3 data-i18n="why1_h3">Your language</h3>
-        <p data-i18n="why1_p">We explain and set things up without technical jargon — plain and human.</p>
-      </div>
-      <div class="card">
-        <div class="ico">🛠️</div>
-        <h3 data-i18n="why2_h3">Done-for-you</h3>
-        <p data-i18n="why2_p">You don't touch the tech — we do it all. If something breaks, we fix it. Always in touch.</p>
-      </div>
-      <div class="card">
-        <div class="ico">💻</div>
-        <h3 data-i18n="why3_h3">Fully online</h3>
-        <p data-i18n="why3_p">We set everything up remotely, no visits — working with businesses anywhere.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="block">
-  <div class="wrap">
-    <div class="kicker" data-i18n="work_kicker">Our work</div>
-    <h2 data-i18n="work_h2">Example: a premium site with online booking</h2>
-    <p class="sub" data-i18n="work_sub">What we built for the detailing studio White Swan Auto Spa — a luxury site with real photos, prices and booking right on the page.</p>
-    <div class="card" style="max-width:620px;margin:0 auto">
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
-        <div class="ico" style="margin:0">🦢</div>
-        <div>
-          <h3 style="margin:0 0 2px">White Swan Auto Spa</h3>
-          <p style="margin:0;font-size:14px;color:var(--muted)" data-i18n="work_card_sub">Detailing studio · USA · by appointment</p>
-        </div>
-      </div>
-      <p style="color:var(--muted);font-size:15px" data-i18n="work_card_p">Premium dark design, hero slideshow, services and prices, online booking in a popup. Done-for-you — the client just takes bookings.</p>
-      <div style="margin-top:18px;text-align:center">
-        <a class="btn btn-primary" data-i18n="work_cta" href="https://dowjones08.github.io/white-swan-site/" target="_blank" rel="noopener">Open live demo →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ====================== FREE AI AUDIT ====================== -->
-<section class="block" id="audit">
-  <div class="wrap">
-    <div class="kicker" data-i18n="audit_kicker">Free AI audit</div>
-    <h2 data-i18n="audit_h2">Drop your site — get an instant audit</h2>
-    <p class="sub" data-i18n="audit_sub">Paste your website and Instagram. Our AI reviews them, shows where you're losing clients and recommends the right package — free, in seconds.</p>
-    <style>
-    .audit-box{max-width:560px;margin:30px auto 0;display:flex;flex-direction:column;gap:12px;text-align:left}
-    .audit-box input{padding:14px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:#eaf0f7;font-size:15px;font-family:inherit}
-    .audit-box input:focus{outline:2px solid #5fe3d2;border-color:transparent}
-    .audit-box button{padding:15px;border:0;border-radius:12px;background:linear-gradient(150deg,#3da9fc,#5fe3d2);color:#06121f;font-weight:700;font-size:15px;cursor:pointer}
-    .audit-box button:disabled{opacity:.6;cursor:wait}
-    .audit-out{display:none;margin-top:4px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 20px;white-space:pre-wrap;line-height:1.62;font-size:15px;color:#cdd6e4}
-    .audit-out.show{display:block}
-    .audit-out a.tg{display:inline-block;margin-top:14px;padding:11px 18px;border-radius:999px;background:#5fe3d2;color:#06121f;font-weight:700;text-decoration:none;font-size:14px}
-    </style>
-    <div class="audit-box">
-      <input id="auSite" type="text" placeholder="yoursite.com" autocomplete="off">
-      <input id="auIg" type="text" placeholder="@instagram" autocomplete="off">
-      <button id="auBtn" data-i18n="audit_btn">Get my free audit →</button>
-      <div id="auOut" class="audit-out"></div>
-    </div>
-  </div>
-</section>
-<script>
-(function(){
-  var AGENT='https://frosting-hydrated-paralyze.ngrok-free.dev';
-  var b=document.getElementById('auBtn'), out=document.getElementById('auOut');
-  if(!b) return;
-  b.addEventListener('click', function(){
-    var site=(document.getElementById('auSite').value||'').trim();
-    var ig=(document.getElementById('auIg').value||'').trim();
-    if(!site && !ig){ document.getElementById('auSite').focus(); return; }
-    var label=b.textContent; b.disabled=true; b.textContent='…';
-    out.className='audit-out show'; out.textContent='⏳ ИИ смотрит ваш сайт… (10–20 сек)';
-    fetch(AGENT+'/audit',{method:'POST',headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'true'},body:JSON.stringify({site:site,ig:ig})})
-      .then(function(r){return r.json();})
-      .then(function(j){
-        b.disabled=false; b.textContent=label;
-        if(j && j.audit){
-          out.textContent=j.audit;
-          var a=document.createElement('a'); a.className='tg'; a.href='https://t.me/FlowBox08_bot'; a.target='_blank'; a.rel='noopener'; a.textContent='Продолжить в Telegram →';
-          out.appendChild(document.createElement('br')); out.appendChild(a);
-        } else { out.textContent='Не получилось прямо сейчас — напишите нам, разберём вручную: instagram.com/flow_box08'; }
-      })
-      .catch(function(){ b.disabled=false; b.textContent=label; out.textContent='Сервис временно недоступен — напишите @flow_box08, сделаем разбор вручную.'; });
-  });
-})();
-</script>
-
-<section class="block" id="prices">
-  <div class="wrap">
-    <div class="kicker" data-i18n="price_kicker">Pricing</div>
-    <h2 data-i18n="price_h2">Hire your AI employee</h2>
-    <p class="sub" data-i18n="price_sub">Pick the package that fits — a one-time setup plus a monthly. We set it up and run it for you, with the AI compute (Claude + video) included. Your first month is free.</p>
-
-    <style>
-    .mod-head{text-align:center;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#8a97ab;font-weight:700;margin:4px 0 16px}
-    .modules{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:10px;max-width:760px;margin:0 auto 44px}
-    .mod{display:flex;justify-content:space-between;align-items:center;gap:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:13px 16px;font-size:14px}
-    .mod b{color:#5fe3d2;font-weight:700;white-space:nowrap}
-    </style>
-    <!-- modules section removed — fixed $2,000 setup + tier pricing only (revert from git if needed) -->
-    <div class="prices">
-
-      <div class="price">
-        <h3 data-i18n="pkg1_h3">Start</h3>
-        <div class="tg" data-i18n="pkg1_tg">An AI administrator that answers and books, 24/7.</div>
-        <div class="amt">$2,000</div>
-        <div class="mo" data-i18n="pkg1_mo">+ $900/mo · min. 3 months</div>
+    <div class="tiers">
+      <div class="tier rev">
+        <h3>Start</h3><div class="pr">$149<span data-i18n="mo">/mo</span></div>
         <ul>
-          <li data-i18n="pkg1_li1">AI chat on your site — answers in seconds</li>
-          <li data-i18n="pkg1_li2">Telegram dispatcher — every request to your team</li>
-          <li data-i18n="pkg1_li3">Daily reports</li>
-          <li data-i18n="pkg1_li4">RU / EN / ES · hands complex questions to you</li>
+          <li data-i18n="t1_1">Website chat + 1 messenger (WhatsApp or Telegram)</li>
+          <li data-i18n="t1_2">Booking + reminders</li>
+          <li data-i18n="t1_3">Evening Telegram report</li>
+          <li data-i18n="t1_4">Support within 4 hours</li>
         </ul>
-        <a class="btn btn-ghost" data-i18n="tier_btn" href="https://instagram.com/flow_box08">Choose</a>
+        <button class="btn btn-g" data-i18n="t_cta" onclick="cwOpen()">Choose</button>
       </div>
-
-      <div class="price feat">
-        <div class="badge" data-i18n="badge">Most popular</div>
-        <h3 data-i18n="pkg2_h3">Business</h3>
-        <div class="tg" data-i18n="pkg2_tg">+ loyalty videos, accounting and reminders.</div>
-        <div class="amt">$2,000</div>
-        <div class="mo" data-i18n="pkg2_mo">+ $1,100/mo · min. 6 months</div>
+      <div class="tier hot rev">
+        <span class="pop" data-i18n="t2_pop">Most popular</span>
+        <h3>Business</h3><div class="pr">$249<span data-i18n="mo">/mo</span></div>
         <ul>
-          <li data-i18n="pkg2_li1">Everything in Start</li>
-          <li data-i18n="pkg2_li2">Loyalty system — brings clients back</li>
-          <li data-i18n="pkg2_li3">Invoices &amp; accounting</li>
+          <li data-i18n="t2_1">Everything in Start</li>
+          <li data-i18n="t2_2">Instagram DM (official) + all messengers</li>
+          <li data-i18n="t2_3">Win-back campaigns & loyalty nudges</li>
+          <li data-i18n="t2_4">Team dispatch to each master</li>
         </ul>
-        <a class="btn btn-primary" data-i18n="tier_btn" href="https://instagram.com/flow_box08">Choose</a>
+        <button class="btn btn-p" data-i18n="t_cta2" onclick="cwOpen()">Choose</button>
       </div>
-
-      <div class="price">
-        <h3 data-i18n="pkg3_h3">Pro</h3>
-        <div class="tg" data-i18n="pkg3_tg">Your full AI employee — front and back office.</div>
-        <div class="amt">$2,000</div>
-        <div class="mo" data-i18n="pkg3_mo">+ $1,300/mo · min. 6 months</div>
+      <div class="tier rev">
+        <h3>Pro</h3><div class="pr">$349<span data-i18n="mo">/mo</span></div>
         <ul>
-          <li data-i18n="pkg3_li1">Everything in Business</li>
-          <li data-i18n="pkg3_li2">Higgsfield video — a reel of the client's car after each visit</li>
-          <li data-i18n="pkg3_li3">Owner's personal assistant — briefings, content, full back office</li>
+          <li data-i18n="t3_1">Everything in Business</li>
+          <li data-i18n="t3_2">Content & AI video on request</li>
+          <li data-i18n="t3_3">Ad materials: copy, creatives, audiences</li>
+          <li data-i18n="t3_4">Monthly strategy call with analytics</li>
         </ul>
-        <a class="btn btn-ghost" data-i18n="tier_btn" href="https://instagram.com/flow_box08">Choose</a>
+        <button class="btn btn-g" data-i18n="t_cta3" onclick="cwOpen()">Choose</button>
       </div>
-
     </div>
-
-    <div class="entry">
-      <p data-i18n="entry_p">Not sure what you need? <b>Start with a free demo.</b> I'll review how your business takes bookings right now — site, scheduling, replies on Instagram and WhatsApp — show where you're losing clients, and set up a live demo. <b>Setup $2,000 (50% to start, 50% at launch) — and your first month is free.</b></p>
-      <div style="margin-top:16px"><a class="btn btn-primary" data-i18n="entry_btn" href="https://instagram.com/flow_box08">Book a free demo</a></div>
+    <p class="setup-note" data-i18n="setup">One-time setup <b>$500</b> — waived if your pilot hits its target. Month-to-month after that, cancel with 7 days’ notice. AI compute already included.</p>
+    <div class="guar">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="g1">Launch in 3 days</span></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="g2">99%+ uptime</span></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="g3">Reply to you within 4h</span></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="g4">No hidden fees</span></span>
     </div>
-
-    <p class="note" data-i18n="note">Setup $2,000 — 50% to start, 50% at launch. Your first month is free. No hidden fees — a one-time setup and a monthly; the AI compute (Claude + Higgsfield video) is already included in the monthly.</p>
   </div>
 </section>
 
-<section class="wrap">
-  <div class="final">
-    <h2 data-i18n="final_h2">Try ABU AI — first month free</h2>
-    <p class="sub" data-i18n="final_sub">Book a free demo of your AI employee. We'll show where you're losing clients and set it up for you — first month free, no pressure.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" data-i18n="final_cta1" href="https://instagram.com/flow_box08">Message on Instagram</a>
-      <a class="btn btn-ghost" href="https://wa.me/13322778090">WhatsApp</a>
-      <a class="btn btn-ghost" data-i18n="final_cta3" href="tel:+13322778090">Call</a>
+<section style="padding-top:24px">
+  <div class="wrap founder">
+    <div class="f-photo rev"><img src="img/founder.jpg" alt="Andrey — founder of FLOWBOX" loading="lazy"></div>
+    <div class="rev">
+      <div class="eyebrow"><span class="n">07</span><span data-i18n="f_eb">Who’s behind it</span></div>
+      <blockquote data-i18n="f_q">“I build every ABU myself and test it like a paranoid client before you ever see it. I work with local businesses in person, in your language — <b>and I only win if your agent actually pays for itself.</b> That’s why the pilot comes with a target, not promises.”</blockquote>
+      <cite>Andrey <span data-i18n="f_role">Founder, FLOWBOX · Brooklyn, NY · EN / RU</span></cite>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="eyebrow rev"><span class="n">08</span><span>FAQ</span></div>
+    <div class="faq rev">
+      <details><summary data-i18n="q1">Is it safe for my Instagram account?</summary><div class="a" data-i18n="q1a">Yes. For Instagram we use only Meta-approved official tools — no gray bots, no mass DMs, nothing that risks a ban. Channels we fully control (your website, WhatsApp, Telegram) run our own AI directly.</div></details>
+      <details><summary data-i18n="q2">What if the AI answers something wrong?</summary><div class="a" data-i18n="q2a">ABU only answers from your approved services, prices and rules — it doesn’t invent discounts. Anything unusual is handed to you with one tap, and every conversation is logged so we can tune it weekly.</div></details>
+      <details><summary data-i18n="q3">My clients write in Russian and English. Will it cope?</summary><div class="a" data-i18n="q3a">That’s exactly what it’s built for: it detects the client’s language and answers in English, Russian or Spanish — the same brain, three languages.</div></details>
+      <details><summary data-i18n="q4">What do I need to provide?</summary><div class="a" data-i18n="q4a">About 30 minutes of your time: services, prices, schedule, how you like to talk to clients. Everything else — setup, testing, launch — is on us. That’s what “done-for-you” means.</div></details>
+      <details><summary data-i18n="q5">What happens if I cancel?</summary><div class="a" data-i18n="q5a">Month-to-month, 7 days’ notice, no exit fees. Your client history and calendar are yours — we hand everything over.</div></details>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="final rev">
+      <h2 data-i18n="fin_h2">Your clients are writing <span class="grad">right now.</span></h2>
+      <p class="sub" data-i18n="fin_sub">Test ABU AI on this page, or claim a 2-week pilot with a target — if it doesn’t deliver, you don’t pay.</p>
+      <div class="cta-row" style="justify-content:center">
+        <button class="btn btn-p" data-i18n="fin_cta1" onclick="cwOpen()">Talk to ABU AI now</button>
+        <a class="btn btn-g" href="https://wa.me/13322778090" target="_blank" rel="noopener">WhatsApp</a>
+        <a class="btn btn-g" data-i18n="fin_cta3" href="tel:+13322778090">Call +1 (332) 277-8090</a>
+      </div>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <div class="logo">FLOWBOX</div>
-    <p data-i18n="footer_tagline">AI employee for your business</p>
-    <p style="margin-top:6px;opacity:.6" data-i18n="footer_copy">© 2026 FLOWBOX. All rights reserved.</p>
+    <div><div class="logo">FLOWBOX<em style="font-style:normal;display:block;font-family:'Manrope';font-weight:600;font-size:10px;letter-spacing:.3em;color:var(--cyan)">ABU AI</em></div></div>
+    <div class="fl">
+      <a href="https://instagram.com/flow_box08" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://wa.me/13322778090" target="_blank" rel="noopener">WhatsApp</a>
+      <a href="tel:+13322778090">+1 (332) 277-8090</a>
+    </div>
+    <div data-i18n="footer_copy">© 2026 FLOWBOX · Brooklyn, NY</div>
   </div>
 </footer>
 
-<script>
-(function(){
-  var I18N = {
-    ru: {
-      logo_sub:"ABU AI",
-      nav_cta:"Начать",
-      hero_eyebrow:"ABU AI · ваш невидимый сотрудник",
-      hero_h1:"Наймите ИИ-администратора,<br>который отвечает за 5 секунд и сам записывает",
-      hero_lead:"Знакомьтесь, <b class='grad'>ABU AI</b> — ваш невидимый сотрудник на Claude. Отвечает клиентам на сайте, в Instagram, WhatsApp и Telegram, записывает, отправляет заказ команде и ведёт бэк-офис. Под ключ, 24/7.",
-      hero_cta1:"Бесплатное демо →",
-      hero_cta2:"Как это работает",
-      pain:"Клиент пишет вам в Instagram в <b>23:40</b>. Вы отвечаете утром. А он уже <b>записался к конкуренту.</b>",
-      svc_kicker:"Ваш ИИ-сотрудник",
-      svc_h2:"Всё, что делает сотрудник — за вас",
-      svc_sub:"Отвечает, записывает и напоминает — на сайте, в Instagram и WhatsApp, 24/7.",
-      svc1_h3:"Автозапись 24/7",
-      svc1_p:"Клиент сам выбирает услугу, мастера и время — без звонков и переписки. Запись приходит вам в календарь.",
-      svc2_h3:"Автоответы в Instagram и WhatsApp",
-      svc2_p:"Цены, адрес, часы работы и ссылка на запись — система отвечает мгновенно, даже ночью и в выходные.",
-      svc3_h3:"Напоминания о записи",
-      svc3_p:"Автонапоминание клиенту за день до визита. Меньше неявок — больше заполненных кресел и дохода.",
-      how_kicker:"Как это работает",
-      how_h2:"Вам не нужно ничего настраивать",
-      how_sub:"Вся техническая часть — на нас. Вы просто принимаете клиентов.",
-      step1_h3:"Бесплатный разбор и демо",
-      step1_p:"15 минут. Смотрим ваш сайт, Instagram и запись, показываем, где именно вы теряете клиентов — и даём живое демо. Бесплатно.",
-      step2_h3:"Настройка под ключ",
-      step2_p:"Всё настраиваем за вас за 2–3 дня. От вас — только доступы и пара ответов.",
-      step3_h3:"Работает на вас",
-      step3_p:"Система записывает, отвечает и напоминает. Вы занимаетесь клиентами, а не телефоном.",
-      aud_kicker:"Для кого",
-      aud_h2:"Мы знаем ваш бизнес",
-      aud_sub:"Говорим по-английски, по-русски и по-испански. Работаем онлайн — с бизнесом из любого города.",
-      tag1:"Салоны красоты",
-      tag2:"Барбершопы",
-      tag3:"Ногтевые студии",
-      tag4:"Бьюти-мастера",
-      tag5:"Косметология",
-      why_kicker:"Почему мы",
-      why_h2:"Свои люди, а не очередное агентство",
-      why1_h3:"На вашем языке",
-      why1_p:"Объясняем и настраиваем без технических сложностей — по-человечески.",
-      why2_h3:"Под ключ",
-      why2_p:"Вы не трогаете технику — всё делаем мы. Сломается — чиним сами, на связи.",
-      why3_h3:"Полностью онлайн",
-      why3_p:"Настраиваем удалённо, без визитов — работаем с бизнесом из любого города.",
-      work_kicker:"Наши работы",
-      work_h2:"Пример: premium-сайт с онлайн-записью",
-      work_sub:"Что мы сделали для студии детейлинга White Swan Auto Spa — люксовый сайт с реальными фото, ценами и записью прямо на странице.",
-      work_card_sub:"Детейлинг-студия · США · запись по предв.",
-      work_card_p:"Премиальный тёмный дизайн, hero-слайдшоу, услуги и цены, онлайн-запись во всплывающем окне. Сделано под ключ — клиент только принимает брони.",
-      work_cta:"Открыть живое демо →",
-      price_kicker:"Цены",
-      price_h2:"Наймите своего ИИ-сотрудника",
-      price_sub:"Выберите подходящий пакет — разовое подключение плюс абонентка. Настраиваем и ведём за вас, расходы на ИИ (Claude + видео) уже включены. Первый месяц — бесплатно.",
-      audit_kicker:"Бесплатный ИИ-разбор",
-      audit_h2:"Вставьте сайт — получите разбор за секунды",
-      audit_sub:"Вставьте ссылку на сайт и Instagram. ИИ посмотрит, покажет где вы теряете клиентов и подберёт пакет — бесплатно, за секунды.",
-      audit_btn:"Получить бесплатный разбор →",
-      mod_head:"Соберите своего — модули",
-      mod1:"AI-чат на сайте",
-      mod2:"Telegram-диспетчер",
-      mod3:"Ежедневные отчёты",
-      mod4:"Система лояльности",
-      mod5:"Инвойсы и бухгалтерия",
-      mod6:"Higgsfield видео",
-      mod7:"Личный ассистент владельца",
-      pkg1_h3:"Старт",
-      pkg1_tg:"ИИ-администратор, который отвечает и записывает, 24/7.",
-      pkg1_mo:"+ $900/мес · мин. 3 мес",
-      pkg1_li1:"AI-чат на сайте — отвечает за секунды",
-      pkg1_li2:"Telegram-диспетчер — каждая заявка вашей команде",
-      pkg1_li3:"Ежедневные отчёты",
-      pkg1_li4:"RU / EN / ES · сложное передаёт вам",
-      pkg2_h3:"Бизнес",
-      pkg2_tg:"+ видео-лояльность, бухгалтерия и напоминания.",
-      pkg2_mo:"+ $1 100/мес · мин. 6 мес",
-      pkg2_li1:"Всё из «Старт»",
-      pkg2_li2:"Система лояльности — возвращает клиентов",
-      pkg2_li3:"Инвойсы и бухгалтерия",
-      pkg3_h3:"Про",
-      pkg3_tg:"Ваш полный ИИ-сотрудник — фронт и бэк-офис.",
-      pkg3_mo:"+ $1 300/мес · мин. 6 мес",
-      pkg3_li1:"Всё из «Бизнес»",
-      pkg3_li2:"Higgsfield видео — ролик авто клиента после визита",
-      pkg3_li3:"Личный ассистент владельца — брифинги, контент, весь бэк-офис",
-      tier1_h3:"Сайт + запись",
-      tier1_tg:"Чистый сайт и онлайн-запись, которая работает 24/7.",
-      tier1_mo:"+ $49/мес поддержка",
-      tier1_li1:"Современный одностраничный сайт под телефон и компьютер",
-      tier1_li2:"Настройка онлайн-записи (Square, Acuity или Calendly — на выбор)",
-      tier1_li3:"Виджет записи прямо на сайте: клиент бронирует за минуту",
-      tier1_li4:"Автоматические подтверждения записи клиенту",
-      tier1_li5:"Подключение вашего домена, фото и контактов",
-      tier1_li6:"Запуск и проверка всей системы перед сдачей",
-      tier2_h3:"Сайт + ½ автоматизации",
-      tier2_tg:"Сайт, запись и автоответы — заявки не теряются даже ночью.",
-      tier2_mo:"+ $99/мес поддержка",
-      tier2_li1:"Всё из тарифа «Сайт + запись»",
-      tier2_li2:"Автоответы в Instagram Direct на частые вопросы",
-      tier2_li3:"Автоответы в WhatsApp со ссылкой на запись",
-      tier2_li4:"Готовые ответы на топ-вопросы: цены, адрес, часы работы",
-      tier2_li5:"Напоминания клиентам о записи (меньше неявок)",
-      tier2_li6:"Настройка и тестирование сценариев под ваш бизнес",
-      tier3_h3:"Сайт + полная автоматизация",
-      tier3_tg:"Полный автопилот: сайт, запись, бот и сбор клиентов в одном месте.",
-      tier3_mo:"+ $149/мес поддержка",
-      tier3_li1:"Всё из тарифа «Сайт + ½ автоматизации»",
-      tier3_li2:"Полноценный чат-бот в Instagram и WhatsApp с диалогами",
-      tier3_li3:"Сбор заявок и контактов клиентов в единую базу",
-      tier3_li4:"Простая CRM: видно всех клиентов и историю обращений",
-      tier3_li5:"Настройка всех воронок и сценариев под ключ",
-      tier3_li6:"Ответ клиенту при пропущенном звонке со ссылкой на запись",
-      badge:"Популярный выбор",
-      tier_btn:"Выбрать",
-      entry_p:"Не уверены, что нужно? <b>Начните с бесплатного демо.</b> Я разберу, как ваш бизнес сейчас принимает заявки — сайт, запись, ответы в Instagram и WhatsApp — покажу, где вы теряете клиентов, и настрою живое демо. <b>Подключение $2 000 (50% на старте, 50% при запуске) — и первый месяц бесплатно.</b>",
-      entry_btn:"Записаться на демо",
-      note:"Подключение $2 000 — 50% на старте, 50% при запуске. Первый месяц бесплатно. Без скрытых платежей: подключение и абонентка — это всё, расходы на ИИ (Claude + Higgsfield-видео) уже включены.",
-      final_h2:"Попробуйте ABU AI — первый месяц бесплатно",
-      final_sub:"Закажите бесплатное демо вашего ИИ-сотрудника. Покажем, где вы теряете клиентов, и настроим всё за вас — первый месяц бесплатно, без навязывания.",
-      final_cta1:"Написать в Instagram",
-      final_cta3:"Позвонить",
-      footer_tagline:"ИИ-сотрудник для вашего бизнеса",
-      footer_copy:"© 2026 FLOWBOX. Все права защищены."
-    },
-    es: {
-      logo_sub:"ABU AI",
-      nav_cta:"Empezar",
-      hero_eyebrow:"ABU AI · tu empleado invisible",
-      hero_h1:"Contrata un administrador IA<br>que responde en 5 segundos y reserva solo",
-      hero_lead:"Conoce a <b class='grad'>ABU AI</b> — tu empleado invisible con Claude. Responde a tus clientes en el sitio, Instagram, WhatsApp y Telegram, reserva, envía cada pedido a tu equipo y lleva la trastienda. Llave en mano, 24/7.",
-      hero_cta1:"Demo gratis →",
-      hero_cta2:"Cómo funciona",
-      pain:"Un cliente le escribe por Instagram a las <b>23:40</b>. Usted responde por la mañana. Y él ya <b>reservó con la competencia.</b>",
-      svc_kicker:"Tu empleado IA",
-      svc_h2:"Todo lo que hace un empleado — por ti",
-      svc_sub:"Responde, reserva y recuerda — en tu sitio, Instagram y WhatsApp, 24/7.",
-      svc1_h3:"Reservas online 24/7",
-      svc1_p:"El cliente elige el servicio, el profesional y la hora — sin llamadas ni mensajes. La reserva llega a su calendario.",
-      svc2_h3:"Respuestas automáticas en Instagram y WhatsApp",
-      svc2_p:"Precios, dirección, horarios y enlace de reserva — el sistema responde al instante, incluso de noche y fines de semana.",
-      svc3_h3:"Recordatorios de cita",
-      svc3_p:"Un recordatorio automático el día antes de la visita. Menos ausencias — más sillones llenos e ingresos.",
-      how_kicker:"Cómo funciona",
-      how_h2:"Usted no configura nada",
-      how_sub:"Toda la parte técnica es nuestra. Usted solo atiende clientes.",
-      step1_h3:"Auditoría y demo gratis",
-      step1_p:"15 minutos. Revisamos su sitio, Instagram y reservas, le mostramos dónde está perdiendo clientes — y le damos una demo en vivo. Gratis.",
-      step2_h3:"Configuración llave en mano",
-      step2_p:"Lo configuramos todo por usted en 2–3 días. De usted — solo accesos y un par de respuestas.",
-      step3_h3:"Trabaja para usted",
-      step3_p:"El sistema reserva, responde y recuerda. Usted se ocupa de los clientes, no del teléfono.",
-      aud_kicker:"Para quién",
-      aud_h2:"Conocemos su negocio",
-      aud_sub:"Hablamos inglés, ruso y español. Trabajamos online — con negocios de cualquier ciudad.",
-      tag1:"Salones de belleza",
-      tag2:"Barberías",
-      tag3:"Estudios de uñas",
-      tag4:"Profesionales de belleza",
-      tag5:"Cosmetología",
-      why_kicker:"Por qué nosotros",
-      why_h2:"Una persona real, no otra agencia",
-      why1_h3:"En su idioma",
-      why1_p:"Explicamos y configuramos sin tecnicismos — de forma humana.",
-      why2_h3:"Llave en mano",
-      why2_p:"Usted no toca la tecnología — lo hacemos todo. Si algo falla, lo arreglamos. Siempre disponibles.",
-      why3_h3:"Totalmente online",
-      why3_p:"Configuramos todo de forma remota, sin visitas — con negocios de cualquier lugar.",
-      work_kicker:"Nuestro trabajo",
-      work_h2:"Ejemplo: un sitio premium con reservas online",
-      work_sub:"Lo que creamos para el estudio de detailing White Swan Auto Spa — un sitio de lujo con fotos reales, precios y reservas en la misma página.",
-      work_card_sub:"Estudio de detailing · EE. UU. · con cita previa",
-      work_card_p:"Diseño oscuro premium, slideshow principal, servicios y precios, reservas online en ventana emergente. Llave en mano — el cliente solo recibe reservas.",
-      work_cta:"Abrir demo en vivo →",
-      price_kicker:"Precios",
-      price_h2:"Contrata a tu empleado IA",
-      price_sub:"Elige el paquete que encaje — una configuración única más una mensualidad. Lo configuramos y lo operamos por ti, con el cómputo de IA (Claude + video) incluido. Tu primer mes es gratis.",
-      audit_kicker:"Auditoría IA gratis",
-      audit_h2:"Pega tu sitio — recibe una auditoría al instante",
-      audit_sub:"Pega el enlace de tu sitio e Instagram. La IA los revisa, muestra dónde pierdes clientes y recomienda el paquete — gratis, en segundos.",
-      audit_btn:"Quiero mi auditoría gratis →",
-      mod_head:"Arma el tuyo — módulos",
-      mod1:"Chat IA en tu sitio",
-      mod2:"Despachador en Telegram",
-      mod3:"Reportes diarios",
-      mod4:"Sistema de fidelización",
-      mod5:"Facturas y contabilidad",
-      mod6:"Video Higgsfield",
-      mod7:"Asistente personal del dueño",
-      pkg1_h3:"Inicio",
-      pkg1_tg:"Un administrador IA que responde y reserva, 24/7.",
-      pkg1_mo:"+ $900/mes · mín. 3 meses",
-      pkg1_li1:"Chat IA en tu sitio — responde en segundos",
-      pkg1_li2:"Despachador en Telegram — cada pedido a tu equipo",
-      pkg1_li3:"Reportes diarios",
-      pkg1_li4:"RU / EN / ES · te pasa lo complejo",
-      pkg2_h3:"Business",
-      pkg2_tg:"+ videos de fidelización, contabilidad y recordatorios.",
-      pkg2_mo:"+ $1,100/mes · mín. 6 meses",
-      pkg2_li1:"Todo lo de Inicio",
-      pkg2_li2:"Sistema de fidelización — clientes que vuelven",
-      pkg2_li3:"Facturas y contabilidad",
-      pkg3_h3:"Pro",
-      pkg3_tg:"Tu empleado IA completo — atención y trastienda.",
-      pkg3_mo:"+ $1,300/mes · mín. 6 meses",
-      pkg3_li1:"Todo lo de Business",
-      pkg3_li2:"Video Higgsfield — del auto del cliente tras cada visita",
-      pkg3_li3:"Asistente personal del dueño — briefings, contenido, toda la trastienda",
-      tier1_h3:"Sitio + reservas",
-      tier1_tg:"Un sitio limpio y reservas online que funcionan 24/7.",
-      tier1_mo:"+ $49/mes soporte",
-      tier1_li1:"Sitio moderno de una página para móvil y computadora",
-      tier1_li2:"Configuración de reservas online (Square, Acuity o Calendly — a elegir)",
-      tier1_li3:"Widget de reservas en el sitio: el cliente reserva en un minuto",
-      tier1_li4:"Confirmaciones automáticas de reserva al cliente",
-      tier1_li5:"Conexión de su dominio, fotos y contactos",
-      tier1_li6:"Lanzamiento y prueba completa del sistema antes de la entrega",
-      tier2_h3:"Sitio + ½ automatización",
-      tier2_tg:"Sitio, reservas y respuestas automáticas — no se pierden clientes ni de noche.",
-      tier2_mo:"+ $99/mes soporte",
-      tier2_li1:"Todo lo del plan «Sitio + reservas»",
-      tier2_li2:"Respuestas automáticas en Instagram Direct a preguntas frecuentes",
-      tier2_li3:"Respuestas automáticas en WhatsApp con enlace de reserva",
-      tier2_li4:"Respuestas listas a las preguntas top: precios, dirección, horarios",
-      tier2_li5:"Recordatorios de cita a los clientes (menos ausencias)",
-      tier2_li6:"Escenarios configurados y probados para su negocio",
-      tier3_h3:"Sitio + automatización completa",
-      tier3_tg:"Piloto automático total: sitio, reservas, bot y captura de clientes en un solo lugar.",
-      tier3_mo:"+ $149/mes soporte",
-      tier3_li1:"Todo lo del plan «Sitio + ½ automatización»",
-      tier3_li2:"Chatbot completo en Instagram y WhatsApp con diálogos",
-      tier3_li3:"Captura de leads y contactos de clientes en una sola base",
-      tier3_li4:"CRM simple: vea cada cliente y su historial",
-      tier3_li5:"Todos los embudos y escenarios configurados llave en mano",
-      tier3_li6:"Mensaje al cliente por llamada perdida con enlace de reserva",
-      badge:"Más elegido",
-      tier_btn:"Elegir",
-      entry_p:"¿No sabe qué necesita? <b>Empiece con una demo gratis.</b> Reviso cómo su negocio recibe reservas ahora — sitio, agenda, respuestas en Instagram y WhatsApp — le muestro dónde está perdiendo clientes y le preparo una demo en vivo. <b>Configuración $2,000 (50% al inicio, 50% al lanzar) — y su primer mes es gratis.</b>",
-      entry_btn:"Reservar una demo",
-      note:"Configuración $2,000 — 50% al inicio, 50% al lanzar. Tu primer mes es gratis. Sin cargos ocultos: configuración y mensualidad — el cómputo de IA (Claude + video Higgsfield) ya está incluido.",
-      final_h2:"Prueba ABU AI — primer mes gratis",
-      final_sub:"Reserva una demo gratis de tu empleado IA. Te mostramos dónde pierdes clientes y lo configuramos por ti — primer mes gratis, sin presión.",
-      final_cta1:"Escribir por Instagram",
-      final_cta3:"Llamar",
-      footer_tagline:"Empleado IA para tu negocio",
-      footer_copy:"© 2026 FLOWBOX. Todos los derechos reservados."
-    }
-  };
-  var META = {
-    en:{title:"FLOWBOX — ABU AI, your invisible employee", desc:"ABU AI by FLOWBOX — a real AI employee on Claude for local business. Answers clients 24/7, books, dispatches to your team and runs the back office. Done-for-you, first month free."},
-    ru:{title:"FLOWBOX — ABU AI, ваш невидимый сотрудник", desc:"ABU AI от FLOWBOX — настоящий ИИ-сотрудник на Claude для локального бизнеса. Отвечает клиентам 24/7, записывает, отправляет заказ команде и ведёт бэк-офис. Под ключ, первый месяц бесплатно."},
-    es:{title:"FLOWBOX — ABU AI, tu empleado invisible", desc:"ABU AI de FLOWBOX — un verdadero empleado IA con Claude para negocios locales. Responde 24/7, reserva, envía pedidos a tu equipo y lleva la trastienda. Llave en mano, primer mes gratis."}
-  };
-  var EN = {}; // English is the static HTML — captured on load for switching back
-  document.querySelectorAll('[data-i18n]').forEach(function(el){ EN[el.getAttribute('data-i18n')] = el.innerHTML; });
-
-  function setLang(l){
-    if(l!=='ru' && l!=='es') l='en';
-    var dict = (l==='en') ? EN : I18N[l];
-    document.documentElement.lang = l;
-    document.querySelectorAll('[data-i18n]').forEach(function(el){
-      var k = el.getAttribute('data-i18n');
-      if(dict[k]!=null) el.innerHTML = dict[k];
-    });
-    var m = META[l] || META.en;
-    document.title = m.title;
-    var md = document.querySelector('meta[name="description"]');
-    if(md) md.setAttribute('content', m.desc);
-    document.querySelectorAll('.lang button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang')===l); });
-    try{ localStorage.setItem('flowbox_lang', l); }catch(e){}
-  }
-
-  var saved = null;
-  try{ saved = localStorage.getItem('flowbox_lang'); }catch(e){}
-  setLang(saved || 'en');
-
-  document.querySelectorAll('.lang button').forEach(function(b){
-    b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang')); });
-  });
-})();
-</script>
-
-<!-- Flowbox chat widget -->
-<style>
-#fbChat{position:fixed;right:18px;bottom:18px;z-index:9000;font-family:'Manrope',system-ui,sans-serif}
-#fbFab{width:60px;height:60px;border-radius:50%;border:0;cursor:pointer;background:linear-gradient(150deg,#3da9fc,#5fe3d2);color:#06121f;font-size:25px;box-shadow:0 14px 34px -10px rgba(61,169,252,.6)}
-#fbPanel{position:absolute;right:0;bottom:74px;width:340px;max-width:86vw;height:460px;max-height:72vh;display:none;flex-direction:column;background:#0d1320;border:1px solid rgba(120,160,220,.2);border-radius:18px;overflow:hidden;box-shadow:0 40px 90px -30px #000}
-#fbChat.open #fbPanel{display:flex}
-#fbHead{padding:13px 16px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.07);color:#eaf0f7;font-weight:700;font-size:14px;display:flex;justify-content:space-between;align-items:center}
-#fbHead small{color:#5fe3d2;font-weight:600;font-size:11px}
-#fbClose{background:none;border:0;color:#8a97ab;font-size:20px;cursor:pointer}
-#fbBody{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px}
-.fbm{max-width:84%;padding:10px 13px;border-radius:13px;font-size:14px;line-height:1.45;white-space:pre-wrap}
-.fbm.bot{background:rgba(255,255,255,.05);color:#dbe3ef;align-self:flex-start;border-bottom-left-radius:4px}
-.fbm.me{background:linear-gradient(150deg,#3da9fc,#5fe3d2);color:#06121f;align-self:flex-end;border-bottom-right-radius:4px;font-weight:500}
-#fbForm{display:flex;gap:8px;padding:12px;border-top:1px solid rgba(255,255,255,.07)}
-#fbInput{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 12px;color:#eaf0f7;font-size:14px;font-family:inherit}
-#fbInput:focus{outline:1px solid #5fe3d2}
-#fbSend{background:#5fe3d2;border:0;border-radius:10px;color:#06121f;font-weight:700;padding:0 15px;cursor:pointer}
-</style>
-<div id="fbChat">
-  <div id="fbPanel">
-    <div id="fbHead"><span>Flowbox · ИИ-консультант<br><small>отвечает за секунды</small></span><button id="fbClose" aria-label="закрыть">×</button></div>
-    <div id="fbBody"></div>
-    <form id="fbForm"><input id="fbInput" placeholder="Спросите про ИИ-сотрудника…" autocomplete="off"><button id="fbSend" type="submit">→</button></form>
+<!-- chat widget -->
+<button id="cw-btn" aria-label="Chat with ABU AI" onclick="cwToggle()"><span class="ring"></span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.6 8.6 0 0 1-3.9-.9L3 21l1.9-5.6a8.4 8.4 0 0 1-.9-3.9A8.4 8.4 0 0 1 12.5 3a8.4 8.4 0 0 1 8.5 8.5z"/></svg>
+</button>
+<div id="cw" role="dialog" aria-label="ABU AI chat">
+  <div class="cw-h">
+    <div class="ph-ava">A</div>
+    <div><b>ABU AI</b><span class="st off" id="cw-st">connecting…</span></div>
+    <button class="cw-x" onclick="cwToggle()" aria-label="Close">×</button>
   </div>
-  <button id="fbFab" aria-label="чат">💬</button>
+  <div class="cw-b" id="cw-b"></div>
+  <div class="cw-chips" id="cw-chips"></div>
+  <div class="cw-f">
+    <input id="cw-in" type="text" autocomplete="off" placeholder="Ask ABU anything…">
+    <button onclick="cwSend()" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m22 2-7 20-4-9-9-4 20-7z"/></svg></button>
+  </div>
 </div>
+
 <script>
-(function(){
-  var AGENT='https://frosting-hydrated-paralyze.ngrok-free.dev';
-  var wrap=document.getElementById('fbChat'),fab=document.getElementById('fbFab'),body=document.getElementById('fbBody'),form=document.getElementById('fbForm'),inp=document.getElementById('fbInput');
-  var sid='fb-'+Math.random().toString(36).slice(2)+Date.now().toString(36),opened=false,busy=false;
-  function add(t,who){var d=document.createElement('div');d.className='fbm '+who;d.textContent=t;body.appendChild(d);body.scrollTop=body.scrollHeight;return d;}
-  fab.addEventListener('click',function(){wrap.classList.toggle('open');if(!opened){opened=true;add('Здравствуйте! 🤍 Я ИИ-консультант Flowbox. Расскажите про ваш бизнес или спросите про пакеты — подскажу и подберу.','bot');}inp.focus();});
-  document.getElementById('fbClose').addEventListener('click',function(){wrap.classList.remove('open');});
-  form.addEventListener('submit',function(e){e.preventDefault();var t=inp.value.trim();if(!t||busy)return;busy=true;add(t,'me');inp.value='';var typ=add('…','bot');
-    fetch(AGENT+'/chat',{method:'POST',headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'true'},body:JSON.stringify({message:t,sessionId:sid,business:'flowbox'})})
-      .then(function(r){return r.json();}).then(function(j){typ.remove();add((j&&j.reply)?j.reply:'Напишите нам в Telegram @FlowBox08_bot — отвечу там.','bot');busy=false;})
-      .catch(function(){typ.remove();add('Связь прервалась — напишите @FlowBox08_bot в Telegram.','bot');busy=false;});
+/* ===================== CONFIG ===================== */
+var AGENT = 'https://frosting-hydrated-paralyze.ngrok-free.dev';
+var WA = 'https://wa.me/13322778090';
+
+/* ===================== I18N ===================== */
+var LANG = localStorage.getItem('fb_lang') || 'en';
+var I18N = {
+ru: {
+  logo_sub:"ABU AI", nav_cta:"Поговорить с ABU AI",
+  hero_pill:"Живое демо прямо на этой странице",
+  hero_h1:"Невидимый сотрудник,<br>которого клиенты <span class='grad'>никогда не ждут</span>",
+  hero_lead:"<b>ABU AI</b> отвечает вашим клиентам за секунды — днём и ночью. Записывает, напоминает, координирует команду и каждый вечер присылает отчёт о выручке. Вы занимаетесь ремеслом — он занимается ресепшном.",
+  hero_cta1:"▶ Попробовать живое демо", hero_cta2:"Цены",
+  m1:"время ответа", m2:"без выходных", m3:"до запуска", m4:"языка",
+  ph_st:"онлайн · отвечает за секунды",
+  ph_note:"↑ реальный ночной диалог, который ваш бизнес больше не теряет",
+  s1:"Отвечает, пока вы спите", s2:"Записывает прямо в ваш график", s3:"Вечерний отчёт о выручке", s4:"Держит команду в курсе",
+  pain:"Клиент пишет вам в <b>23:40</b>: «Есть место на завтра?»<br>Вы видите в 9 утра. <span class='x'>Он записался к конкуренту в 23:47.</span><br><b>ABU отвечает в 23:40:08.</b>",
+  d_eb:"Живое демо",
+  d_h2:"Не верьте на слово. <span class='grad'>Проверьте прямо сейчас.</span>",
+  d_sub:"Это не видео и не скриншоты — ниже тот самый живой агент, которого мы настраиваем клиентам.",
+  d1_h:"Чат с ABU AI",
+  d1_p:"Спросите что угодно — как будто вы клиент салона, барбершопа или автомойки. Отвечает на вашем языке, называет услуги и записывает на визит.",
+  d1_cta:"Открыть чат →",
+  d2_h:"Бесплатный AI-аудит вашего бизнеса",
+  d2_p:"Оставьте сайт или Instagram — ABU прочитает их и скажет, где вы теряете клиентов и что автоматизировать первым.",
+  d2_in1:"Ваш сайт (необязательно)", d2_in2:"Ваш Instagram, напр. @mysalon", d2_cta:"Получить аудит",
+  svc_eb:"Что делает ABU",
+  svc_h2:"Всё, что делает администратор.<br><span class='grad'>Без зарплаты администратора.</span>",
+  c1_h:"Запись 24/7", c1_p:"Клиент выбирает услугу и время в чате — запись падает в ваш календарь. Без двойных броней и блокнота.",
+  c2_h:"Отвечает везде", c2_p:"Чат на сайте, Instagram, WhatsApp, Telegram — один мозг во всех каналах, на английском, русском и испанском.",
+  c3_h:"Напоминания и неявки", c3_p:"Автонапоминания о визите и сообщения «давно вас не было», которые возвращают клиентов.",
+  c4_h:"Вечерний отчёт", c4_p:"Каждый вечер в Telegram: сколько сегодня обращений, записей и долларов. Вы всегда знаете свои цифры.",
+  c5_h:"Координация команды", c5_p:"Новая запись → нужный мастер мгновенно получает уведомление. Больше никаких «забыла передать».",
+  c6_h:"Контент по запросу", c6_p:"Тексты постов, промо, даже AI-видео про ваши услуги — попросите в чате, получите через минуты.",
+  h_eb:"Честные условия",
+  h_h2:"Что ABU делает — <span class='grad'>и чего честно не делает</span>",
+  h_sub:"Мы работаем с вашими соседями. Одно нарушенное обещание — и об этом знают все. Поэтому обещаем только то, что выполняем.",
+  hy_h:"Что вы получаете",
+  hy1:"<b>Ответ на каждое входящее сообщение</b> за секунды, 24/7 — сайт, IG, WhatsApp, Telegram",
+  hy2:"<b>Больше повторных визитов</b> — напоминания и «давно вас не было» возвращают тех, кто забыл бы",
+  hy3:"<b>Работа админа за долю зарплаты</b> — администратор в Бруклине стоит $3,000+/мес",
+  hy4:"<b>Готовый контент и материалы для рекламы</b> — тексты, креативы, аудитории. Вы утверждаете и публикуете",
+  hn_h:"Чего мы не обещаем",
+  hn1:"Он <b>не</b> рассылает сообщения незнакомым людям — это нарушает правила Meta и банит аккаунты",
+  hn2:"Он <b>не</b> запускает платную рекламу без вашего одобрения — реальные деньги требуют решения человека",
+  hn3:"Он <b>не</b> «приводит клиентов из воздуха» — он конвертирует и удерживает тех, кто к вам обращается",
+  h_note:"Если кто-то обещает вам ИИ, который «сам находит клиентов» — спросите как именно, и внимательно слушайте ответ. Мы лучше пообещаем меньше и сделаем больше.",
+  cs_eb:"Живой проект",
+  cs_h2:"Сделано под ключ для автоспа в Бруклине",
+  cs1:"Премиум-сайт с AI-консьержем на 3 языках",
+  cs2:"Запись, которая падает прямо в Telegram команды",
+  cs3:"AI-ассистент владельца: отчёты, генерация видео, follow-up клиентам",
+  cs_cta:"Открыть живой проект ↗",
+  st_eb:"Как это работает",
+  st_h2:"От первого звонка до работающего сотрудника<br>за <span class='grad'>три дня</span>",
+  st1_t:"15 мин", st1_h:"Аудит-созвон", st1_p:"Смотрим, как клиенты доходят до вас сейчас, и находим, где утекают деньги: пропущенные DM, неявки, медленные ответы.",
+  st2_t:"3 дня", st2_h:"Собираем ABU под вас", st2_p:"Ваши услуги, цены, тон общения, график. Настраиваем каждый канал и тестируем вместе с вами. От вас — только «ок».",
+  st3_t:"постоянно", st3_h:"Запуск и поддержка", st3_p:"ABU начинает отвечать. Мы следим ежедневно, донастраиваем еженедельно и отвечаем вам в течение 4 часов. Вы смотрите вечерние отчёты.",
+  pr_eb:"Цены",
+  pr_h2:"Начните с пилота.<br><span class='grad'>Платите, когда работает.</span>",
+  pl_h:"Пилот 2 недели", pl_tag:"ШАГ 1",
+  pl_p:"Ставим ABU на один канал и вместе фиксируем цель — например, <b>«X возвращённых записей за 14 дней»</b>. Цель достигнута → продолжаете на тарифе, и настройка <b>бесплатно</b>. Нет → вы <b>ничего не должны</b>, расходимся друзьями.",
+  pl_cta:"Занять слот пилота →",
+  mo:"/мес",
+  t1_1:"Чат на сайте + 1 мессенджер (WhatsApp или Telegram)", t1_2:"Запись + напоминания", t1_3:"Вечерний отчёт в Telegram", t1_4:"Поддержка в течение 4 часов",
+  t_cta:"Выбрать", t_cta2:"Выбрать", t_cta3:"Выбрать",
+  t2_pop:"Самый популярный",
+  t2_1:"Всё из Start", t2_2:"Instagram DM (официально) + все мессенджеры", t2_3:"Возврат клиентов и лояльность", t2_4:"Уведомления каждому мастеру",
+  t3_1:"Всё из Business", t3_2:"Контент и AI-видео по запросу", t3_3:"Материалы для рекламы: тексты, креативы, аудитории", t3_4:"Ежемесячный стратегический созвон с аналитикой",
+  setup:"Разовая настройка <b>$500</b> — бесплатно, если пилот достиг цели. Дальше помесячно, отмена за 7 дней. Работа ИИ уже включена в тариф.",
+  g1:"Запуск за 3 дня", g2:"99%+ аптайм", g3:"Ответ вам в течение 4ч", g4:"Без скрытых платежей",
+  f_eb:"Кто за этим стоит",
+  f_q:"«Каждого ABU я собираю сам и тестирую как параноидальный клиент, прежде чем показать вам. Работаю с локальным бизнесом лично, на вашем языке — <b>и выигрываю только если ваш агент реально себя окупает.</b> Поэтому пилот идёт с целью, а не с обещаниями.»",
+  f_role:"Основатель FLOWBOX · Бруклин, NY · RU / EN",
+  q1:"Это безопасно для моего Instagram?",
+  q1a:"Да. Для Instagram мы используем только официальные инструменты, одобренные Meta — никаких серых ботов и рассылок, ничего, что рискует баном. В каналах, которые мы полностью контролируем (ваш сайт, WhatsApp, Telegram), работает наш собственный ИИ напрямую.",
+  q2:"А если ИИ ответит что-то не то?",
+  q2a:"ABU отвечает только по вашим утверждённым услугам, ценам и правилам — он не выдумывает скидки. Всё нестандартное передаётся вам в один тап, а каждый диалог записывается, чтобы мы донастраивали его еженедельно.",
+  q3:"Мои клиенты пишут по-русски и по-английски. Справится?",
+  q3a:"Именно для этого он и сделан: определяет язык клиента и отвечает на английском, русском или испанском — один мозг, три языка.",
+  q4:"Что нужно от меня?",
+  q4a:"Около 30 минут вашего времени: услуги, цены, график, как вы любите говорить с клиентами. Всё остальное — настройка, тесты, запуск — на нас. Это и значит «под ключ».",
+  q5:"Что будет, если я захочу отменить?",
+  q5a:"Помесячно, уведомление за 7 дней, без штрафов за выход. История клиентов и календарь — ваши, всё передаём.",
+  fin_h2:"Ваши клиенты пишут <span class='grad'>прямо сейчас.</span>",
+  fin_sub:"Протестируйте ABU AI на этой странице или займите пилот на 2 недели с целью — не принесёт результат, не платите.",
+  fin_cta1:"Поговорить с ABU AI", fin_cta3:"Позвонить +1 (332) 277-8090",
+  footer_copy:"© 2026 FLOWBOX · Бруклин, NY"
+},
+es: {
+  logo_sub:"ABU AI", nav_cta:"Habla con ABU AI",
+  hero_pill:"Demo en vivo en esta misma página",
+  hero_h1:"El empleado invisible que<br>tus clientes <span class='grad'>nunca esperan</span>",
+  hero_lead:"<b>ABU AI</b> responde a tus clientes en segundos — de día y de noche. Reserva citas, envía recordatorios, coordina a tu equipo y reporta tus ingresos cada noche. Tú haces tu oficio; él lleva la recepción.",
+  hero_cta1:"▶ Probar la demo en vivo", hero_cta2:"Precios",
+  m1:"tiempo de respuesta", m2:"sin días libres", m3:"para lanzar", m4:"idiomas",
+  ph_st:"en línea · responde en segundos",
+  ph_note:"↑ una conversación nocturna real que tu negocio ya no pierde",
+  s1:"Responde mientras duermes", s2:"Reserva directo en tu agenda", s3:"Reporte de ingresos cada noche", s4:"Mantiene al equipo sincronizado",
+  pain:"Un cliente te escribe a las <b>11:40 PM</b>: «¿Tienen algo mañana?»<br>Lo ves a las 9 AM. <span class='x'>Reservó con la competencia a las 11:47 PM.</span><br><b>ABU responde a las 11:40:08.</b>",
+  d_eb:"Demo en vivo",
+  d_h2:"No nos creas. <span class='grad'>Pruébalo ahora mismo.</span>",
+  d_sub:"No es un video ni capturas — abajo está el mismo agente en vivo que instalamos a nuestros clientes.",
+  d1_h:"Chatea con ABU AI",
+  d1_p:"Pregunta lo que sea — como si fueras cliente de un salón, barbería o auto spa. Responde en tu idioma, cotiza servicios y reserva una visita.",
+  d1_cta:"Abrir el chat →",
+  d2_h:"Auditoría IA gratis de tu negocio",
+  d2_p:"Deja tu sitio web o Instagram — ABU los lee y te dice dónde pierdes clientes y qué automatizar primero.",
+  d2_in1:"Tu sitio web (opcional)", d2_in2:"Tu Instagram, ej. @misalon", d2_cta:"Recibir mi auditoría",
+  svc_eb:"Qué hace ABU",
+  svc_h2:"Todo lo que hace una recepcionista.<br><span class='grad'>Sin el sueldo.</span>",
+  c1_h:"Reservas 24/7", c1_p:"El cliente elige servicio y hora en el chat; la cita cae en tu calendario. Sin dobles reservas ni cuaderno.",
+  c2_h:"Responde en todas partes", c2_p:"Chat del sitio, Instagram, WhatsApp, Telegram — un solo cerebro en cada canal, en inglés, ruso y español.",
+  c3_h:"Recordatorios y ausencias", c3_p:"Recordatorios automáticos y mensajes de «hace tiempo que no te vemos» que hacen volver a los clientes.",
+  c4_h:"Reporte nocturno", c4_p:"Cada noche en Telegram: cuántas consultas, reservas y dólares hoy. Siempre conoces tus números.",
+  c5_h:"Coordinación del equipo", c5_p:"Nueva reserva → el profesional correcto recibe la notificación al instante. Se acabó el «olvidé avisarte».",
+  c6_h:"Contenido a pedido", c6_p:"Textos para posts, promos, incluso videos con IA de tus servicios — pídelo en el chat y llega en minutos.",
+  h_eb:"Condiciones honestas",
+  h_h2:"Lo que ABU hace — <span class='grad'>y lo que honestamente no</span>",
+  h_sub:"Trabajamos con tus vecinos. Una promesa rota y todos se enteran — por eso solo prometemos lo que cumplimos.",
+  hy_h:"Lo que recibes",
+  hy1:"<b>Cada mensaje entrante respondido</b> en segundos, 24/7 — sitio, IG, WhatsApp, Telegram",
+  hy2:"<b>Más visitas repetidas</b> — recordatorios y mensajes de reactivación recuperan a quienes olvidarían",
+  hy3:"<b>Trabajo de recepción por una fracción del sueldo</b> — una recepcionista en Brooklyn cuesta $3,000+/mes",
+  hy4:"<b>Contenido y material publicitario listos</b> — textos, creativos, audiencias. Tú apruebas y publicas",
+  hn_h:"Lo que no prometemos",
+  hn1:"<b>No</b> envía mensajes masivos a desconocidos — viola las reglas de Meta y banean cuentas",
+  hn2:"<b>No</b> lanza publicidad pagada sin tu aprobación — el dinero real requiere decisión humana",
+  hn3:"<b>No</b> «trae clientes de la nada» — convierte y retiene a los que te contactan",
+  h_note:"Si alguien te promete una IA que «encuentra clientes sola», pregúntale cómo exactamente y escucha bien la respuesta. Preferimos prometer menos y entregar más.",
+  cs_eb:"Proyecto en vivo",
+  cs_h2:"Hecho de principio a fin para un auto spa de Brooklyn",
+  cs1:"Sitio premium con conserje IA en 3 idiomas",
+  cs2:"Reservas que llegan directo al Telegram del equipo",
+  cs3:"Asistente IA del dueño: reportes, generación de video, seguimiento de clientes",
+  cs_cta:"Abrir el proyecto en vivo ↗",
+  st_eb:"Cómo funciona",
+  st_h2:"De la primera llamada a un empleado funcionando<br>en <span class='grad'>tres días</span>",
+  st1_t:"15 min", st1_h:"Llamada de auditoría", st1_p:"Vemos cómo te llegan los clientes hoy y dónde se fuga el dinero: DMs perdidos, ausencias, respuestas lentas.",
+  st2_t:"3 días", st2_h:"Construimos tu ABU", st2_p:"Tus servicios, precios, tono, horario. Configuramos cada canal y lo probamos contigo. Tú solo apruebas.",
+  st3_t:"continuo", st3_h:"Lanzamiento y soporte", st3_p:"ABU empieza a responder. Lo vigilamos a diario, lo ajustamos cada semana y te respondemos en 4 horas. Tú miras los reportes.",
+  pr_eb:"Precios",
+  pr_h2:"Empieza con un piloto.<br><span class='grad'>Paga cuando funcione.</span>",
+  pl_h:"Piloto de 2 semanas", pl_tag:"PASO 1",
+  pl_p:"Instalamos ABU en un canal y fijamos juntos una meta — por ejemplo, <b>«X reservas recuperadas en 14 días»</b>. ¿Meta cumplida? → sigues en un plan y la instalación es <b>gratis</b>. ¿No? → <b>no debes nada</b> y quedamos como amigos.",
+  pl_cta:"Reservar un piloto →",
+  mo:"/mes",
+  t1_1:"Chat del sitio + 1 mensajero (WhatsApp o Telegram)", t1_2:"Reservas + recordatorios", t1_3:"Reporte nocturno en Telegram", t1_4:"Soporte en 4 horas",
+  t_cta:"Elegir", t_cta2:"Elegir", t_cta3:"Elegir",
+  t2_pop:"El más popular",
+  t2_1:"Todo lo de Start", t2_2:"Instagram DM (oficial) + todos los mensajeros", t2_3:"Campañas de reactivación y lealtad", t2_4:"Avisos a cada profesional",
+  t3_1:"Todo lo de Business", t3_2:"Contenido y video IA a pedido", t3_3:"Material publicitario: textos, creativos, audiencias", t3_4:"Llamada estratégica mensual con analítica",
+  setup:"Instalación única <b>$500</b> — gratis si tu piloto cumple la meta. Luego mes a mes, cancela con 7 días de aviso. El cómputo de IA ya está incluido.",
+  g1:"Lanzamiento en 3 días", g2:"99%+ de disponibilidad", g3:"Te respondemos en 4h", g4:"Sin cargos ocultos",
+  f_eb:"Quién está detrás",
+  f_q:"«Construyo cada ABU yo mismo y lo pruebo como un cliente paranoico antes de que lo veas. Trabajo con negocios locales en persona, en tu idioma — <b>y solo gano si tu agente realmente se paga solo.</b> Por eso el piloto viene con una meta, no con promesas.»",
+  f_role:"Fundador de FLOWBOX · Brooklyn, NY · EN / RU",
+  q1:"¿Es seguro para mi cuenta de Instagram?",
+  q1a:"Sí. Para Instagram usamos solo herramientas oficiales aprobadas por Meta — nada de bots grises ni mensajes masivos, nada que arriesgue un baneo. En los canales que controlamos por completo (tu sitio, WhatsApp, Telegram) corre nuestra propia IA directamente.",
+  q2:"¿Y si la IA responde algo mal?",
+  q2a:"ABU responde solo según tus servicios, precios y reglas aprobados — no inventa descuentos. Lo inusual te lo pasa con un toque, y cada conversación queda registrada para ajustarlo cada semana.",
+  q3:"Mis clientes escriben en ruso e inglés. ¿Podrá?",
+  q3a:"Para eso está hecho: detecta el idioma del cliente y responde en inglés, ruso o español — el mismo cerebro, tres idiomas.",
+  q4:"¿Qué necesito aportar?",
+  q4a:"Unos 30 minutos de tu tiempo: servicios, precios, horario, cómo te gusta hablar con tus clientes. Lo demás — configuración, pruebas, lanzamiento — corre por nuestra cuenta. Eso significa «llave en mano».",
+  q5:"¿Qué pasa si cancelo?",
+  q5a:"Mes a mes, aviso de 7 días, sin penalidades. El historial de clientes y el calendario son tuyos — te entregamos todo.",
+  fin_h2:"Tus clientes están escribiendo <span class='grad'>ahora mismo.</span>",
+  fin_sub:"Prueba ABU AI en esta página o reserva un piloto de 2 semanas con meta — si no da resultado, no pagas.",
+  fin_cta1:"Habla con ABU AI ahora", fin_cta3:"Llamar +1 (332) 277-8090",
+  footer_copy:"© 2026 FLOWBOX · Brooklyn, NY"
+}
+};
+var W = {   /* widget strings */
+  en:{ st_on:'online · live AI', st_off:'agent is resting — I’ll still help', hi:'Hey! I’m ABU — the same AI employee we set up for businesses like yours. Ask me anything: services, pricing, how the pilot works. Or pretend you’re a client of a nail salon and try to book 😉',
+       chips:['💅 Book me for tomorrow','💰 Pricing','🚀 How does the pilot work?'],
+       off_note:'The live agent is offline right now (it runs on demand for demos). Message us on WhatsApp and we’ll wake it up for you in minutes:',
+       err:'Hmm, connection hiccup. Try once more, or ping us on WhatsApp:', wa:'Open WhatsApp',
+       ph:'Ask ABU anything…',
+       aud_wait:'⏳ ABU is reading your pages… usually 30–60 seconds.',
+       aud_err:'Couldn’t reach the audit engine right now. Send your site/IG on WhatsApp and we’ll run it manually today — free.',
+       aud_empty:'Enter a website or an Instagram handle.' },
+  ru:{ st_on:'онлайн · живой ИИ', st_off:'агент отдыхает — я всё равно помогу', hi:'Привет! Я ABU — тот самый ИИ-сотрудник, которого мы настраиваем бизнесам. Спросите что угодно: услуги, цены, как работает пилот. Или притворитесь клиентом салона и попробуйте записаться 😉',
+       chips:['💅 Запишите меня на завтра','💰 Цены','🚀 Как работает пилот?'],
+       off_note:'Живой агент сейчас офлайн (для демо включаем по запросу). Напишите в WhatsApp — разбудим за пару минут:',
+       err:'Хм, сбой связи. Попробуйте ещё раз или напишите в WhatsApp:', wa:'Открыть WhatsApp',
+       ph:'Спросите ABU о чём угодно…',
+       aud_wait:'⏳ ABU читает ваши страницы… обычно 30–60 секунд.',
+       aud_err:'Не достучались до движка аудита. Пришлите сайт/IG в WhatsApp — сегодня сделаем вручную, бесплатно.',
+       aud_empty:'Укажите сайт или Instagram.' },
+  es:{ st_on:'en línea · IA en vivo', st_off:'el agente descansa — igual te ayudo', hi:'¡Hola! Soy ABU, el mismo empleado de IA que configuramos para negocios como el tuyo. Pregunta lo que sea: servicios, precios, cómo funciona el piloto. O haz de cliente de un salón e intenta reservar 😉',
+       chips:['💅 Resérvame para mañana','💰 Precios','🚀 ¿Cómo funciona el piloto?'],
+       off_note:'El agente en vivo está offline ahora (lo encendemos para demos). Escríbenos por WhatsApp y lo despertamos en minutos:',
+       err:'Ups, fallo de conexión. Prueba otra vez o escríbenos por WhatsApp:', wa:'Abrir WhatsApp',
+       ph:'Pregúntale a ABU lo que quieras…',
+       aud_wait:'⏳ ABU está leyendo tus páginas… suele tardar 30–60 segundos.',
+       aud_err:'No pudimos conectar con el motor de auditoría. Envía tu sitio/IG por WhatsApp y la hacemos manual hoy — gratis.',
+       aud_empty:'Escribe un sitio web o un Instagram.' }
+};
+var META = {
+  en:{ title:'FLOWBOX — ABU AI, the invisible employee for your business',
+       desc:'ABU AI answers your clients in seconds, 24/7 — books, reminds, reports. 2-week pilot: if it doesn’t bring bookings, you don’t pay.' },
+  ru:{ title:'FLOWBOX — ABU AI, невидимый сотрудник вашего бизнеса',
+       desc:'ABU AI отвечает клиентам за секунды, 24/7 — записывает, напоминает, отчитывается. Пилот 2 недели: не принесёт записи — не платите.' },
+  es:{ title:'FLOWBOX — ABU AI, el empleado invisible de tu negocio',
+       desc:'ABU AI responde a tus clientes en segundos, 24/7 — reserva, recuerda, reporta. Piloto de 2 semanas: si no trae reservas, no pagas.' }
+};
+var EN_CACHE = {};
+function setLang(l){
+  LANG = l; localStorage.setItem('fb_lang', l);
+  document.documentElement.lang = l;
+  document.querySelectorAll('.lang button').forEach(function(b){ b.classList.toggle('on', b.dataset.lang===l); });
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var k = el.dataset.i18n;
+    if (!(k in EN_CACHE)) EN_CACHE[k] = el.innerHTML;
+    if (l==='en') { el.innerHTML = EN_CACHE[k]; }
+    else if (I18N[l] && I18N[l][k]) { el.innerHTML = I18N[l][k]; }
+    else { el.innerHTML = EN_CACHE[k]; }
   });
-})();
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+    var k = el.dataset.i18nPh;
+    if (!(k+'_ph' in EN_CACHE)) EN_CACHE[k+'_ph'] = el.placeholder;
+    el.placeholder = (l!=='en' && I18N[l] && I18N[l][k]) ? I18N[l][k] : EN_CACHE[k+'_ph'];
+  });
+  if (META[l]) { document.title = META[l].title;
+    var m = document.querySelector('meta[name="description"]'); if (m) m.content = META[l].desc; }
+  var inp = document.getElementById('cw-in'); if (inp) inp.placeholder = W[l].ph;
+  cwChips();
+  phPlay();
+}
+document.querySelectorAll('.lang button').forEach(function(b){ b.addEventListener('click', function(){ setLang(b.dataset.lang); }); });
+
+/* ===================== reveal on scroll ===================== */
+var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target);} }); },{threshold:.12});
+document.querySelectorAll('.rev').forEach(function(el){ io.observe(el); });
+
+/* ===================== hero phone script ===================== */
+var PH = {
+  en:[ ['c','Hi! Do you have anything free tomorrow for gel manicure?','11:41 PM'],
+       ['a','Hi! Yes 🙂 Tomorrow we have 11:30 AM with Alina or 4:00 PM with Vika. Gel manicure is $45, about 1h 15m. Which works?','11:41 PM'],
+       ['c','4pm with Vika please. Do you take Zelle?','11:42 PM'],
+       ['a','Booked ✅ Tomorrow 4:00 PM · gel manicure · Vika. Yes — Zelle or card at the studio. I’ll remind you 2h before. Anything else? 💅','11:42 PM'] ],
+  ru:[ ['c','Здравствуйте! Есть окошко завтра на маникюр с покрытием?','23:41'],
+       ['a','Здравствуйте! Да 🙂 Завтра есть 11:30 к Алине или 16:00 к Вике. Маникюр с гель-лаком — $45, ~1ч 15м. Какое время удобнее?','23:41'],
+       ['c','Давайте 16:00 к Вике. Zelle принимаете?','23:42'],
+       ['a','Записала ✅ Завтра 16:00 · маникюр с покрытием · Вика. Да — Zelle или карта в студии. Напомню за 2 часа. Что-то ещё? 💅','23:42'] ],
+  es:[ ['c','¡Hola! ¿Tienen algo libre mañana para manicura en gel?','11:41 PM'],
+       ['a','¡Hola! Sí 🙂 Mañana hay 11:30 con Alina o 4:00 PM con Vika. Manicura en gel $45, ~1h 15m. ¿Cuál te viene bien?','11:41 PM'],
+       ['c','A las 4 con Vika, porfa. ¿Aceptan Zelle?','11:42 PM'],
+       ['a','Reservado ✅ Mañana 4:00 PM · manicura en gel · Vika. Sí — Zelle o tarjeta en el estudio. Te recuerdo 2h antes. ¿Algo más? 💅','11:42 PM'] ]
+};
+var phTimer = [];
+function phPlay(){
+  phTimer.forEach(clearTimeout); phTimer = [];
+  var box = document.getElementById('ph-body'); if(!box) return;
+  box.innerHTML = '';
+  var s = PH[LANG] || PH.en, d = 400;
+  s.forEach(function(m){
+    phTimer.push(setTimeout(function(){
+      var el = document.createElement('div');
+      el.className = 'bub ' + m[0];
+      el.innerHTML = m[1] + '<time>' + m[2] + (m[0]==='a' ? ' · ABU AI' : '') + '</time>';
+      box.appendChild(el);
+    }, d));
+    d += m[0]==='a' ? 1900 : 1400;
+  });
+  phTimer.push(setTimeout(phPlay, d + 6000));
+}
+
+/* ===================== chat widget ===================== */
+var cwOnline = null, cwSid = localStorage.getItem('fb_sid');
+if (!cwSid) { cwSid = 'w' + Math.random().toString(36).slice(2, 11); localStorage.setItem('fb_sid', cwSid); }
+function cwEl(){ return document.getElementById('cw'); }
+function cwMsg(t, who, html){
+  var b = document.getElementById('cw-b'), el = document.createElement('div');
+  el.className = 'cw-m ' + who;
+  if (html) el.innerHTML = t; else el.textContent = t;
+  b.appendChild(el); b.scrollTop = b.scrollHeight; return el;
+}
+function cwTyping(on){
+  var b = document.getElementById('cw-b'), t = document.getElementById('cw-t');
+  if (on && !t) { t = document.createElement('div'); t.id='cw-t'; t.className='cw-typing'; t.innerHTML='<i></i><i></i><i></i>'; b.appendChild(t); b.scrollTop=b.scrollHeight; }
+  if (!on && t) t.remove();
+}
+function cwChips(){
+  var c = document.getElementById('cw-chips'); if(!c) return;
+  c.innerHTML = '';
+  W[LANG].chips.forEach(function(x){
+    var btn = document.createElement('button');
+    btn.textContent = x;
+    btn.onclick = function(){ document.getElementById('cw-in').value = x.replace(/^[^ ]+ /,''); cwSend(); };
+    c.appendChild(btn);
+  });
+}
+function cwStatus(){
+  var st = document.getElementById('cw-st');
+  st.textContent = '…'; st.className = 'st off';
+  var ctl = new AbortController(); var tm = setTimeout(function(){ ctl.abort(); }, 3500);
+  fetch(AGENT + '/health', { signal: ctl.signal, headers: { 'ngrok-skip-browser-warning': '1' } })
+    .then(function(r){ return r.json(); })
+    .then(function(j){ clearTimeout(tm); cwOnline = !!(j && j.ok && j.llm); })
+    .catch(function(){ cwOnline = false; })
+    .finally(function(){
+      st.textContent = cwOnline ? W[LANG].st_on : W[LANG].st_off;
+      st.className = 'st ' + (cwOnline ? 'on' : 'off');
+      if (cwOnline === false && !document.getElementById('cw-offnote')) {
+        var el = cwMsg(W[LANG].off_note + ' <a href="' + WA + '" target="_blank" rel="noopener">' + W[LANG].wa + ' →</a>', 'b', true);
+        el.id = 'cw-offnote';
+      }
+    });
+}
+var cwGreeted = false;
+function cwOpen(){ if (!cwEl().classList.contains('open')) cwToggle(); }
+function cwToggle(){
+  var el = cwEl(); el.classList.toggle('open');
+  if (el.classList.contains('open')) {
+    if (!cwGreeted) { cwMsg(W[LANG].hi, 'b'); cwChips(); cwGreeted = true; }
+    cwStatus();
+    setTimeout(function(){ document.getElementById('cw-in').focus(); }, 250);
+  }
+}
+function cwSend(){
+  var inp = document.getElementById('cw-in'), t = inp.value.trim();
+  if (!t) return;
+  inp.value = ''; cwMsg(t, 'u'); cwTyping(true);
+  var ctl = new AbortController(); var tm = setTimeout(function(){ ctl.abort(); }, 45000);
+  fetch(AGENT + '/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': '1' },
+    body: JSON.stringify({ message: t, sessionId: cwSid, business: 'flowbox' }),
+    signal: ctl.signal
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(j){
+    clearTimeout(tm); cwTyping(false);
+    if (j && j.reply) { cwMsg(j.reply, 'b'); }
+    else { cwMsg(W[LANG].off_note + ' <a href="' + WA + '" target="_blank" rel="noopener">' + W[LANG].wa + ' →</a>', 'b', true); }
+  })
+  .catch(function(){
+    clearTimeout(tm); cwTyping(false);
+    cwMsg(W[LANG].err + ' <a href="' + WA + '" target="_blank" rel="noopener">' + W[LANG].wa + ' →</a>', 'b', true);
+  });
+}
+document.getElementById('cw-in').addEventListener('keydown', function(e){ if (e.key === 'Enter') cwSend(); });
+
+/* ===================== audit form ===================== */
+document.getElementById('audit-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  var site = document.getElementById('aud-site').value.trim();
+  var ig = document.getElementById('aud-ig').value.trim();
+  var out = document.getElementById('aud-out');
+  out.style.display = 'block';
+  if (!site && !ig) { out.textContent = W[LANG].aud_empty; return; }
+  out.textContent = W[LANG].aud_wait;
+  var ctl = new AbortController(); var tm = setTimeout(function(){ ctl.abort(); }, 90000);
+  fetch(AGENT + '/audit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': '1' },
+    body: JSON.stringify({ site: site, ig: ig }),
+    signal: ctl.signal
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(j){ clearTimeout(tm); out.textContent = (j && j.audit) ? j.audit : W[LANG].aud_err; })
+  .catch(function(){ clearTimeout(tm); out.textContent = W[LANG].aud_err; });
+});
+
+/* ===================== init ===================== */
+setLang(LANG);
 </script>
 </body>
 </html>
