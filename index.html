@@ -16,6 +16,12 @@
 <meta name="description" content="ABU AI answers your clients in seconds, 24/7 — books appointments, reminds, reports revenue every evening. Done-for-you setup. 2-week pilot: if it doesn't bring bookings, you don't pay.">
 <meta property="og:title" content="FLOWBOX — ABU AI, your invisible employee">
 <meta property="og:description" content="AI administrator that answers in seconds, books 24/7 and reports every evening. Try the live demo right on this page.">
+<meta property="og:url" content="https://dowjones08.github.io/flowbox-site/">
+<meta property="og:image" content="https://dowjones08.github.io/flowbox-site/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234F7CFF'/%3E%3Cstop offset='1' stop-color='%2322D3EE'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23g)'/%3E%3Ctext x='32' y='45' font-family='Arial' font-size='36' font-weight='bold' text-anchor='middle' fill='%2304101E'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="img/avatar-gdi.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -90,7 +96,7 @@ h1{font-family:'Unbounded';font-weight:600;font-size:clamp(30px,4.9vw,54px);line
 .hmeta b i{font-style:normal;color:var(--cyan)}
 
 /* phone mockup */
-.phone{width:min(340px,88vw);margin:0 auto;background:linear-gradient(165deg,#111A2C,#0A0F1B);
+.phone{width:min(340px,100%);margin:0 auto;background:linear-gradient(165deg,#111A2C,#0A0F1B);
   border:1px solid var(--line2);border-radius:34px;padding:16px 14px 18px;position:relative;
   box-shadow:0 50px 100px -40px rgba(0,0,0,.9),0 0 0 8px rgba(148,170,210,.04),inset 0 1px 0 rgba(255,255,255,.06)}
 .phone::before{content:"";position:absolute;top:9px;left:50%;transform:translateX(-50%);width:86px;height:5px;border-radius:9px;background:rgba(148,170,210,.18)}
@@ -286,6 +292,33 @@ footer a:hover{color:var(--ink)}
 .cw-f input:focus{border-color:var(--blue)}
 .cw-f button{background:var(--grad);border:0;border-radius:12px;width:48px;cursor:pointer;display:grid;place-items:center;flex:none}
 .cw-f button svg{width:19px;height:19px;color:#04101E}
+
+/* ─ v2 polish (design-critique pass 2026-07-12) ─ */
+:root{--bad:#F87171}
+h2 .grad{background:none;-webkit-background-clip:initial;background-clip:initial;-webkit-text-fill-color:var(--ink);color:var(--ink)}
+.final h2 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+section.flush{padding-top:clamp(24px,4vw,44px)}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;border-radius:6px}
+.cw-b::-webkit-scrollbar,.aud-out::-webkit-scrollbar{width:8px}
+.cw-b::-webkit-scrollbar-thumb,.aud-out::-webkit-scrollbar-thumb{background:rgba(148,170,210,.22);border-radius:8px}
+.cw-b,.aud-out{scrollbar-width:thin;scrollbar-color:rgba(148,170,210,.25) transparent}
+.cards>*:nth-child(2),.tiers>*:nth-child(2),.steps>*:nth-child(2){transition-delay:.08s}
+.cards>*:nth-child(3),.tiers>*:nth-child(3),.steps>*:nth-child(3){transition-delay:.16s}
+.cards>*:nth-child(4){transition-delay:.24s}
+.cards>*:nth-child(5){transition-delay:.32s}
+.cards>*:nth-child(6){transition-delay:.4s}
+.card h3,.dcard h3,.pilot h3{font-weight:700}
+.tier li{font-size:14px}
+.cw-f input,.aud-form input{font-size:16px}
+.cw-chips button{padding:11px 16px;font-size:13.5px}
+.cw-x{width:44px;height:44px;display:grid;place-items:center;padding:0}
+#cw-btn{bottom:calc(22px + env(safe-area-inset-bottom))}
+#cw{bottom:calc(96px + env(safe-area-inset-bottom))}
+@media(max-width:600px){
+  h1 br,h2 br{display:none}
+  .lang button{padding:13px 15px;font-size:13px}
+  footer{padding-bottom:110px}
+}
 </style>
 </head>
 <body>
@@ -306,12 +339,12 @@ footer a:hover{color:var(--ink)}
   <div class="orb orb1"></div><div class="orb orb2"></div>
   <div class="wrap">
     <div>
-      <div class="hpill"><span class="dot"></span><span data-i18n="hero_pill">Live demo on this page — talk to it</span></div>
+      <div class="hpill"><span class="dot"></span><span data-i18n="hero_pill">2-week pilot: doesn’t hit the target — you don’t pay</span></div>
       <h1 data-i18n="hero_h1">The invisible employee<br>your clients <span class="grad">never wait for</span></h1>
-      <p class="lead" data-i18n="hero_lead"><b>ABU AI</b> answers your clients in seconds — day and night. It books appointments, sends reminders, coordinates your team and reports your revenue every evening. You do the craft; it does the front desk.</p>
+      <p class="lead" data-i18n="hero_lead">For salons, barbershops, nail studios and local services: <b>ABU AI</b> answers every Instagram, WhatsApp and website message in seconds — day and night — books clients straight into your calendar, reminds them, and reports the day’s bookings every evening. You do the craft; it does the front desk.</p>
       <div class="cta-row">
         <button class="btn btn-p" data-i18n="hero_cta1" onclick="cwOpen()">▶ Try the live demo</button>
-        <a class="btn btn-g" data-i18n="hero_cta2" href="#prices">Pricing</a>
+        <a class="btn btn-g" data-i18n="hero_cta2" href="#prices">Claim a free pilot</a>
       </div>
       <div class="hmeta">
         <div><b>&lt;5 <i>s</i></b><span data-i18n="m1">reply time</span></div>
@@ -346,7 +379,7 @@ footer a:hover{color:var(--ink)}
   </div>
 </section>
 
-<section id="demo" style="padding-top:0">
+<section id="demo" class="flush">
   <div class="wrap">
     <div class="eyebrow rev"><span class="n">01</span><span data-i18n="d_eb">Live demo</span></div>
     <h2 class="rev" data-i18n="d_h2">Don’t take our word for it. <span class="grad">Test it right now.</span></h2>
@@ -354,7 +387,7 @@ footer a:hover{color:var(--ink)}
     <div class="demo-grid">
       <div class="dcard rev">
         <h3><span data-i18n="d1_h">Chat with ABU AI</span> <span class="dtag">LIVE</span></h3>
-        <p data-i18n="d1_p">Ask anything — as if you were a client of a salon, barbershop or auto spa. It answers in your language, quotes services and books a visit.</p>
+        <p data-i18n="d1_p">Try it like a client would: <i>“Хочу маникюр завтра после 18:00”</i> · <i>“How much is a fade?”</i> · <i>“Do you take walk-ins on Sunday?”</i> — it answers in your language and books the visit.</p>
         <button class="btn btn-p" data-i18n="d1_cta" onclick="cwOpen()">Open the chat →</button>
       </div>
       <div class="dcard rev">
@@ -371,7 +404,7 @@ footer a:hover{color:var(--ink)}
   </div>
 </section>
 
-<section style="padding-top:20px">
+<section class="flush">
   <div class="wrap">
     <div class="eyebrow rev"><span class="n">02</span><span data-i18n="svc_eb">What ABU does</span></div>
     <h2 class="rev" data-i18n="svc_h2">Everything a front-desk admin does.<br><span class="grad">Without the salary.</span></h2>
@@ -429,13 +462,16 @@ footer a:hover{color:var(--ink)}
           <li data-i18n="cs2">Booking flow that lands straight in the team’s Telegram</li>
           <li data-i18n="cs3">Owner’s AI assistant: reports, video generation, client follow-ups</li>
         </ul>
-        <a class="btn btn-p" data-i18n="cs_cta" href="https://dowjones08.github.io/white-swan-site/" target="_blank" rel="noopener">Open the live project ↗</a>
+        <div class="cta-row">
+          <a class="btn btn-p" data-i18n="cs_cta" href="https://dowjones08.github.io/white-swan-site/" target="_blank" rel="noopener">Open the live project ↗</a>
+          <a class="btn btn-g" data-i18n="cs_cta2" href="https://dowjones08.github.io/flowbox-site/demo-bagira/" target="_blank" rel="noopener">Demo for a Brighton nail studio ↗</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section style="padding-top:0" id="how">
+<section class="flush" id="how">
   <div class="wrap">
     <div class="eyebrow rev"><span class="n">05</span><span data-i18n="st_eb">How it works</span></div>
     <h2 class="rev" data-i18n="st_h2">From first call to a working employee<br>in <span class="grad">three days</span></h2>
@@ -447,7 +483,7 @@ footer a:hover{color:var(--ink)}
   </div>
 </section>
 
-<section id="prices" style="padding-top:0">
+<section id="prices" class="flush">
   <div class="wrap">
     <div class="eyebrow rev"><span class="n">06</span><span data-i18n="pr_eb">Pricing</span></div>
     <h2 class="rev" data-i18n="pr_h2">Start with a pilot.<br><span class="grad">Pay when it works.</span></h2>
@@ -455,7 +491,7 @@ footer a:hover{color:var(--ink)}
     <div class="pilot rev">
       <div>
         <h3><span data-i18n="pl_h">2-week pilot</span> <span class="dtag" data-i18n="pl_tag">STEP 1</span></h3>
-        <p data-i18n="pl_p">We install ABU on one channel and agree on a target together — for example, <b>“X recovered bookings in 14 days.”</b> Hit the target → you continue on a plan and the setup fee is <b>waived</b>. Miss it → you owe <b>nothing</b> and we part as friends.</p>
+        <p data-i18n="pl_p"><b>$0 upfront. $0 for the whole two weeks.</b> We install ABU on one channel and put a target in writing — e.g. <b>12 recovered bookings in 14 days</b>, counted together from your booking calendar. Hit it → you continue from $149/mo and the $500 setup is <b>waived forever</b>. Miss it → you owe <b>nothing</b>. 3 pilot slots a month — I build each one myself.</p>
       </div>
       <button class="btn btn-p" data-i18n="pl_cta" onclick="cwOpen()">Claim a pilot slot →</button>
     </div>
@@ -469,7 +505,7 @@ footer a:hover{color:var(--ink)}
           <li data-i18n="t1_3">Evening Telegram report</li>
           <li data-i18n="t1_4">Support within 4 hours</li>
         </ul>
-        <button class="btn btn-g" data-i18n="t_cta" onclick="cwOpen()">Choose</button>
+        <button class="btn btn-g" data-i18n="t_cta" onclick="cwOpen()">Start pilot →</button>
       </div>
       <div class="tier hot rev">
         <span class="pop" data-i18n="t2_pop">Most popular</span>
@@ -480,7 +516,7 @@ footer a:hover{color:var(--ink)}
           <li data-i18n="t2_3">Win-back campaigns & loyalty nudges</li>
           <li data-i18n="t2_4">Team dispatch to each master</li>
         </ul>
-        <button class="btn btn-p" data-i18n="t_cta2" onclick="cwOpen()">Choose</button>
+        <button class="btn btn-p" data-i18n="t_cta2" onclick="cwOpen()">Start pilot →</button>
       </div>
       <div class="tier rev">
         <h3>Pro</h3><div class="pr">$349<span data-i18n="mo">/mo</span></div>
@@ -490,20 +526,20 @@ footer a:hover{color:var(--ink)}
           <li data-i18n="t3_3">Ad materials: copy, creatives, audiences</li>
           <li data-i18n="t3_4">Monthly strategy call with analytics</li>
         </ul>
-        <button class="btn btn-g" data-i18n="t_cta3" onclick="cwOpen()">Choose</button>
+        <button class="btn btn-g" data-i18n="t_cta3" onclick="cwOpen()">Start pilot →</button>
       </div>
     </div>
-    <p class="setup-note" data-i18n="setup">One-time setup <b>$500</b> — waived if your pilot hits its target. Month-to-month after that, cancel with 7 days’ notice. AI compute already included.</p>
+    <p class="setup-note" data-i18n="setup">One-time setup <b>$500</b> — waived if your pilot hits its target. Month-to-month, cancel with 7 days’ notice, AI compute included. <b>$149/mo ≈ two gel manicures a week</b> — a front-desk employee in Brooklyn is $3,000+/mo.</p>
     <div class="guar">
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="g1">Launch in 3 days</span></span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="g2">99%+ uptime</span></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="g2">Official Meta tools only</span></span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="g3">Reply to you within 4h</span></span>
       <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="g4">No hidden fees</span></span>
     </div>
   </div>
 </section>
 
-<section style="padding-top:24px">
+<section class="flush">
   <div class="wrap founder">
     <div class="f-photo rev"><img src="img/founder.jpg" alt="Andrey — founder of FLOWBOX" loading="lazy"></div>
     <div class="rev">
@@ -514,7 +550,7 @@ footer a:hover{color:var(--ink)}
   </div>
 </section>
 
-<section style="padding-top:0">
+<section class="flush">
   <div class="wrap">
     <div class="eyebrow rev"><span class="n">08</span><span>FAQ</span></div>
     <div class="faq rev">
@@ -527,7 +563,7 @@ footer a:hover{color:var(--ink)}
   </div>
 </section>
 
-<section style="padding-top:0">
+<section class="flush">
   <div class="wrap">
     <div class="final rev">
       <h2 data-i18n="fin_h2">Your clients are writing <span class="grad">right now.</span></h2>
@@ -577,14 +613,14 @@ var AGENT = 'https://frosting-hydrated-paralyze.ngrok-free.dev';
 var WA = 'https://wa.me/13322778090';
 
 /* ===================== I18N ===================== */
-var LANG = localStorage.getItem('fb_lang') || 'en';
+var LANG = localStorage.getItem('fb_lang') || (function(){ var n=(navigator.language||'').toLowerCase(); return n.indexOf('ru')===0?'ru':n.indexOf('es')===0?'es':'en'; })();
 var I18N = {
 ru: {
   logo_sub:"ABU AI", nav_cta:"Поговорить с ABU AI",
-  hero_pill:"Живое демо прямо на этой странице",
+  hero_pill:"Пилот 2 недели: не достигнет цели — не платите",
   hero_h1:"Невидимый сотрудник,<br>которого клиенты <span class='grad'>никогда не ждут</span>",
-  hero_lead:"<b>ABU AI</b> отвечает вашим клиентам за секунды — днём и ночью. Записывает, напоминает, координирует команду и каждый вечер присылает отчёт о выручке. Вы занимаетесь ремеслом — он занимается ресепшном.",
-  hero_cta1:"▶ Попробовать живое демо", hero_cta2:"Цены",
+  hero_lead:"Для салонов, барбершопов, ногтевых студий и локальных сервисов: <b>ABU AI</b> отвечает на каждое сообщение в Instagram, WhatsApp и на сайте за секунды — днём и ночью, — записывает клиентов прямо в ваш календарь, напоминает им и каждый вечер присылает отчёт о записях. Вы занимаетесь ремеслом — он занимается ресепшном.",
+  hero_cta1:"▶ Попробовать живое демо", hero_cta2:"Занять бесплатный пилот",
   m1:"время ответа", m2:"без выходных", m3:"до запуска", m4:"языка",
   ph_st:"онлайн · отвечает за секунды",
   ph_note:"↑ реальный ночной диалог, который ваш бизнес больше не теряет",
@@ -594,7 +630,7 @@ ru: {
   d_h2:"Не верьте на слово. <span class='grad'>Проверьте прямо сейчас.</span>",
   d_sub:"Это не видео и не скриншоты — ниже тот самый живой агент, которого мы настраиваем клиентам.",
   d1_h:"Чат с ABU AI",
-  d1_p:"Спросите что угодно — как будто вы клиент салона, барбершопа или автомойки. Отвечает на вашем языке, называет услуги и записывает на визит.",
+  d1_p:"Попробуйте как клиент: <i>«Хочу маникюр завтра после 18:00»</i> · <i>«How much is a fade?»</i> · <i>«Есть окно в воскресенье?»</i> — отвечает на вашем языке и записывает на визит.",
   d1_cta:"Открыть чат →",
   d2_h:"Бесплатный AI-аудит вашего бизнеса",
   d2_p:"Оставьте сайт или Instagram — ABU прочитает их и скажет, где вы теряете клиентов и что автоматизировать первым.",
@@ -626,6 +662,7 @@ ru: {
   cs2:"Запись, которая падает прямо в Telegram команды",
   cs3:"AI-ассистент владельца: отчёты, генерация видео, follow-up клиентам",
   cs_cta:"Открыть живой проект ↗",
+  cs_cta2:"Демо для ногтевой студии на Брайтоне ↗",
   st_eb:"Как это работает",
   st_h2:"От первого звонка до работающего сотрудника<br>за <span class='grad'>три дня</span>",
   st1_t:"15 мин", st1_h:"Аудит-созвон", st1_p:"Смотрим, как клиенты доходят до вас сейчас, и находим, где утекают деньги: пропущенные DM, неявки, медленные ответы.",
@@ -634,16 +671,16 @@ ru: {
   pr_eb:"Цены",
   pr_h2:"Начните с пилота.<br><span class='grad'>Платите, когда работает.</span>",
   pl_h:"Пилот 2 недели", pl_tag:"ШАГ 1",
-  pl_p:"Ставим ABU на один канал и вместе фиксируем цель — например, <b>«X возвращённых записей за 14 дней»</b>. Цель достигнута → продолжаете на тарифе, и настройка <b>бесплатно</b>. Нет → вы <b>ничего не должны</b>, расходимся друзьями.",
+  pl_p:"<b>$0 на старте. $0 все две недели.</b> Ставим ABU на один канал и письменно фиксируем цель — напр. <b>12 возвращённых записей за 14 дней</b>, считаем вместе по вашему календарю записи. Достигли → продолжаете от $149/мес, и настройка $500 <b>не взимается никогда</b>. Нет → вы <b>ничего не должны</b>. 3 пилот-слота в месяц — каждый собираю сам.",
   pl_cta:"Занять слот пилота →",
   mo:"/мес",
   t1_1:"Чат на сайте + 1 мессенджер (WhatsApp или Telegram)", t1_2:"Запись + напоминания", t1_3:"Вечерний отчёт в Telegram", t1_4:"Поддержка в течение 4 часов",
-  t_cta:"Выбрать", t_cta2:"Выбрать", t_cta3:"Выбрать",
+  t_cta:"Начать с пилота →", t_cta2:"Начать с пилота →", t_cta3:"Начать с пилота →",
   t2_pop:"Самый популярный",
   t2_1:"Всё из Start", t2_2:"Instagram DM (официально) + все мессенджеры", t2_3:"Возврат клиентов и лояльность", t2_4:"Уведомления каждому мастеру",
   t3_1:"Всё из Business", t3_2:"Контент и AI-видео по запросу", t3_3:"Материалы для рекламы: тексты, креативы, аудитории", t3_4:"Ежемесячный стратегический созвон с аналитикой",
-  setup:"Разовая настройка <b>$500</b> — бесплатно, если пилот достиг цели. Дальше помесячно, отмена за 7 дней. Работа ИИ уже включена в тариф.",
-  g1:"Запуск за 3 дня", g2:"99%+ аптайм", g3:"Ответ вам в течение 4ч", g4:"Без скрытых платежей",
+  setup:"Разовая настройка <b>$500</b> — бесплатно, если пилот достиг цели. Помесячно, отмена за 7 дней, работа ИИ включена. <b>$149/мес ≈ два маникюра с покрытием в неделю</b> — администратор в Бруклине стоит $3,000+/мес.",
+  g1:"Запуск за 3 дня", g2:"Только официальные инструменты Meta", g3:"Ответ вам в течение 4ч", g4:"Без скрытых платежей",
   f_eb:"Кто за этим стоит",
   f_q:"«Каждого ABU я собираю сам и тестирую как параноидальный клиент, прежде чем показать вам. Работаю с локальным бизнесом лично, на вашем языке — <b>и выигрываю только если ваш агент реально себя окупает.</b> Поэтому пилот идёт с целью, а не с обещаниями.»",
   f_role:"Основатель FLOWBOX · Бруклин, NY · RU / EN",
@@ -664,10 +701,10 @@ ru: {
 },
 es: {
   logo_sub:"ABU AI", nav_cta:"Habla con ABU AI",
-  hero_pill:"Demo en vivo en esta misma página",
+  hero_pill:"Piloto de 2 semanas: si no cumple la meta, no pagas",
   hero_h1:"El empleado invisible que<br>tus clientes <span class='grad'>nunca esperan</span>",
-  hero_lead:"<b>ABU AI</b> responde a tus clientes en segundos — de día y de noche. Reserva citas, envía recordatorios, coordina a tu equipo y reporta tus ingresos cada noche. Tú haces tu oficio; él lleva la recepción.",
-  hero_cta1:"▶ Probar la demo en vivo", hero_cta2:"Precios",
+  hero_lead:"Para salones, barberías, estudios de uñas y servicios locales: <b>ABU AI</b> responde cada mensaje de Instagram, WhatsApp y tu sitio en segundos — de día y de noche —, reserva clientes directo en tu calendario, les recuerda y reporta las reservas del día cada noche. Tú haces tu oficio; él lleva la recepción.",
+  hero_cta1:"▶ Probar la demo en vivo", hero_cta2:"Reservar piloto gratis",
   m1:"tiempo de respuesta", m2:"sin días libres", m3:"para lanzar", m4:"idiomas",
   ph_st:"en línea · responde en segundos",
   ph_note:"↑ una conversación nocturna real que tu negocio ya no pierde",
@@ -677,7 +714,7 @@ es: {
   d_h2:"No nos creas. <span class='grad'>Pruébalo ahora mismo.</span>",
   d_sub:"No es un video ni capturas — abajo está el mismo agente en vivo que instalamos a nuestros clientes.",
   d1_h:"Chatea con ABU AI",
-  d1_p:"Pregunta lo que sea — como si fueras cliente de un salón, barbería o auto spa. Responde en tu idioma, cotiza servicios y reserva una visita.",
+  d1_p:"Pruébalo como cliente: <i>«¿Tienen turno el domingo?»</i> · <i>«How much is a fade?»</i> · <i>«Хочу маникюр завтра»</i> — responde en tu idioma y reserva la visita.",
   d1_cta:"Abrir el chat →",
   d2_h:"Auditoría IA gratis de tu negocio",
   d2_p:"Deja tu sitio web o Instagram — ABU los lee y te dice dónde pierdes clientes y qué automatizar primero.",
@@ -709,6 +746,7 @@ es: {
   cs2:"Reservas que llegan directo al Telegram del equipo",
   cs3:"Asistente IA del dueño: reportes, generación de video, seguimiento de clientes",
   cs_cta:"Abrir el proyecto en vivo ↗",
+  cs_cta2:"Demo para un salón de uñas de Brighton ↗",
   st_eb:"Cómo funciona",
   st_h2:"De la primera llamada a un empleado funcionando<br>en <span class='grad'>tres días</span>",
   st1_t:"15 min", st1_h:"Llamada de auditoría", st1_p:"Vemos cómo te llegan los clientes hoy y dónde se fuga el dinero: DMs perdidos, ausencias, respuestas lentas.",
@@ -717,16 +755,16 @@ es: {
   pr_eb:"Precios",
   pr_h2:"Empieza con un piloto.<br><span class='grad'>Paga cuando funcione.</span>",
   pl_h:"Piloto de 2 semanas", pl_tag:"PASO 1",
-  pl_p:"Instalamos ABU en un canal y fijamos juntos una meta — por ejemplo, <b>«X reservas recuperadas en 14 días»</b>. ¿Meta cumplida? → sigues en un plan y la instalación es <b>gratis</b>. ¿No? → <b>no debes nada</b> y quedamos como amigos.",
+  pl_p:"<b>$0 al inicio. $0 durante las dos semanas.</b> Instalamos ABU en un canal y fijamos una meta por escrito — ej. <b>12 reservas recuperadas en 14 días</b>, contadas juntos desde tu calendario. ¿Cumplida? → sigues desde $149/mes y la instalación de $500 queda <b>gratis para siempre</b>. ¿No? → <b>no debes nada</b>. 3 cupos de piloto al mes — cada uno lo construyo yo.",
   pl_cta:"Reservar un piloto →",
   mo:"/mes",
   t1_1:"Chat del sitio + 1 mensajero (WhatsApp o Telegram)", t1_2:"Reservas + recordatorios", t1_3:"Reporte nocturno en Telegram", t1_4:"Soporte en 4 horas",
-  t_cta:"Elegir", t_cta2:"Elegir", t_cta3:"Elegir",
+  t_cta:"Empezar con piloto →", t_cta2:"Empezar con piloto →", t_cta3:"Empezar con piloto →",
   t2_pop:"El más popular",
   t2_1:"Todo lo de Start", t2_2:"Instagram DM (oficial) + todos los mensajeros", t2_3:"Campañas de reactivación y lealtad", t2_4:"Avisos a cada profesional",
   t3_1:"Todo lo de Business", t3_2:"Contenido y video IA a pedido", t3_3:"Material publicitario: textos, creativos, audiencias", t3_4:"Llamada estratégica mensual con analítica",
-  setup:"Instalación única <b>$500</b> — gratis si tu piloto cumple la meta. Luego mes a mes, cancela con 7 días de aviso. El cómputo de IA ya está incluido.",
-  g1:"Lanzamiento en 3 días", g2:"99%+ de disponibilidad", g3:"Te respondemos en 4h", g4:"Sin cargos ocultos",
+  setup:"Instalación única <b>$500</b> — gratis si tu piloto cumple la meta. Mes a mes, cancela con 7 días de aviso, cómputo de IA incluido. <b>$149/mes ≈ dos manicuras en gel por semana</b> — una recepcionista en Brooklyn cuesta $3,000+/mes.",
+  g1:"Lanzamiento en 3 días", g2:"Solo herramientas oficiales de Meta", g3:"Te respondemos en 4h", g4:"Sin cargos ocultos",
   f_eb:"Quién está detrás",
   f_q:"«Construyo cada ABU yo mismo y lo pruebo como un cliente paranoico antes de que lo veas. Trabajo con negocios locales en persona, en tu idioma — <b>y solo gano si tu agente realmente se paga solo.</b> Por eso el piloto viene con una meta, no con promesas.»",
   f_role:"Fundador de FLOWBOX · Brooklyn, NY · EN / RU",
