@@ -1,5 +1,5 @@
 /* ABU Office SW — shell cache v1 */
-var C = 'abu-office-v1';
+var C = 'abu-office-v2';
 var SHELL = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(C).then(function (c) { return c.addAll(SHELL); }).then(function(){ return self.skipWaiting(); }));
