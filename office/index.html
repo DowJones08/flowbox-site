@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!-- ABU OFFICE — pixel office PWA v0 (2026-07-12).
+     Реальные события: /health = свет в офисе, задание → /chat (business:flowbox).
+     Ставится на телефон: Chrome → меню → «Добавить на главный экран». -->
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>ABU Office</title>
+<meta name="description" content="Пиксельный офис ABU AI — дай задание, и агенты его выполнят.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#05070D">
+<style>
+:root{--bg:#05070D;--panel:#0C1220;--line:rgba(148,170,210,.16);--ink:#F2F5FB;--mut:#93A0B8;
+--blue:#4F7CFF;--cyan:#22D3EE;--ok:#34D399;--warn:#FBBF24}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:'Segoe UI',system-ui,sans-serif;
+display:flex;flex-direction:column;overflow:hidden;-webkit-tap-highlight-color:transparent}
+header{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);flex:none}
+header b{font-size:15px;letter-spacing:.06em}
+header .st{font-size:11.5px;font-weight:700;margin-left:auto;display:flex;align-items:center;gap:6px}
+header .st i{width:8px;height:8px;border-radius:50%;background:var(--warn);display:inline-block}
+header .st.on i{background:var(--ok);box-shadow:0 0 8px var(--ok)}
+#stage{flex:1;display:grid;place-items:center;min-height:0;padding:8px;background:
+radial-gradient(120% 100% at 50% 0,#0A1120,#05070D 70%)}
+canvas{image-rendering:pixelated;image-rendering:crisp-edges;width:100%;max-width:860px;height:auto;
+border:1px solid var(--line);border-radius:10px;background:#080B12;max-height:100%}
+#hud{flex:none;border-top:1px solid var(--line);background:var(--panel);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+#chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}
+#chips::-webkit-scrollbar{display:none}
+#chips button{flex:none;background:rgba(79,124,255,.12);border:1px solid rgba(79,124,255,.3);color:var(--ink);
+font:600 12px 'Segoe UI';border-radius:99px;padding:8px 12px;cursor:pointer}
+#row{display:flex;gap:8px}
+#task{flex:1;background:rgba(5,7,13,.7);border:1px solid var(--line);border-radius:11px;color:var(--ink);
+font:500 16px 'Segoe UI';padding:11px 13px;outline:0}
+#task:focus{border-color:var(--blue)}
+#send{background:linear-gradient(100deg,var(--blue),var(--cyan));border:0;border-radius:11px;width:52px;
+cursor:pointer;font-size:18px;color:#04101E;font-weight:800}
+#log{max-height:118px;overflow-y:auto;font-size:12.5px;color:var(--mut);line-height:1.55;margin-top:8px;
+border-top:1px dashed var(--line);padding-top:6px;white-space:pre-wrap;scrollbar-width:thin}
+#log b{color:var(--cyan)}
+#log .me{color:var(--ink)}
+</style>
+</head>
+<body>
+<header><span style="font-size:18px">🕹️</span><b>ABU OFFICE</b>
+  <span class="st" id="st"><i></i><span id="stt">проверяю движок…</span></span>
+</header>
+<div id="stage"><canvas id="cv" width="640" height="336"></canvas></div>
+<div id="hud">
+  <div id="chips">
+    <button onclick="chip('Напиши пост про акцию на маникюр')">📣 Пост про акцию</button>
+    <button onclick="chip('Клиент спрашивает: есть окно завтра после 18:00?')">💬 Ответ клиенту</button>
+    <button onclick="chip('Запиши Анну на стрижку в субботу в 14:00')">📅 Записать клиента</button>
+    <button onclick="chip('Сделай короткий отчёт: как прошёл день?')">📊 Отчёт за день</button>
+  </div>
+  <div id="row">
+    <input id="task" placeholder="Дай задание агентам…" autocomplete="off">
+    <button id="send" onclick="give()">▶</button>
+  </div>
+  <div id="log"><b>ABU OFFICE</b> · v0 · задания уходят в реальный движок FLOWBOX</div>
+</div>
+<script>
+'use strict';
+/* ================= CONFIG ================= */
+var AGENT_URL='https://frosting-hydrated-paralyze.ngrok-free.dev';
+var T=16, W=40, H=21;                       // tile size, world in tiles
+var cv=document.getElementById('cv'), ctx=cv.getContext('2d');
+ctx.imageSmoothingEnabled=false;
+var SID=localStorage.getItem('office_sid')||('o'+Math.random().toString(36).slice(2,10));
+localStorage.setItem('office_sid',SID);
+
+/* ================= WORLD ================= */
+// palette
+var P={floorA:'#101724',floorB:'#0D131E',wall:'#1B2436',wallTop:'#232F47',rug:'#12203A',
+desk:'#5A4634',deskT:'#6E5742',chair:'#26324C',mon:'#0A0F1B',monGlow:'#22D3EE',monOff:'#141B2B',
+plant:'#2F9E5F',pot:'#7A4A2B',board:'#DDE6F5',coffee:'#8B5A3C',win:'#0A1630',star:'#9FB7E8'};
+var ADMIN_DESK={x:4,y:4};
+var AGENTS=[
+ {id:'rec', nm:'Лия — ресепшн', shirt:'#22D3EE', hair:'#3B2A1E', desk:{x:8,y:14}},
+ {id:'book',nm:'Макс — запись', shirt:'#4F7CFF', hair:'#191410', desk:{x:16,y:14}},
+ {id:'cnt', nm:'Ника — контент', shirt:'#F472B6', hair:'#57301A', desk:{x:24,y:14}},
+ {id:'ana', nm:'Дан — аналитика', shirt:'#FBBF24', hair:'#20180F', desk:{x:32,y:14}}
+];
+var COFFEE={x:36,y:4}, BOARD={x:17,y:1}, CORR=11; // corridor row (tiles)
+
+function px(t){return t*T}
+/* static scene → offscreen */
+var bg=document.createElement('canvas'); bg.width=cv.width; bg.height=cv.height;
+function paintBG(){
+ var g=bg.getContext('2d'); g.imageSmoothingEnabled=false;
+ for(var y=0;y<H;y++)for(var x=0;x<W;x++){g.fillStyle=((x+y)%2?P.floorA:P.floorB);g.fillRect(px(x),px(y),T,T);}
+ g.fillStyle=P.rug; g.fillRect(px(2),px(CORR-1),px(36),px(2));
+ g.fillStyle=P.wallTop; g.fillRect(0,0,cv.width,px(2));
+ g.fillStyle=P.wall; g.fillRect(0,px(2),cv.width,5);
+ for(var wx=3;wx<W-4;wx+=7){ g.fillStyle=P.win; g.fillRect(px(wx)+2,3,px(3)-4,px(2)-8);
+   g.fillStyle=P.star; g.fillRect(px(wx)+6,8,2,2); g.fillRect(px(wx)+px(2),12,2,2); g.fillRect(px(wx)+px(1),16,2,2);}
+ // whiteboard
+ g.fillStyle=P.board; g.fillRect(px(BOARD.x),px(BOARD.y)-6,px(6),px(2));
+ g.fillStyle='#4F7CFF'; g.fillRect(px(BOARD.x)+6,px(BOARD.y)-2,px(2),3);
+ g.fillStyle='#F472B6'; g.fillRect(px(BOARD.x)+px(3),px(BOARD.y),px(1),3);
+ g.fillStyle='#34D399'; g.fillRect(px(BOARD.x)+8,px(BOARD.y)+6,px(3),3);
+ // coffee machine
+ g.fillStyle=P.coffee; g.fillRect(px(COFFEE.x),px(COFFEE.y),px(2),px(2));
+ g.fillStyle='#3B2A1E'; g.fillRect(px(COFFEE.x)+3,px(COFFEE.y)+4,px(2)-6,6);
+ g.fillStyle='#22D3EE'; g.fillRect(px(COFFEE.x)+px(1)-2,px(COFFEE.y)-4,4,4);
+ // plants
+ [[1,CORR-3],[W-2,CORR-3],[1,H-3],[W-2,H-3]].forEach(function(p){
+   g.fillStyle=P.pot; g.fillRect(px(p[0])+3,px(p[1])+8,10,8);
+   g.fillStyle=P.plant; g.fillRect(px(p[0])+1,px(p[1]),14,10);
+   g.fillStyle='#1E7A45'; g.fillRect(px(p[0])+5,px(p[1])+3,6,5);});
+ // desks
+ function desk(d,wide){var wpx=wide?px(4):px(3);
+   g.fillStyle=P.deskT; g.fillRect(px(d.x),px(d.y),wpx,px(1)+4);
+   g.fillStyle=P.desk; g.fillRect(px(d.x),px(d.y)+px(1)+4,wpx,4);
+   g.fillStyle=P.chair; g.fillRect(px(d.x)+(wpx/2)-7,px(d.y)+px(2)+2,14,10);}
+ desk(ADMIN_DESK,true); AGENTS.forEach(function(a){desk(a.desk,false)});
+}
+paintBG();
+function drawMonitor(g,d,on,wide){var wpx=wide?px(4):px(3);var mx=px(d.x)+(wpx/2)-9,my=px(d.y)-8;
+ g.fillStyle=P.mon; g.fillRect(mx,my,18,12);
+ g.fillStyle=on?P.monGlow:P.monOff; g.fillRect(mx+2,my+2,14,8);
+ if(on){g.fillStyle='#0A0F1B';var t=Math.floor(now/150)%4;for(var i=0;i<3;i++)g.fillRect(mx+3,my+3+i*2,4+((i+t)%3)*3,1);}
+ g.fillStyle=P.mon; g.fillRect(mx+7,my+12,4,3);}
+
+/* ================= CHARACTERS ================= */
+function mkChar(o){return Object.assign({x:px(o.desk.x)+px(1),y:px(o.desk.y)+px(2)+2,fx:0,
+ state:'sit',q:[],bub:null,bubT:0,frame:0,working:false,sleep:false},o)}
+var admin=mkChar({id:'adm',nm:'АДМИН',shirt:'#EAEEF6',hair:'#111',desk:ADMIN_DESK,tie:'#22D3EE'});
+var chars=[admin].concat(AGENTS.map(mkChar));
+function drawChar(g,c){
+ var x=Math.round(c.x),y=Math.round(c.y),f=Math.floor(c.frame/8)%2,sit=(c.state==='sit'||c.state==='work');
+ // legs
+ if(!sit){g.fillStyle='#1B2436';g.fillRect(x-4,y+6,3,5+(f?1:0));g.fillRect(x+1,y+6,3,6-(f?1:0));}
+ // body
+ g.fillStyle=c.shirt;g.fillRect(x-5,y-2,10,sit?7:9);
+ if(c.tie){g.fillStyle=c.tie;g.fillRect(x-1,y-1,2,5);}
+ // arms typing wiggle
+ if(c.state==='work'){g.fillStyle=c.shirt;g.fillRect(x-7,y+1+(f?1:0),2,3);g.fillRect(x+5,y+1+(f?0:1),2,3);}
+ // head
+ g.fillStyle='#E8B48C';g.fillRect(x-4,y-9,8,7);
+ g.fillStyle=c.hair;g.fillRect(x-4,y-11,8,3);g.fillRect(x-4,y-9,2,3);
+ g.fillStyle='#111';g.fillRect(x-2,y-6,1,1);g.fillRect(x+1,y-6,1,1);
+ if(c.sleep){bubble(g,x,y-14,'💤');}
+ else if(c.bub&&now<c.bubT){bubble(g,x,y-14,c.bub);}
+ // name
+ g.font='7px monospace';g.fillStyle='rgba(147,160,184,.85)';g.textAlign='center';
+ g.fillText(c.nm.split(' ')[0],x,y+16);
+}
+function bubble(g,x,y,t){g.font='9px "Segoe UI Emoji",monospace';var w=g.measureText(t).width+8;
+ g.fillStyle='rgba(240,244,252,.95)';g.fillRect(x-w/2,y-11,w,13);
+ g.fillStyle='rgba(240,244,252,.95)';g.fillRect(x-2,y+2,4,3);
+ g.fillStyle='#0A0F1B';g.textAlign='center';g.fillText(t,x,y-1);}
+function say(c,t,ms){c.bub=t;c.bubT=now+(ms||2200);}
+
+/* movement: axis-по-axis через коридор */
+function route(c,tx,ty){var p=[],cy=px(CORR)+4;
+ if(Math.abs(c.y-cy)>6){p.push([c.x,cy]);} p.push([tx,cy]); p.push([tx,ty]); return p;}
+function walkTo(c,tx,ty,done){c.q.push({t:'walk',p:route(c,tx,ty),done:done});c.state='walk';}
+function deskPos(d,wide){return [px(d.x)+(wide?px(2):px(1))+4, px(d.y)+px(2)+4];}
+
+/* ================= LOOP ================= */
+var now=0,last=0,online=null;
+function tick(ts){now=ts;var dt=Math.min(32,ts-last);last=ts;
+ chars.forEach(function(c){step(c,dt)});
+ render(); requestAnimationFrame(tick);}
+function step(c,dt){c.frame+=dt/16;
+ var a=c.q[0]; if(!a){if(c.state==='walk')c.state='idle';idleAI(c);return;}
+ if(a.t==='walk'){c.state='walk';var tgt=a.p[0],sp=0.075*dt;
+   var dx=tgt[0]-c.x,dy=tgt[1]-c.y,d=Math.hypot(dx,dy);
+   if(d<sp){c.x=tgt[0];c.y=tgt[1];a.p.shift();if(!a.p.length){c.q.shift();c.state='idle';a.done&&a.done();}}
+   else{c.x+=dx/d*sp;c.y+=dy/d*sp;}}
+ else if(a.t==='wait'){a.ms-=dt;if(a.ms<=0){c.q.shift();a.done&&a.done();}}
+ else if(a.t==='state'){c.state=a.s;c.q.shift();a.done&&a.done();}
+}
+function wait(c,ms,done){c.q.push({t:'wait',ms:ms,done:done})}
+function setState(c,s,done){c.q.push({t:'state',s:s,done:done})}
+/* idle wander + coffee, только когда нет заданий и офис онлайн */
+function idleAI(c){if(c.q.length||c.working||c.sleep)return;
+ if(!c._next)c._next=now+3000+Math.random()*7000;
+ if(now<c._next)return; c._next=now+5000+Math.random()*9000;
+ var r=Math.random(),dp=deskPos(c.desk,c===admin);
+ if(r<0.5){walkTo(c,dp[0],dp[1]);setState(c,'sit');}
+ else if(r<0.7){walkTo(c,px(COFFEE.x)+8,px(COFFEE.y)+px(3));wait(c,1400);var s=c;c.q.push({t:'wait',ms:1,done:function(){say(s,'☕')}});walkTo(c,dp[0],dp[1]);setState(c,'sit');}
+ else{walkTo(c,px(4+Math.floor(Math.random()*32)),px(CORR)+4);}
+}
+function render(){ctx.clearRect(0,0,cv.width,cv.height);ctx.drawImage(bg,0,0);
+ drawMonitor(ctx,ADMIN_DESK,admin.state==='work',true);
+ AGENTS.forEach(function(a,i){drawMonitor(ctx,a.desk,chars[i+1].state==='work',false)});
+ chars.slice().sort(function(a,b){return a.y-b.y}).forEach(function(c){drawChar(ctx,c)});
+ if(online===false){ctx.fillStyle='rgba(4,7,15,.55)';ctx.fillRect(0,0,cv.width,cv.height);
+   ctx.font='bold 12px monospace';ctx.fillStyle='#FBBF24';ctx.textAlign='center';
+   ctx.fillText('ДВИЖОК СПИТ — включи пульт (agent-on)',cv.width/2,px(CORR));}
+}
+
+/* ================= REAL ENGINE ================= */
+function hStatus(on){online=on;var st=document.getElementById('st');
+ st.className='st'+(on?' on':'');
+ document.getElementById('stt').textContent=on?'движок онлайн':'движок спит';
+ chars.forEach(function(c){c.sleep=!on&&!c.working;});}
+function health(){fetch(AGENT_URL+'/health',{headers:{'ngrok-skip-browser-warning':'1'},signal:AbortSignal.timeout(4000)})
+ .then(function(r){return r.json()}).then(function(j){hStatus(!!(j&&j.ok&&j.llm))})
+ .catch(function(){hStatus(false)});}
+health(); setInterval(health,60000);
+
+function pickAgent(t){t=t.toLowerCase();
+ if(/запис|запиш|окно|book|время|слот/.test(t))return chars[2];
+ if(/пост|контент|видео|текст|стор|акци|промо|реклам/.test(t))return chars[3];
+ if(/отч[её]т|аналит|цифр|стат|итог|день прош/.test(t))return chars[4];
+ return chars[1];}
+function log(who,txt,me){var l=document.getElementById('log');
+ l.innerHTML+='\n'+(me?'<span class="me">🧑 '+esc(txt)+'</span>':'<b>'+who+':</b> '+esc(txt));
+ l.scrollTop=l.scrollHeight;}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function chip(t){document.getElementById('task').value=t;give();}
+var busy=false;
+function give(){var inp=document.getElementById('task'),t=inp.value.trim();
+ if(!t||busy)return; inp.value=''; busy=true;
+ var ag=pickAgent(t); log('',t,true);
+ ag.sleep=false; admin.sleep=false; ag.working=true;
+ // сценка: админ идёт к агенту с заданием
+ admin.q.length=0; ag.q.length=0;
+ var adp=deskPos(ag.desk,false), admHome=deskPos(ADMIN_DESK,true);
+ walkTo(admin,adp[0]-px(2),adp[1]-2,function(){say(admin,'📋');say(ag,'Принял!',1600);});
+ wait(admin,1500);
+ walkTo(admin,admHome[0],admHome[1]); setState(admin,'sit');
+ wait(ag,1600,function(){ag.state='work';});
+ // реальный запрос
+ fetch(AGENT_URL+'/chat',{method:'POST',
+   headers:{'Content-Type':'application/json','ngrok-skip-browser-warning':'1'},
+   body:JSON.stringify({message:t,sessionId:'office-'+SID,business:'flowbox'}),
+   signal:AbortSignal.timeout(60000)})
+ .then(function(r){return r.json()})
+ .then(function(j){finish(ag, j&&j.reply ? j.reply : null)})
+ .catch(function(){finish(ag,null)});
+}
+function finish(ag,reply){
+ var hold=setInterval(function(){ if(ag.state!=='work'){ag.state='work';} },400); // печатает до конца
+ setTimeout(function(){clearInterval(hold);
+  ag.working=false; ag.state='sit';
+  if(reply){say(ag,'✅ Готово!',2600); log(ag.nm,reply);}
+  else{say(ag,'😴 Движок офлайн',2600);
+   log(ag.nm,'Не смог достучаться до движка. Включи пульт (agent-on.ps1) — и я всё сделаю.');
+   hStatus(false);}
+  busy=false;},600);
+}
+document.getElementById('task').addEventListener('keydown',function(e){if(e.key==='Enter')give()});
+
+/* старт: все за столами */
+chars.forEach(function(c){c.state='sit'});
+requestAnimationFrame(tick);
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){})}
+</script>
+</body>
+</html>
