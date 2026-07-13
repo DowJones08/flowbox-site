@@ -24,7 +24,9 @@
 <link rel="apple-touch-icon" href="img/avatar-gdi.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;700&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
 <style>
 :root{
   --bg:#05070D; --bg2:#090D16; --panel:#0C1220; --panel2:#101828;
@@ -46,7 +48,7 @@ a{color:inherit;text-decoration:none}
 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;letter-spacing:.22em;
   text-transform:uppercase;color:var(--cyan);margin-bottom:18px}
-.eyebrow .n{font-family:'Unbounded';color:var(--dim);letter-spacing:0}
+.eyebrow .n{font-family:'Unbounded';font-weight:600;color:var(--dim);letter-spacing:0}
 .eyebrow::after{content:"";height:1px;width:56px;background:linear-gradient(90deg,var(--cyan),transparent)}
 h2{font-size:clamp(26px,4.2vw,42px);line-height:1.15;font-weight:600;font-family:'Unbounded';letter-spacing:-.01em}
 .sub{color:var(--mut);font-size:clamp(15px,1.6vw,17.5px);max-width:640px;margin-top:14px}
@@ -262,7 +264,7 @@ footer a:hover{color:var(--ink)}
 #cw-btn svg{width:27px;height:27px;color:#04101E}
 #cw-btn .ring{position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(34,211,238,.5);animation:ring 2.4s infinite}
 @keyframes ring{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.35);opacity:0}}
-#cw{position:fixed;right:22px;bottom:96px;z-index:95;width:min(390px,calc(100vw - 28px));height:min(560px,calc(100dvh - 130px));
+#cw{position:fixed;right:22px;bottom:96px;z-index:95;width:min(390px,calc(100vw - 28px));height:min(560px,calc(100vh - 130px));height:min(560px,calc(100dvh - 130px));
   background:#0A0F1B;border:1px solid var(--line2);border-radius:22px;display:none;flex-direction:column;overflow:hidden;
   box-shadow:0 40px 90px -20px rgba(0,0,0,.9)}
 #cw.open{display:flex;animation:cwin .3s cubic-bezier(.16,1,.3,1)}
@@ -298,6 +300,7 @@ footer a:hover{color:var(--ink)}
 h2 .grad{background:none;-webkit-background-clip:initial;background-clip:initial;-webkit-text-fill-color:var(--ink);color:var(--ink)}
 .final h2 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 section.flush{padding-top:clamp(24px,4vw,44px)}
+section.flush,section.honest{content-visibility:auto;contain-intrinsic-size:auto 720px}
 :focus-visible{outline:2px solid var(--cyan);outline-offset:2px;border-radius:6px}
 .cw-b::-webkit-scrollbar,.aud-out::-webkit-scrollbar{width:8px}
 .cw-b::-webkit-scrollbar-thumb,.aud-out::-webkit-scrollbar-thumb{background:rgba(148,170,210,.22);border-radius:8px}
@@ -316,9 +319,15 @@ section.flush{padding-top:clamp(24px,4vw,44px)}
 #cw{bottom:calc(96px + env(safe-area-inset-bottom))}
 @media(max-width:600px){
   h1 br,h2 br{display:none}
+}
+@media(pointer:coarse){
   .lang button{padding:13px 15px;font-size:13px}
   footer{padding-bottom:110px}
 }
+html{scroll-padding-top:84px}
+.cw-m,.aud-out,.bub{overflow-wrap:anywhere}
+.ph-body{min-height:408px}
+@media(max-width:640px){.btn{white-space:normal;line-height:1.3;text-align:center}}
 </style>
 </head>
 <body>
@@ -339,7 +348,7 @@ section.flush{padding-top:clamp(24px,4vw,44px)}
   <div class="orb orb1"></div><div class="orb orb2"></div>
   <div class="wrap">
     <div>
-      <div class="hpill"><span class="dot"></span><span data-i18n="hero_pill">2-week pilot — just $99 to try it live</span></div>
+      <div class="hpill"><span class="dot"></span><span data-i18n="hero_pill">2-week pilot — just $99</span></div>
       <h1 data-i18n="hero_h1">The invisible employee<br>your clients <span class="grad">never wait for</span></h1>
       <p class="lead" data-i18n="hero_lead">For salons, barbershops, nail studios and local services: <b>ABU AI</b> answers every Instagram, WhatsApp and website message in seconds — day and night — books clients straight into your calendar, reminds them, and reports the day’s bookings every evening. You do the craft; it does the front desk.</p>
       <div class="cta-row">
@@ -458,7 +467,7 @@ section.flush{padding-top:clamp(24px,4vw,44px)}
     <div class="case">
       <div class="case-shot rev">
         <span class="lbl">EXAMPLE · AUTO DETAILING</span>
-        <img src="img/case-whiteswan.jpg" alt="Example AI-concierge website for an auto detailing business" loading="lazy">
+        <img src="img/case-whiteswan.jpg" srcset="img/case-whiteswan-680.jpg 680w, img/case-whiteswan.jpg 1080w" sizes="(max-width:880px) 92vw, 540px" alt="Example AI-concierge website for an auto detailing business" loading="lazy" decoding="async" fetchpriority="low" width="1080" height="1350">
       </div>
       <div class="rev">
         <h2 data-i18n="cs_h2">This is what your AI agent — and your site — could look like</h2>
@@ -545,7 +554,7 @@ section.flush{padding-top:clamp(24px,4vw,44px)}
 
 <section class="flush">
   <div class="wrap founder">
-    <div class="f-photo rev"><img src="img/founder.jpg" alt="Andrey — founder of FLOWBOX" loading="lazy"></div>
+    <div class="f-photo rev"><img src="img/founder.jpg" alt="Andrey — founder of FLOWBOX" loading="lazy" decoding="async" fetchpriority="low" width="680" height="850"></div>
     <div class="rev">
       <div class="eyebrow"><span class="n">07</span><span data-i18n="f_eb">Who’s behind it</span></div>
       <blockquote data-i18n="f_q">“I build every ABU myself and test it like a paranoid client before you ever see it. I work with local businesses in person, in your language — <b>and I only win if your agent actually pays for itself.</b> That’s why you try it for two weeks before you commit to anything.”</blockquote>
@@ -621,7 +630,7 @@ var LANG = localStorage.getItem('fb_lang') || (function(){ var n=(navigator.lang
 var I18N = {
 ru: {
   logo_sub:"ABU AI", nav_cta:"Поговорить с ABU AI",
-  hero_pill:"Пилот 2 недели — всего $99, чтобы попробовать вживую",
+  hero_pill:"Пилот 2 недели — $99",
   hero_h1:"Невидимый сотрудник,<br>которого клиенты <span class='grad'>никогда не ждут</span>",
   hero_lead:"Для салонов, барбершопов, ногтевых студий и локальных сервисов: <b>ABU AI</b> отвечает на каждое сообщение в Instagram, WhatsApp и на сайте за секунды — днём и ночью, — записывает клиентов прямо в ваш календарь, напоминает им и каждый вечер присылает отчёт о записях. Вы занимаетесь ремеслом — он занимается ресепшном.",
   hero_cta1:"▶ Попробовать живое демо", hero_cta2:"Начать пилот за $99",
@@ -705,7 +714,7 @@ ru: {
 },
 es: {
   logo_sub:"ABU AI", nav_cta:"Habla con ABU AI",
-  hero_pill:"Piloto de 2 semanas — solo $99 para probarlo en vivo",
+  hero_pill:"Piloto de 2 semanas — $99",
   hero_h1:"El empleado invisible que<br>tus clientes <span class='grad'>nunca esperan</span>",
   hero_lead:"Para salones, barberías, estudios de uñas y servicios locales: <b>ABU AI</b> responde cada mensaje de Instagram, WhatsApp y tu sitio en segundos — de día y de noche —, reserva clientes directo en tu calendario, les recuerda y reporta las reservas del día cada noche. Tú haces tu oficio; él lleva la recepción.",
   hero_cta1:"▶ Probar la demo en vivo", hero_cta2:"Empezar el piloto por $99",
@@ -814,6 +823,7 @@ var W = {   /* widget strings */
        aud_err:'No pudimos conectar con el motor de auditoría. Envía tu sitio/IG por WhatsApp y la hacemos manual hoy — gratis.',
        aud_empty:'Escribe un sitio web o un Instagram.' }
 };
+if (!W[LANG]) LANG = 'en';   // fb_lang в localStorage делят соседние демо-сайты на этом домене — валидируем
 var META = {
   en:{ title:'FLOWBOX — ABU AI, the invisible employee for your business',
        desc:'ABU AI answers your clients in seconds, 24/7 — books, reminds, reports. 2-week pilot for $99 — like it, and you continue on your plan.' },
@@ -824,6 +834,7 @@ var META = {
 };
 var EN_CACHE = {};
 function setLang(l){
+  if (!W[l]) l = 'en';
   LANG = l; localStorage.setItem('fb_lang', l);
   document.documentElement.lang = l;
   document.querySelectorAll('.lang button').forEach(function(b){ b.classList.toggle('on', b.dataset.lang===l); });
@@ -869,6 +880,7 @@ var PH = {
 var phTimer = [];
 function phPlay(){
   phTimer.forEach(clearTimeout); phTimer = [];
+  if (document.hidden) { phTimer.push(setTimeout(phPlay, 2000)); return; }   // не жечь CPU в фоновой вкладке
   var box = document.getElementById('ph-body'); if(!box) return;
   box.innerHTML = '';
   var s = PH[LANG] || PH.en, d = 400;
@@ -886,7 +898,12 @@ function phPlay(){
 
 /* ===================== chat widget ===================== */
 var cwOnline = null, cwSid = localStorage.getItem('fb_sid');
-if (!cwSid) { cwSid = 'w' + Math.random().toString(36).slice(2, 11); localStorage.setItem('fb_sid', cwSid); }
+var cwSidTs = +localStorage.getItem('fb_sid_ts') || 0;
+if (!cwSid || Date.now() - cwSidTs > 86400000) {   // свежая сессия раз в 24ч — не копить контекст на движке
+  cwSid = 'w' + Math.random().toString(36).slice(2, 11);
+  localStorage.setItem('fb_sid', cwSid);
+}
+localStorage.setItem('fb_sid_ts', String(Date.now()));
 function cwEl(){ return document.getElementById('cw'); }
 function cwMsg(t, who, html){
   var b = document.getElementById('cw-b'), el = document.createElement('div');
@@ -905,7 +922,7 @@ function cwChips(){
   W[LANG].chips.forEach(function(x){
     var btn = document.createElement('button');
     btn.textContent = x;
-    btn.onclick = function(){ document.getElementById('cw-in').value = x.replace(/^[^ ]+ /,''); cwSend(); };
+    btn.onclick = function(){ cwSend(x.replace(/^[^ ]+ /,'')); };
     c.appendChild(btn);
   });
 }
@@ -933,13 +950,24 @@ function cwToggle(){
   if (el.classList.contains('open')) {
     if (!cwGreeted) { cwMsg(W[LANG].hi, 'b'); cwChips(); cwGreeted = true; }
     cwStatus();
-    setTimeout(function(){ document.getElementById('cw-in').focus(); }, 250);
+    if (matchMedia('(hover:hover) and (pointer:fine)').matches)
+      setTimeout(function(){ document.getElementById('cw-in').focus(); }, 250);   // на тач-устройствах не выдёргиваем клавиатуру
   }
 }
-function cwSend(){
-  var inp = document.getElementById('cw-in'), t = inp.value.trim();
-  if (!t) return;
-  inp.value = ''; cwMsg(t, 'u'); cwTyping(true);
+var cwBusy = false;
+function cwStatusSet(on){
+  cwOnline = on;
+  var st = document.getElementById('cw-st');
+  st.className = 'st ' + (on ? 'on' : 'off');
+  st.textContent = on ? W[LANG].st_on : W[LANG].st_off;
+  if (on) { var n = document.getElementById('cw-offnote'); if (n) n.remove(); }
+}
+function cwSend(txt){
+  var inp = document.getElementById('cw-in'), t = (txt || inp.value).trim();
+  if (!t || cwBusy) return;                    // не спамить движок параллельными запросами
+  cwBusy = true;
+  if (!txt) inp.value = '';
+  cwMsg(t, 'u'); cwTyping(true);
   var ctl = new AbortController(); var tm = setTimeout(function(){ ctl.abort(); }, 45000);
   fetch(AGENT + '/chat', {
     method: 'POST',
@@ -947,20 +975,28 @@ function cwSend(){
     body: JSON.stringify({ message: t, sessionId: cwSid, business: 'flowbox' }),
     signal: ctl.signal
   })
-  .then(function(r){ return r.json(); })
+  .then(function(r){ if (!r.ok && r.status !== 503) throw 0; return r.json(); })
   .then(function(j){
-    clearTimeout(tm); cwTyping(false);
-    if (j && j.reply) { cwMsg(j.reply, 'b'); }
-    else { cwMsg(W[LANG].off_note + ' <a href="' + WA + '" target="_blank" rel="noopener">' + W[LANG].wa + ' →</a>', 'b', true); }
+    clearTimeout(tm); cwTyping(false); cwBusy = false;
+    if (j && j.reply) { cwStatusSet(true); cwMsg(j.reply, 'b'); }
+    else {
+      cwStatusSet(false);
+      if (!document.getElementById('cw-offnote')) {
+        var el = cwMsg(W[LANG].off_note + ' <a href="' + WA + '" target="_blank" rel="noopener">' + W[LANG].wa + ' →</a>', 'b', true);
+        el.id = 'cw-offnote';
+      }
+    }
   })
   .catch(function(){
-    clearTimeout(tm); cwTyping(false);
+    clearTimeout(tm); cwTyping(false); cwBusy = false;
+    cwStatusSet(false);
     cwMsg(W[LANG].err + ' <a href="' + WA + '" target="_blank" rel="noopener">' + W[LANG].wa + ' →</a>', 'b', true);
   });
 }
 document.getElementById('cw-in').addEventListener('keydown', function(e){ if (e.key === 'Enter') cwSend(); });
 
 /* ===================== audit form ===================== */
+var audCtl = null;
 document.getElementById('audit-form').addEventListener('submit', function(e){
   e.preventDefault();
   var site = document.getElementById('aud-site').value.trim();
@@ -969,7 +1005,9 @@ document.getElementById('audit-form').addEventListener('submit', function(e){
   out.style.display = 'block';
   if (!site && !ig) { out.textContent = W[LANG].aud_empty; return; }
   out.textContent = W[LANG].aud_wait;
-  var ctl = new AbortController(); var tm = setTimeout(function(){ ctl.abort(); }, 90000);
+  if (audCtl) audCtl.abort();                  // повторный сабмит отменяет предыдущий запрос
+  var ctl = new AbortController(); audCtl = ctl;
+  var tm = setTimeout(function(){ ctl.abort(); }, 90000);
   fetch(AGENT + '/audit', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'ngrok-skip-browser-warning': '1' },
@@ -977,8 +1015,8 @@ document.getElementById('audit-form').addEventListener('submit', function(e){
     signal: ctl.signal
   })
   .then(function(r){ return r.json(); })
-  .then(function(j){ clearTimeout(tm); out.textContent = (j && j.audit) ? j.audit : W[LANG].aud_err; })
-  .catch(function(){ clearTimeout(tm); out.textContent = W[LANG].aud_err; });
+  .then(function(j){ clearTimeout(tm); if (ctl !== audCtl) return; out.textContent = (j && j.audit) ? j.audit : W[LANG].aud_err; })
+  .catch(function(){ clearTimeout(tm); if (ctl !== audCtl) return; out.textContent = W[LANG].aud_err; });
 });
 
 /* ===================== init ===================== */
